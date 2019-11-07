@@ -6,7 +6,7 @@ Feature: Smoke Testing
 @SmokePack @TC001_Invite_Friends
 Scenario Outline: Verify Meed customer is able to invite friends to Meed app 
 Given user launches the app in "<Platform>" device
-And user waits for "10" seconds
+And user waits for "15" seconds
  And user clicks on button "Apply_now"
  And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
@@ -30,7 +30,7 @@ And user waits for "10" seconds
   
   Examples: 
     |   Platform    |   Email                           |   Username     |   Password    |  	Invitees						| 
-    |   Android     |   manoj.chauhan@prodigylabs.net   |   mchauhan9189 |   Qwerty123!! | 		 us3ser@yopmail.com		|
+    |   Android     |   manoj.chauhan@prodigylabs.net   |   mchauhan9189 |   Qwerty123!! | 		 manojuser3@yopmail.com		|
 	
 	
 	@SmokePack @TC002_Internal_Transfer_DDA_To_SAV
@@ -62,13 +62,12 @@ And user waits for "10" seconds
  And user clicks on button "Confirm_details" 
  And user waits for "3" seconds
  And user clicks on button "Move_money"
- And user waits for "5" seconds
+And user waits for "3" seconds
   And user clicks on button "Done"
   
   Examples: 
 	|	Platform	|	Email													|	Username				|	Password		|	 	Amount	|	
 	|	Android		|	manoj.chauhan@prodigylabs.net	|	mchauhan9189		|	Qwerty123!!	|		1.00		|
-	
 	
 	@SmokePack @TC003_Internal_Transfer_SAV_To_DDA
 Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Savings to Checkings))
@@ -86,6 +85,7 @@ And user waits for "10" seconds
  And user clicks on button "Move_Money"
   And user waits for "2" seconds
   And user scrolls down
+   And user scrolls down
    And user scrolls down
   And user clicks on button "Move_Between_Accounts"
   And user waits for "3" seconds
@@ -108,7 +108,6 @@ And user waits for "10" seconds
   | Platform  | Email                         | Username        | Password    |   Amount    | 
   | Android   | manoj.chauhan@prodigylabs.net | mchauhan9189    | Qwerty123!! |   5.00    	|
   
-  
   @SmokePack @TC004_Scheduled_Payment
 Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Checkings to Savings))
 #Scheduled transfer
@@ -127,6 +126,7 @@ And user waits for "10" seconds
   And user waits for "2" seconds
   And user scrolls down
    And user scrolls down
+    And user scrolls down
   And user clicks on button "Move_Between_Accounts"
   And user waits for "5" seconds
    And user scrolls down
@@ -144,7 +144,7 @@ And user waits for "10" seconds
  And user clicks on button "Confirm_details" 
  And user waits for "3" seconds
  And user clicks on button "Move_money"
- And user waits for "10" seconds
+ And user waits for "5" seconds
   And user clicks on button "Done"
   
   Examples: 
@@ -178,7 +178,7 @@ And user waits for "10" seconds
     And user waits for "2" seconds
     And user clicks on button "EMAIL_DIRECT_DEPOSIT_FORM"
     And user waits for "2" seconds
-    And user clicks on button "Let's_explore_a_bit"
+    And user clicks on button "Let_explore_a_bit"
     And user waits for "2" seconds
  
 
@@ -335,7 +335,241 @@ And user waits for "10" seconds
  
  
    
-    @SmokePack @TC010_More_Change_Language
+      
+    
+     @SmokePack @TC010_More_Contact_preferences
+Scenario Outline: Verify Meed customer is able to Change Contact Preferences in Meed app 
+Given user launches the app in "<Platform>" device
+And user waits for "10" seconds
+ And user clicks on button "Apply_now"
+ And user waits for "3" seconds
+ And user enters text "<Email>" in textbox "Your_email"
+ And user clicks on button "Continue"
+ And user waits for "2" seconds
+ And user enters text "<Username>" in textbox "Username"
+ And user enters text "<Password>" in textbox "Password"
+ And user clicks on button "Log_In"
+ And user waits for "5" seconds
+ And user clicks on button "More"
+  And user waits for "2" seconds
+ And user scrolls down
+ And user clicks on button "Settings"
+  And user waits for "2" seconds
+  
+  And user clicks on label "Contact_Preferences"
+   And user waits for "2" seconds
+And user scrolls down
+And user scrolls down
+And user selects checkbox at index "2"
+
+  And user waits for "3" seconds
+And user selects checkbox at index "3"
+
+And user clicks on button "Back"
+And user waits for "3" seconds
+
+  
+  Examples: 
+    |   Platform    |   Email                           |   Username     |   Password    |  	
+    |   Android     |   manoj.chauhan@prodigylabs.net   |   mchauhan9189 |   Qwerty123!! | 	
+    
+    
+    @SmokePack @TC011_Meed_Extras
+Scenario Outline: Verify Meed customer is able to view Meed Rewards to Meed app 
+Given user launches the app in "<Platform>" device
+And user waits for "10" seconds
+ And user clicks on button "Apply_now"
+ And user waits for "3" seconds
+ And user enters text "<Email>" in textbox "Your_email"
+ And user clicks on button "Continue"
+ And user waits for "2" seconds
+ And user enters text "<Username>" in textbox "Username"
+ And user enters text "<Password>" in textbox "Password"
+ And user clicks on button "Log_In"
+ And user waits for "5" seconds
+ And user clicks on button "Rewards"
+  And user waits for "2" seconds
+ 
+  And user clicks on button "MeedExtras"
+  And user clicks on button "Okay"
+  
+  And user scrolls down
+  And user scrolls down
+  And user clicks on label "See_All_Offers"
+  And user waits for "3" seconds
+  And user scrolls down
+  And user scrolls down
+   And user clicks on button "Back"
+   And user waits for "3" seconds
+   And user clicks on label "See_Nearby_Offers"
+ 
+  And user waits for "5" seconds
+
+  Examples: 
+    |   Platform    |   Email                           |   Username     |   Password    |  
+    |   Android     |   manoj.chauhan@prodigylabs.net   |   mchauhan9189 |   Qwerty123!! | 
+  
+  
+     @SmokePack @TC012_Meed_Cover
+Scenario Outline: Verify Meed customer is able to view Meed Cover to Meed app 
+Given user launches the app in "<Platform>" device
+And user waits for "10" seconds
+ And user clicks on button "Apply_now"
+ And user waits for "3" seconds
+ And user enters text "<Email>" in textbox "Your_email"
+ And user clicks on button "Continue"
+ And user waits for "2" seconds
+ And user enters text "<Username>" in textbox "Username"
+ And user enters text "<Password>" in textbox "Password"
+ And user clicks on button "Log_In"
+ And user waits for "5" seconds
+ And user clicks on button "Rewards"
+  And user waits for "2" seconds
+ 
+ And user clicks on button "MeedCover"
+  And user waits for "2" seconds
+  And user clicks on button "View_Policy"
+   And user waits for "2" seconds
+   And user clicks on button "Allow"
+   And user waits for "2" seconds
+   And user scrolls down
+   And user scrolls down
+   And user scrolls down
+   
+  
+  Examples: 
+    |   Platform    |   Email                           |   Username     |   Password    |   
+    |   Android     |   manoj.chauhan@prodigylabs.net   |   mchauhan9189 |   Qwerty123!! |  
+    
+    
+       
+    @SmokePack @TC013_Privacy_&_legal
+Scenario Outline: Verify Meed customer is able to view legal documents in Meed app 
+Given user launches the app in "<Platform>" device
+
+And user waits for "10" seconds
+ And user clicks on button "Apply_now"
+ And user waits for "3" seconds
+ And user enters text "<Email>" in textbox "Your_email"
+ And user clicks on button "Continue"
+ And user waits for "2" seconds
+ And user enters text "<Username>" in textbox "Username"
+ And user enters text "<Password>" in textbox "Password"
+ And user clicks on button "Log_In"
+ And user waits for "5" seconds
+ And user clicks on button "More"
+  And user waits for "2" seconds
+  And user scrolls down
+  And user scrolls down
+  And user scrolls down
+  And user clicks on button "Privacy_&_Legal"
+  And user waits for "25" seconds
+  
+  And user clicks on label "Checking_Account_Agreement"
+  And user clicks on button "Allow"
+  And user waits for "2" seconds
+  And user clicks on button "back"
+  
+  
+ # And user presses device "BACK" button
+  And user waits for "5" seconds
+   And user clicks on label "Checking_Truth_In_Savings_Disclosure"
+  # And user scrolls down
+ # And user scrolls down
+ And user waits for "2" seconds
+  And user clicks on button "back"
+  
+   And user waits for "2" seconds
+   And user clicks on label "Electronic_Communications"
+  And user clicks on button "back"
+  
+   And user waits for "2" seconds
+   And user clicks on label "Electronic_Funds_Transfer_Disclosure"
+ And user clicks on button "back"
+  And user waits for "2" seconds
+  And user scrolls down
+  
+  And user clicks on label "Fee_Schedule"
+   And user waits for "2" seconds
+  And user clicks on button "back" 
+  And user waits for "2" seconds
+  
+  And user scrolls down
+ 
+  And user clicks on label "Funds_Availability_Disclosure"
+    And user waits for "2" seconds
+  And user clicks on button "back" 
+   And user waits for "2" seconds
+   
+  And user scrolls down
+
+  And user clicks on label "Online_Banking_Agreement"  
+   And user waits for "2" seconds
+  And user clicks on button "back" 
+   And user waits for "2" seconds
+  And user scrolls down
+ 
+  And user clicks on label "Privacy_Notice"  
+   And user waits for "2" seconds
+  And user clicks on button "back" 
+   And user waits for "2" seconds
+  And user scrolls down
+
+  And user clicks on label "Savings_Truth_In_Savings_Disclosure"  
+     And user waits for "2" seconds
+  And user clicks on button "back" 
+   And user waits for "2" seconds
+  And user scrolls down
+
+  And user clicks on label "Truth_In_Lending_Disclosure_and_Agreement"  
+     And user waits for "2" seconds
+  And user clicks on button "back" 
+   And user waits for "2" seconds
+  And user scrolls down
+ 
+  And user clicks on label "W-9"  
+     And user waits for "2" seconds
+  And user clicks on button "back" 
+  
+  And user waits for "10" seconds
+
+  Examples: 
+    |   Platform    |   Email                           |   Username     |   Password    |   
+    |   Android     |   manoj.chauhan@prodigylabs.net   |   mchauhan9189 |   Qwerty123!! |
+       
+      
+  # needs to be updated based upon new binary
+   @SmokePack @TC014_P2P_Sent_money
+Scenario Outline: Verify Meed customer is able to successfully Pay Friends having Meed membership - Send Money
+Given user launches the app in "<Platform>" device
+And user waits for "10" seconds
+ And user clicks on button "Apply_now"
+ And user waits for "3" seconds
+ And user enters text "<Email>" in textbox "Your_email"
+ And user clicks on button "Continue"
+ And user waits for "2" seconds
+ And user enters text "<Username>" in textbox "Username"
+ And user enters text "<Password>" in textbox "Password"
+ And user clicks on button "Log_In"
+ And user waits for "5" seconds
+ And user clicks on button "Move_Money"
+  And user waits for "2" seconds
+  And user scrolls down
+  And user clicks on button "Send_Money"
+  And user waits for "2" seconds
+  And user clicks on button "Deny"
+  
+
+  
+  #TO BE COMPLETED
+
+  Examples: 
+    |   Platform    |   Email                           |   Username     |   Password    |   recipient               |  Amount  |
+    |   Android     |   manoj.chauhan@prodigylabs.net   |   mchauhan9189 |   Qwerty123!! |   meedtest75@yopmail.com  |   10.00          |
+    
+    
+  
+@SmokePack @TC016_More_Change_Language
 Scenario Outline: Verify Meed customer is able to Change Language to Spanish in Meed app 
 Given user launches the app in "<Platform>" device
 And user waits for "10" seconds
@@ -373,228 +607,3 @@ And user waits for "10" seconds
     |   Platform    |   Email                           |   Username     |   Password    |  	
     |   Android     |   manoj.chauhan@prodigylabs.net   |   mchauhan9189 |   Qwerty123!! | 
     
-    
-     @SmokePack @TC011_More_Contact_preferences
-Scenario Outline: Verify Meed customer is able to Change Contact Preferences in Meed app 
-Given user launches the app in "<Platform>" device
-And user waits for "10" seconds
- And user clicks on button "Apply_now"
- And user waits for "3" seconds
- And user enters text "<Email>" in textbox "Your_email"
- And user clicks on button "Continue"
- And user waits for "2" seconds
- And user enters text "<Username>" in textbox "Username"
- And user enters text "<Password>" in textbox "Password"
- And user clicks on button "Log_In"
- And user waits for "5" seconds
- And user clicks on button "More"
-  And user waits for "2" seconds
- And user scrolls down
- And user clicks on button "Settings"
-  And user waits for "2" seconds
-  
-  And user clicks on label "Contact_Preferences"
-   And user waits for "2" seconds
-And user scrolls down
-And user scrolls down
-And user selects checkbox at index "2"
-
-  And user waits for "3" seconds
-And user selects checkbox at index "3"
-
-And user clicks on button "Back"
-And user waits for "3" seconds
-
-  
-  Examples: 
-    |   Platform    |   Email                           |   Username     |   Password    |  	
-    |   Android     |   manoj.chauhan@prodigylabs.net   |   mchauhan9189 |   Qwerty123!! | 	
-    
-    
-    @SmokePack @TC012_Meed_Extras
-Scenario Outline: Verify Meed customer is able to view Meed Rewards to Meed app 
-Given user launches the app in "<Platform>" device
-And user waits for "10" seconds
- And user clicks on button "Apply_now"
- And user waits for "3" seconds
- And user enters text "<Email>" in textbox "Your_email"
- And user clicks on button "Continue"
- And user waits for "2" seconds
- And user enters text "<Username>" in textbox "Username"
- And user enters text "<Password>" in textbox "Password"
- And user clicks on button "Log_In"
- And user waits for "5" seconds
- And user clicks on button "Rewards"
-  And user waits for "2" seconds
- 
-  And user clicks on button "MeedExtras"
-  And user clicks on button "Okay"
-  
-  And user scrolls down
-  And user scrolls down
-  And user clicks on label "See_All_Offers"
-  And user waits for "3" seconds
-  And user scrolls down
-  And user scrolls down
-   And user clicks on button "Back"
-   And user waits for "3" seconds
-   And user clicks on label "See_Nearby_Offers"
- 
-  And user waits for "5" seconds
-
-  Examples: 
-    |   Platform    |   Email                           |   Username     |   Password    |  
-    |   Android     |   manoj.chauhan@prodigylabs.net   |   mchauhan9189 |   Qwerty123!! | 
-  
-  
-     @SmokePack @TC013_Meed_Cover
-Scenario Outline: Verify Meed customer is able to view Meed Cover to Meed app 
-Given user launches the app in "<Platform>" device
-And user waits for "10" seconds
- And user clicks on button "Apply_now"
- And user waits for "3" seconds
- And user enters text "<Email>" in textbox "Your_email"
- And user clicks on button "Continue"
- And user waits for "2" seconds
- And user enters text "<Username>" in textbox "Username"
- And user enters text "<Password>" in textbox "Password"
- And user clicks on button "Log_In"
- And user waits for "5" seconds
- And user clicks on button "Rewards"
-  And user waits for "2" seconds
- 
- And user clicks on button "MeedCover"
-  And user waits for "2" seconds
-  And user clicks on button "View_Policy"
-   And user waits for "5" seconds
-  
-  Examples: 
-    |   Platform    |   Email                           |   Username     |   Password    |   
-    |   Android     |   manoj.chauhan@prodigylabs.net   |   mchauhan9189 |   Qwerty123!! |  
-    
-    @SmokePack @TC014_P2P_Sent_money
-Scenario Outline: Verify Meed customer is able to successfully Pay Friends having Meed membership - Send Money
-Given user launches the app in "<Platform>" device
-And user waits for "10" seconds
- And user clicks on button "Apply_now"
- And user waits for "3" seconds
- And user enters text "<Email>" in textbox "Your_email"
- And user clicks on button "Continue"
- And user waits for "2" seconds
- And user enters text "<Username>" in textbox "Username"
- And user enters text "<Password>" in textbox "Password"
- And user clicks on button "Log_In"
- And user waits for "5" seconds
- And user clicks on button "Move_Money"
-  And user waits for "2" seconds
-  And user scrolls down
-  And user clicks on button "Pay_Friends"
-  And user waits for "5" seconds
-  And  user selects radio button "Pay_Meed_Members"
-
-  And user clicks on button "Continue"
- And user waits for "5" seconds
-  And user enters text "<recipient>" in textbox "Search_friends"
-  
-  And user selects option "<recipient>" from the list
-  And user waits for "2" seconds
-  And user enters text "<Amount>" in textbox "AMOUNT_TO_BE_SENT"
-  And user enters text "P2P automation notes" in textbox "NOTES"
-  And user clicks on button "Confirm_Details"
-  And user clicks on button "Send_Money"
-  And user switches to app "message" to get "OTP"
-  
-  #TO BE COMPLETED
-
-  Examples: 
-    |   Platform    |   Email                           |   Username     |   Password    |   recipient               |  Amount  |
-    |   Android     |   manoj.chauhan@prodigylabs.net   |   mchauhan9189 |   Qwerty123!! |   meedtest75@yopmail.com  |   10.00          |
-    
-    
-    @SmokePack @TC016_Privacy_&_legal
-Scenario Outline: Verify Meed customer is able to view legal documents in Meed app 
-Given user launches the app in "<Platform>" device
-
-And user waits for "10" seconds
- And user clicks on button "Apply_now"
- And user waits for "3" seconds
- And user enters text "<Email>" in textbox "Your_email"
- And user clicks on button "Continue"
- And user waits for "2" seconds
- And user enters text "<Username>" in textbox "Username"
- And user enters text "<Password>" in textbox "Password"
- And user clicks on button "Log_In"
- And user waits for "5" seconds
- And user clicks on button "More"
-  And user waits for "2" seconds
-  And user scrolls down
-  And user scrolls down
-  And user scrolls down
-  And user clicks on button "Privacy_&_Legal"
-  And user waits for "15" seconds
-  
-  And user clicks on label "Checking_Account_Agreement"
-  And user clicks on button "ALLOW"
-  And user waits for "2" seconds
-  And user clicks on button "back"
-  
-  
- # And user presses device "BACK" button
-  And user waits for "5" seconds
-   And user clicks on label "Checking_Truth_In_Savings_Disclosure"
-  # And user scrolls down
- # And user scrolls down
- And user waits for "2" seconds
-  And user clicks on button "back"
-  
-   And user waits for "5" seconds
-   And user clicks on label "Electronic_Communications"
-  And user clicks on button "back"
-  
-   And user waits for "5" seconds
-   And user clicks on label "Electronic_Funds_Transfer_Disclosure"
- And user clicks on button "back"
-  
-  And user scrolls down
-  And user clicks on label "Fee_Schedule"
-  
-  And user clicks on button "back" 
-  
-  And user scrolls down
-  And user scrolls down
-  And user clicks on label "Funds_Availability_Disclosure"
-   
-  And user clicks on button "back" 
-  
-  And user scrolls down
-  And user scrolls down
-  And user clicks on label "Online_Banking_Agreement"  
-  And user clicks on button "back" 
-  
-  And user scrolls down
-  And user scrolls down
-  And user clicks on label "Privacy_Notice"  
-  And user clicks on button "back" 
-  
-  And user scrolls down
-  And user scrolls down
-  And user clicks on label "Savings_Truth_In_Savings_Disclosure"  
-  And user clicks on button "back" 
-  
-  And user scrolls down
-  And user scrolls down
-  And user scrolls down
-  And user clicks on label "Truth_In_Lending_Disclosure_and_Agreement"  
-  And user clicks on button "back" 
-  
-  And user scrolls down
-  And user scrolls down
-  And user scrolls down
-  And user clicks on label "W-9"  
-  And user clicks on button "back" 
-  
-  And user waits for "20" seconds
-
-  Examples: 
-    |   Platform    |   Email                           |   Username     |   Password    |   
-    |   Android     |   manoj.chauhan@prodigylabs.net   |   mchauhan9189 |   Qwerty123!! |   

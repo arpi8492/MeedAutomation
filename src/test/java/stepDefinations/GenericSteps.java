@@ -86,16 +86,17 @@ public class GenericSteps extends BaseTest{
     	try 
     		{	
     		
-    		String button_value = button_name.split("_")[0];
-    		Thread.sleep(1000);
-    		driver.findElement(By.xpath("//*[contains(@text, '"+button_value+"')]")).click();; 
+    		System.out.println("Property Value: " +ObjectRepository.getobjectLocator(button_name));
+    		driver.findElement(ObjectRepository.getobjectLocator(button_name)).click();
  	 
     		}
     
     	catch(Exception e) 
     		{
     	
-    		driver.findElement(ObjectRepository.getobjectLocator(button_name)).click();
+    		String button_value = button_name.split("_")[0];
+    		Thread.sleep(1000);
+    		driver.findElement(By.xpath("//*[contains(@text, '"+button_value+"')]")).click();; 
     		System.out.println("Inside Catch , Success");
    		}
     	
@@ -125,24 +126,32 @@ public class GenericSteps extends BaseTest{
 	@Given("^user enters text \"([^\"]*)\" in textbox \"([^\"]*)\"$")
     public void user_enters_text_in_textbox(String text_value, String textbox_name) throws Throwable {
     	
+    	
     	try {
     		if(textbox_name.contentEquals("AMOUNT_TO_BE_MOVED") || textbox_name.contentEquals("AMOUNT_TO_BE_SENT"))
     		{
     			 
+    			System.out.println("Property Value: " +ObjectRepository.getobjectLocator(textbox_name));
+    			
     			driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).click();
         		driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).sendKeys(text_value);
     			((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.SPACE));
     		}
     		else
     		{
+    			
+    				System.out.println("Property Value : " +ObjectRepository.getobjectLocator(textbox_name));	
+    		
     		driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).clear();
     		driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).sendKeys(text_value);
     		}
     		
     	}
     	catch(Exception e) {
-    		driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).clear();
-    		driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).sendKeys(text_value);
+    		
+    		//System.out.println("VALUE OF THE FIELD "+driver.switchTo().activeElement().getText());
+    		
+    		driver.findElement(By.className("android.widget.EditText")).sendKeys(text_value);
     		
     	}
    	
@@ -948,7 +957,7 @@ public class GenericSteps extends BaseTest{
 	public void tearDown() throws Exception {		
 		System.out.println("Executing After of Step Defination");
         Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));  
-		//driver.quit();
+		driver.quit();
 	}
 	
 }	
