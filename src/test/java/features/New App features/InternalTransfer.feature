@@ -4,11 +4,11 @@
 #Scenario: #NA
 Feature: Internal Transfer
 @RegressionPack @TC001
-Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Checkings to Savings))
+Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Checkings to Savings)
 #One time transfer
 Given user launches the app in "<Platform>" device
 And user waits for "5" seconds
- And user clicks on button "Apply_now"
+  And user clicks on button "Get_started"
  And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -20,7 +20,11 @@ And user waits for "5" seconds
  And user clicks on button "Move_Money"
   And user waits for "2" seconds
   And user scrolls down
+     And user waits for "5" seconds
    And user scrolls down
+   And user waits for "5" seconds
+      And user scrolls down
+   And user waits for "5" seconds
   And user clicks on button "Move_Between_Accounts"
   And user waits for "5" seconds
    And user scrolls down
@@ -35,15 +39,15 @@ And user waits for "5" seconds
   And user clicks on button "Done"
   
   Examples: 
-	|	Platform	|	Email													|	Username				|	Password		|	 	Amount		|	
-	|	Android		|	manoj.chauhan@prodigylabs.net	|	mchauhan9189		|	Qwerty123!!	|		1.00		|
+	|	Platform	|	Email					|	Username		|	Password	|	 	Amount		|	
+	|	Android		|	meluser12@yopmail.com	|	meluser12		|	Password-1	|		1.00		|
 	
 	
 	@RegressionPack @TC002
-Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Savings to Checkings))
+Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Savings to Checkings)
 Given user launches the app in "<Platform>" device
 And user waits for "10" seconds
- And user clicks on button "Apply_now"
+  And user clicks on button "Get_started"
  And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -55,8 +59,12 @@ And user waits for "10" seconds
  And user clicks on button "Move_Money"
   And user waits for "2" seconds
   And user scrolls down
+     And user waits for "5" seconds
    And user scrolls down
-  And user clicks on button "Move_Between_Accounts"
+   And user waits for "5" seconds
+      And user scrolls down
+   And user waits for "5" seconds
+    And user clicks on button "Move_Between_Accounts"
   And user waits for "3" seconds
 
   And user selects option "Savings_Account" from the dropdown "TRANSFER_FROM"
@@ -75,15 +83,15 @@ And user waits for "10" seconds
   
   Examples: 
   | Platform  | Email                         | Username        | Password    |   Amount    | 
-  | Android   | manoj.chauhan@prodigylabs.net | mchauhan9189    | Qwerty123!! |   1.00    	|
+  | Android   | meluser12@yopmail.com		  | meluser12     | Password-1 |   1.00    	|
   
   
   @RegressionPack @TC003
-Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Checkings to LOC))
+Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Checkings to LOC)
 #CUSTOM AMOUNT
 Given user launches the app in "<Platform>" device
 And user waits for "10" seconds
- And user clicks on button "Apply_now"
+  And user clicks on button "Get_started"
  And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -95,7 +103,11 @@ And user waits for "10" seconds
  And user clicks on button "Move_Money"
   And user waits for "2" seconds
   And user scrolls down
+     And user waits for "5" seconds
    And user scrolls down
+   And user waits for "5" seconds
+      And user scrolls down
+   And user waits for "5" seconds
   And user clicks on button "Move_Between_Accounts"
   And user waits for "3" seconds
 
@@ -117,16 +129,16 @@ And user waits for "10" seconds
   And user waits for "3" seconds
   
   Examples: 
-  | Platform  | Email                         | Username        | Password    |   Amount    | 
-  | Android   | manoj.chauhan@prodigylabs.net | mchauhan9189    | Qwerty123!! |   1.00  	  |
+  | Platform  | Email                         | Username     | Password   |   Amount    | 
+  | Android   | meluser12@yopmail.com		  | meluser12    | Password-1 |   1.00  	  |
   
   
   @RegressionPack @TC004
-Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Checkings to LOC))
+Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Checkings to LOC)
 #FULL PAYMENT
 Given user launches the app in "<Platform>" device
 And user waits for "10" seconds
- And user clicks on button "Apply_now"
+  And user clicks on button "Get_started"
  And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -138,7 +150,11 @@ And user waits for "10" seconds
  And user clicks on button "Move_Money"
   And user waits for "2" seconds
   And user scrolls down
+     And user waits for "5" seconds
    And user scrolls down
+   And user waits for "5" seconds
+      And user scrolls down
+   And user waits for "5" seconds
   And user clicks on button "Move_Between_Accounts"
   And user waits for "3" seconds
 
@@ -159,14 +175,14 @@ And user waits for "10" seconds
   
   Examples: 
   | Platform  | Email                         | Username        | Password    |   Amount    | 
-  | Android   | manoj.chauhan@prodigylabs.net | mchauhan9189    | Qwerty123!! |   1.00    |
+  | Android   | meluser12@yopmail.com		  | meluser12       | Password-1  |   1.00    |
   
   @RegressionPack @TC005
-Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Checkings to LOC))
+Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Checkings to LOC)
 #MINIMUM PAYMENT
 Given user launches the app in "<Platform>" device
 And user waits for "10" seconds
- And user clicks on button "Apply_now"
+  And user clicks on button "Get_started"
  And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -178,7 +194,11 @@ And user waits for "10" seconds
  And user clicks on button "Move_Money"
   And user waits for "2" seconds
   And user scrolls down
+     And user waits for "5" seconds
    And user scrolls down
+   And user waits for "5" seconds
+      And user scrolls down
+   And user waits for "5" seconds
   And user clicks on button "Move_Between_Accounts"
   And user waits for "3" seconds
 
@@ -199,16 +219,16 @@ And user waits for "10" seconds
   
   Examples: 
   | Platform  | Email                         | Username        | Password    |   Amount    | 
-  | Android   | manoj.chauhan@prodigylabs.net | mchauhan9189    | Qwerty123!! |   1.00    	|
+  | Android   | meluser12@yopmail.com         | meluser12       | Password-1  |   1.00    	|
   
   
   
   @RegressionPack @TC006
-Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Checkings to Savings))
+Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Checkings to Savings)
 #Scheduled transfer
 Given user launches the app in "<Platform>" device
 And user waits for "15" seconds
- And user clicks on button "Apply_now"
+  And user clicks on button "Get_started"
  And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -220,7 +240,11 @@ And user waits for "15" seconds
  And user clicks on button "Move_Money"
   And user waits for "2" seconds
   And user scrolls down
+     And user waits for "5" seconds
    And user scrolls down
+   And user waits for "5" seconds
+      And user scrolls down
+   And user waits for "5" seconds
   And user clicks on button "Move_Between_Accounts"
   And user waits for "5" seconds
    And user scrolls down
@@ -242,6 +266,6 @@ And user waits for "15" seconds
   And user clicks on button "Done"
   
   Examples: 
-	|	Platform	|	Email													|	Username				|	Password		|	 	Amount		|	
-	|	Android		|	manoj.chauhan@prodigylabs.net	|	mchauhan9189		|	Qwerty123!!	|		1.00		|
+	|	Platform	|	Email					|	Username		|	Password		|	 	Amount		|	
+	|	Android		|	meluser12@yopmail.com 	|	meluser12		|	Password-1		|		1.00		|
 	
