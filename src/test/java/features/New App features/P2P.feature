@@ -1,4 +1,4 @@
-#Author: manoj.chauhan@prodigylabs.net
+#Author: meluser12@yopmail.com
 #Keywords Summary : Android Automation 
 #Feature: Account Move Money (New App)
 #Scenario: #NA
@@ -8,7 +8,7 @@ Feature: P2P Transfer
 Scenario Outline: Verify Meed customer is able to successfully Pay Friends having Meed membership - Send Money
 Given user launches the app in "<Platform>" device
 And user waits for "5" seconds
- And user clicks on button "Apply_now"
+ And user clicks on button "Get_started"
  And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -20,27 +20,26 @@ And user waits for "5" seconds
  And user clicks on button "Move_Money"
   And user waits for "2" seconds
   And user scrolls down
-  And user clicks on button "Pay_Friends"
+  And user clicks on button "Send_Money" 
+  And user clicks on button "Allow"
   And user waits for "5" seconds
-  And  user selects radio button "Pay_Meed_Members"
 
-  And user clicks on button "Continue"
- And user waits for "5" seconds
-  And user enters text "<recipient>" in textbox "Search_friends"
-  
+  And user enters text "<recipient>" in textbox "Email_or_existing_contact_name"  
   And user selects option "<recipient>" from the list
-  And user waits for "2" seconds
+  And user clicks on button "Next"
+  And user waits for "2" seconds 
+  
   And user enters text "<Amount>" in textbox "AMOUNT_TO_BE_SENT"
   And user enters text "P2P automation notes" in textbox "NOTES"
-  And user clicks on button "Confirm_details"
-  And user clicks on button "Send_money"
+  And user clicks on button "Confirm_Details"
+  And user clicks on button "Send_Money"
   And user switches to app "message" to get "OTP"
   
   # TO BD COMPLETED
 
   Examples: 
-    |   Platform    |   Email                           |   Username     |   Password    |   recipient               |  Amount  |
-    |   Android     |   manoj.chauhan@prodigylabs.net   |   mchauhan9189 |   Qwerty123!! |   meedtest75@yopmail.com  |   10.00          |
+    |   Platform    |   Email                   |   Username  |   Password   |   recipient             |  Amount  |
+    |   Android     |   meluser12@yopmail.com   |   meluser12 |   Password-1 |   meluser7@yopmail.com  |   10.00  |
     
     
     
@@ -48,7 +47,7 @@ And user waits for "5" seconds
 Scenario Outline: Verify Meed customer is able to request money in Meed app 
 Given user launches the app in "<Platform>" device
 And user waits for "10" seconds
- And user clicks on button "Apply_now"
+ And user clicks on button "Get_started"
  And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -60,30 +59,21 @@ And user waits for "10" seconds
  And user clicks on button "Move_Money"
   And user waits for "2" seconds
   And user scrolls down
-  And user clicks on button "Pay_Friends"
-  And user waits for "5" seconds
-  And  user selects radio button "Pay_Meed_Members"
-
-  And user clicks on button "Continue"
- And user waits for "5" seconds
- And user clicks on button "Request"
-  And user enters text "<recipient>" in textbox "Search_friends"
-  
-  And user selects option "<recipient>" from the list
+  And user clicks on button "Request_Money"
   And user waits for "2" seconds
- 
- 
- #TO BE COMPLETED
- 
- 
- 
- 
-  And user enters text "<Amount>" in textbox "AMOUNT_TO_BE_SENT"
+
+  And user enters text "<recipient>" in textbox "Email"
+  And user clicks on button "Next"
+  And user waits for "2" seconds 
+  And user clicks on button "Next"
+  And user waits for "2" seconds 
+  
+  And user enters text "<Amount>" in textbox "AMOUNT_REQUESTED"
   And user enters text "P2P automation notes" in textbox "NOTES"
-  And user clicks on button "Confirm_details"
-  And user clicks on button "Send_money"
+  And user clicks on button "Confirm_Details"
+  And user clicks on button "Request_Money"
   And user switches to app "message" to get "OTP"
 
   Examples: 
-    |   Platform    |   Email                           |   Username     |   Password    |   recipient               |  Amount  |
-    |   Android     |   manoj.chauhan@prodigylabs.net   |   mchauhan9189 |   Qwerty123!! |   meedtest75@yopmail.com  |   10.00          |
+    |   Platform    |   Email                   |   Username  |   Password   |   recipient             |  Amount  |
+    |   Android     |   meluser12@yopmail.com   |   meluser12 |   Password-1 |   meluser7@yopmail.com  |   10.00  |

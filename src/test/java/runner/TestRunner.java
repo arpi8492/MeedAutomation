@@ -13,11 +13,11 @@ import cucumber.api.junit.Cucumber;
  
 @RunWith(Cucumber.class)
 @CucumberOptions(		
- features = "src/test/java/features/New App features/testApp.feature",
+ features = "src/test/java/features/New App features/P2P.feature",
  glue= {"stepDefinations"},
  plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/TestAutomationReport.html"},
- tags = {"@RegressionPack"},
- monochrome = true
+ monochrome = true,
+ dryRun = false
  )
  
 public class TestRunner {

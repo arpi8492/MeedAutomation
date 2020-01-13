@@ -26,6 +26,7 @@ import cucumber.api.Scenario;
 import cucumber.api.java.Before;
 import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import io.appium.java_client.*;
 import io.appium.java_client.android.Activity;
 import io.appium.java_client.android.AndroidDriver;
@@ -36,6 +37,7 @@ import io.appium.java_client.touch.offset.PointOption;
 import net.prodigylabs.config.ObjectRepository;
 import net.prodigylabs.driver.CapabilitiesGenerator;
 import net.prodigylabs.handlers.ScreenshotHandler;
+import net.prodigylabs.handlers.VerificationHandler;
 import net.prodigylabs.test.BaseTest;
 
 import org.junit.Assert;
@@ -45,17 +47,17 @@ public class GenericSteps extends BaseTest{
 
 	//public AndroidDriver<MobileElement> driver;
 	 WebDriver driver;
-    public WebDriverWait wait;
    
     DesiredCapabilities caps = new DesiredCapabilities();
 	ScreenshotHandler screenshot = null;
 	String sName = null;
+	public WebDriverWait wait = null;
     
 	@Before
 	public void setup(Scenario scenario) throws Exception {		
 		//System.out.println("Executing Before of Step Definition");
 		sName=scenario.getName();
-		
+
 	}
 	
 	//------------------LAUNCHING APP---------------------
@@ -65,6 +67,7 @@ public class GenericSteps extends BaseTest{
     	
     	driver = CapabilitiesGenerator.getInstance().launchApp(platform);
         screenshot = new ScreenshotHandler(driver);
+		wait = new WebDriverWait(driver, ObjectRepository.getLong("global.driver.wait"));
     	Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));  
 	
     }
@@ -81,14 +84,18 @@ public class GenericSteps extends BaseTest{
   //------------------BUTTON CLICK---------------------
     @Given("^user clicks on button \"([^\"]*)\"$")
     public void user_clicks_on_button(String button_name) throws Throwable {
-	
-    			
+
     	try 
     		{	
-    		
     		System.out.println("Property Value: " +ObjectRepository.getobjectLocator(button_name));
-    		driver.findElement(ObjectRepository.getobjectLocator(button_name)).click();
- 	 
+        	if (button_name.equals("Continue_1")) {
+    			System.err.println("Continue_1");
+        	 	wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(button_name)));
+        		driver.findElement(ObjectRepository.getobjectLocator(button_name)).sendKeys(Keys.ENTER);
+    		}else {
+        	 	wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(button_name)));
+        		driver.findElement(ObjectRepository.getobjectLocator(button_name)).click();
+			}
     		}
     
     	catch(Exception e) 
@@ -125,12 +132,11 @@ public class GenericSteps extends BaseTest{
     @SuppressWarnings("rawtypes")
 	@Given("^user enters text \"([^\"]*)\" in textbox \"([^\"]*)\"$")
     public void user_enters_text_in_textbox(String text_value, String textbox_name) throws Throwable {
-    	
-    	
+	
     	try {
-    		if(textbox_name.contentEquals("AMOUNT_TO_BE_MOVED") || textbox_name.contentEquals("AMOUNT_TO_BE_SENT"))
+    		if(textbox_name.contentEquals("AMOUNT_TO_BE_MOVED") || textbox_name.contentEquals("AMOUNT_TO_BE_SENT") || ObjectRepository.getString("frameElement").contains(textbox_name))
     		{
-    			 
+    	     	wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(textbox_name)));   
     			System.out.println("Property Value: " +ObjectRepository.getobjectLocator(textbox_name));
     			
     			driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).click();
@@ -141,7 +147,7 @@ public class GenericSteps extends BaseTest{
     		{
     			
     				System.out.println("Property Value : " +ObjectRepository.getobjectLocator(textbox_name));	
-    		
+    		     	wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(textbox_name)));   
     		driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).clear();
     		driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).sendKeys(text_value);
     		}
@@ -959,7 +965,20 @@ public class GenericSteps extends BaseTest{
         Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));  
 		driver.quit();
 	}
-	
+ 
+ @Given("^user waits for app to load$")
+ public void user_waits_for_app_to_load() throws Throwable {
+ 	wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("android.widget.ProgressBar")));
+	Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 
+ }	
+ 
+ @Then("^user validates that \"([^\"]*)\" is displayed$")
+ public void user_validates_that_is_displayed(String locator) throws Throwable {
+  	wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(locator)));   
+		VerificationHandler.verifyTrue(driver.findElement(ObjectRepository.getobjectLocator(locator)).isDisplayed());
+		Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 
+ }
+ 
 }	
 
 
