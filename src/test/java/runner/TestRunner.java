@@ -13,10 +13,11 @@ import cucumber.api.junit.Cucumber;
  
 @RunWith(Cucumber.class)
 @CucumberOptions(		
- features = "src/test/java/features/New App features/P2P.feature",
+ features = "src/test/java/features/New App features/InternalTransfer.feature",
  glue= {"stepDefinations"},
  plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/TestAutomationReport.html"},
  monochrome = true,
+ tags= {"@TC001"},
  dryRun = false
  )
  

@@ -34,6 +34,7 @@ import io.appium.java_client.android.StartsActivity;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.touch.offset.PointOption;
+import meed.pages.MeedBasePage;
 import net.prodigylabs.config.ObjectRepository;
 import net.prodigylabs.driver.CapabilitiesGenerator;
 import net.prodigylabs.handlers.ScreenshotHandler;
@@ -44,11 +45,16 @@ import org.junit.Assert;
 
 
 public class GenericSteps extends BaseTest{
-
+	
+	private MeedBasePage meedBasePage;
+	
+	public GenericSteps(MeedBasePage meedBasePage) {
+		this.meedBasePage=meedBasePage;
+	}
+	
 	//public AndroidDriver<MobileElement> driver;
 	 WebDriver driver;
    
-    DesiredCapabilities caps = new DesiredCapabilities();
 	ScreenshotHandler screenshot = null;
 	String sName = null;
 	public WebDriverWait wait = null;
@@ -68,6 +74,7 @@ public class GenericSteps extends BaseTest{
     	driver = CapabilitiesGenerator.getInstance().launchApp(platform);
         screenshot = new ScreenshotHandler(driver);
 		wait = new WebDriverWait(driver, ObjectRepository.getLong("global.driver.wait"));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("android.widget.ProgressBar")));
     	Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));  
 	
     }
@@ -87,27 +94,18 @@ public class GenericSteps extends BaseTest{
 
     	try 
     		{	
-    		System.out.println("Property Value: " +ObjectRepository.getobjectLocator(button_name));
-        	if (button_name.equals("Continue_1")) {
-    			System.err.println("Continue_1");
-        	 	wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(button_name)));
-        		driver.findElement(ObjectRepository.getobjectLocator(button_name)).sendKeys(Keys.ENTER);
-    		}else {
+    			System.out.println("Property Value: " +ObjectRepository.getobjectLocator(button_name));
         	 	wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(button_name)));
         		driver.findElement(ObjectRepository.getobjectLocator(button_name)).click();
-			}
     		}
     
     	catch(Exception e) 
     		{
-    	
     		String button_value = button_name.split("_")[0];
     		Thread.sleep(1000);
     		driver.findElement(By.xpath("//*[contains(@text, '"+button_value+"')]")).click();; 
     		System.out.println("Inside Catch , Success");
    		}
-    	
-    	
     	Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));   	
     }
     
@@ -238,6 +236,7 @@ public class GenericSteps extends BaseTest{
     	@SuppressWarnings("rawtypes")
 		TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
     	touchAction.longPress(PointOption.point(200, 550)).moveTo(PointOption.point(200, 200)).release().perform();
+    	Thread.sleep(1000);
     	Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 
     }
     
@@ -326,8 +325,10 @@ public class GenericSteps extends BaseTest{
         //  elements.get(index).sendKeys(text);
         if(elements.get(i).equals(index))
      	   break;
-      
+        System.err.println("button text:" + elements.get(i).getAttribute("text"));
+        System.err.println("button text:" + elements.get(index).getAttribute("text"));
         }
+    	wait.until(ExpectedConditions.elementToBeClickable(elements.get(index)));
         elements.get(index).click();
     }
     catch(Exception e)
@@ -974,7 +975,7 @@ public class GenericSteps extends BaseTest{
  
  @Then("^user validates that \"([^\"]*)\" is displayed$")
  public void user_validates_that_is_displayed(String locator) throws Throwable {
-  	wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(locator)));   
+  		wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(locator)));   
 		VerificationHandler.verifyTrue(driver.findElement(ObjectRepository.getobjectLocator(locator)).isDisplayed());
 		Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 
  }

@@ -8,14 +8,11 @@ Scenario Outline: Verify Meed customer is able to successfully able to login in 
 Given user launches the app in "<Platform>" device  
 And user waits for app to load
   And user clicks on button "Get_started"
- # And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
-# And user waits for "2" seconds
  And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
- #And user waits for "3" seconds
  Then user validates that "Home" is displayed
 
   Examples: 
@@ -27,30 +24,22 @@ And user waits for app to load
 Scenario Outline: Verify Meed customer is able to view all the accounts in Meed App
 Given user launches the app in "<Platform>" device
 And user waits for app to load
-#And user waits for "5" seconds
-  And user clicks on button "Get_started"
- # And user waits for "3" seconds
- And user enters text "<Email>" in textbox "Your_email"
+And user clicks on button "Get_started"
+And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
- #And user waits for "2" seconds
  And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
- #And user waits for "5" seconds
  And user clicks on button "CHECKING"
- #And user waits for "3" seconds
+ Then user validates that "Checking" is displayed
  And user clicks on button "Back"
- #And user waits for "2" seconds
  And user scrolls down
- #And user waits for "2" seconds
  And user clicks on button "LINE_OF_CREDIT"
- #And user waits for "2" seconds
+ Then user validates that "Line_Of_Credit" is displayed
  And user clicks on button "Back"
- #And user waits for "2" seconds
  And user clicks on button "SAVINGS"
- #And user waits for "2" seconds
+  Then user validates that "Savings" is displayed
  And user clicks on button "Back"
-
 
 Examples: 
 	|	Platform	|	Email					|	Username		|	Password	|		

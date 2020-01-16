@@ -83,8 +83,9 @@ And user waits for "5" seconds
   And user scrolls down
   And user clicks on button "Credit/Debit_Cards"
     And user waits for "2" seconds
-    And user clicks on button "Continue_1"
-  And user waits for "30" seconds
+   # And user clicks on button "Continue_1"
+   And user clicks on button at index "1"
+  And user waits for "5" seconds
   And user enters text "<Amount>" in textbox "Make_a_payment"  
   And user enters text "<Email>" in textbox "Email_Address"
   And user enters text "Manoj" in textbox "Name_on_Card"

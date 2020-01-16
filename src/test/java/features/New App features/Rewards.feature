@@ -7,7 +7,7 @@ Feature: Meed Rewards
 @RegressionPack @TC001+Meed_Extras
 Scenario Outline: Verify Meed customer is able to view Meed Rewards - Meed Extras in to Meed app 
 Given user launches the app in "<Platform>" device
-And user waits for "5" seconds
+And user waits for "30" seconds
  And user clicks on button "Get_started"
  And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"

@@ -7,35 +7,24 @@ Feature: Internal Transfer
 Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Checkings to Savings)
 #One time transfer
 Given user launches the app in "<Platform>" device
-And user waits for "5" seconds
   And user clicks on button "Get_started"
- And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
- And user waits for "2" seconds
- And user enters text "<Username>" in textbox "Username"
+  And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
- And user waits for "5" seconds
  And user clicks on button "Move_Money"
-  And user waits for "2" seconds
   And user scrolls down
-     And user waits for "5" seconds
-   And user scrolls down
-   And user waits for "5" seconds
-      And user scrolls down
-   And user waits for "5" seconds
+  And user scrolls down
+  And user scrolls down
   And user clicks on button "Move_Between_Accounts"
-  And user waits for "5" seconds
-   And user scrolls down
+  And user scrolls down
   And user enters text "<Amount>" in textbox "AMOUNT_TO_BE_MOVED"
    And user scrolls down 
   #And user clicks on button "SCHEDULE"
  And user enters text "Testing Internal transfer Automation" in textbox "NOTE"
  And user clicks on button "Confirm_details" 
- And user waits for "3" seconds
  And user clicks on button "Move_money"
- And user waits for "3" seconds
   And user clicks on button "Done"
   
   Examples: 
