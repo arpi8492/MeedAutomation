@@ -34,7 +34,6 @@ import io.appium.java_client.android.StartsActivity;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.touch.offset.PointOption;
-import meed.pages.MeedBasePage;
 import net.prodigylabs.config.ObjectRepository;
 import net.prodigylabs.driver.CapabilitiesGenerator;
 import net.prodigylabs.handlers.ScreenshotHandler;
@@ -45,16 +44,11 @@ import org.junit.Assert;
 
 
 public class GenericSteps extends BaseTest{
-	
-	private MeedBasePage meedBasePage;
-	
-	public GenericSteps(MeedBasePage meedBasePage) {
-		this.meedBasePage=meedBasePage;
-	}
-	
+
 	//public AndroidDriver<MobileElement> driver;
 	 WebDriver driver;
    
+    DesiredCapabilities caps = new DesiredCapabilities();
 	ScreenshotHandler screenshot = null;
 	String sName = null;
 	public WebDriverWait wait = null;
