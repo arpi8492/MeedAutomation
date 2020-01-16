@@ -141,5 +141,5 @@ And user scrolls down
 
   Examples: 
     |   Platform    |   Email                  |	Nickname	| Username  |   Password    |  FirstName		| LastName	|	dob					|	SSN					|	HomeAddress			|	City				|	State				|	ZIPCode	|	Mobile			|	IdentityNumber	|
-    |   Android     |   manojuat2@yopmail.com	 |  ManojUAT	|	manojuat2 |   Password-1	| 	Andrew			|	Lopez			|	09/20/1960	|	666124085		|	307 Supor Blvd	|	New Jersey	|	New Jersey	|	07229		|	6479391989	|	J31000000000059	|
+    |   Android     |   manojuat4@yopmail.com	 |  ManojUAT	|	manojuat4 |   Password-1	| 	Andrew			|	Lopez			|	09/20/1960	|	666124085		|	307 Supor Blvd	|	New Jersey	|	New Jersey	|	07229		|	6479391989	|	J31000000000059	|
 
