@@ -13,6 +13,8 @@ Given user launches the app in "<Platform>" device
   And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
+  And user checks the initial "Available" of "CHECKING" account
+  And user checks the initial "Available" of "SAVINGS" account
  And user clicks on button "Move_Money"
   And user scrolls down
   And user scrolls down
@@ -26,6 +28,11 @@ Given user launches the app in "<Platform>" device
  And user clicks on button "Confirm_details" 
  And user clicks on button "Move_money"
   And user clicks on button "Done"
+   And user waits for "10" seconds
+  And user clicks on button "Home"
+   And user waits for "3" seconds
+  And user verify that "Available" of "CHECKING" account is reduced by "<Amount>"
+  And user verify that "Available" of "SAVINGS" account is increased by "<Amount>"
   
   Examples: 
 	|	Platform	|	Email					|	Username		|	Password	|	 	Amount		|	

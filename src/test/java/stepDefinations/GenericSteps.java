@@ -1,5 +1,6 @@
 package stepDefinations;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -42,7 +43,6 @@ import net.prodigylabs.test.BaseTest;
 
 import org.junit.Assert;
 
-
 public class GenericSteps extends BaseTest{
 
 	//public AndroidDriver<MobileElement> driver;
@@ -52,7 +52,13 @@ public class GenericSteps extends BaseTest{
 	ScreenshotHandler screenshot = null;
 	String sName = null;
 	public WebDriverWait wait = null;
-    
+	
+	TouchActions action ;
+
+	private String checkingBalance = null;
+	private String savingsBalance = null;
+	private String locBalance = null;
+	
 	@Before
 	public void setup(Scenario scenario) throws Exception {		
 		//System.out.println("Executing Before of Step Definition");
@@ -85,17 +91,22 @@ public class GenericSteps extends BaseTest{
   //------------------BUTTON CLICK---------------------
     @Given("^user clicks on button \"([^\"]*)\"$")
     public void user_clicks_on_button(String button_name) throws Throwable {
-
+    	action = new TouchActions(driver);
     	try 
     		{	
     			System.out.println("Property Value: " +ObjectRepository.getobjectLocator(button_name));
         	 	wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(button_name)));
-        		driver.findElement(ObjectRepository.getobjectLocator(button_name)).click();
+        	 	driver.findElement(ObjectRepository.getobjectLocator(button_name)).click();
+        	 	if (button_name.equals("Home")) {
+        	 		System.err.println(driver.findElement(ObjectRepository.getobjectLocator(button_name)).getText());
+            		action.singleTap(driver.findElement(ObjectRepository.getobjectLocator(button_name))).perform();   
+        		}        		
     		}
     
     	catch(Exception e) 
     		{
     		String button_value = button_name.split("_")[0];
+    		System.err.println(button_value + " "+ "//*[contains(@text, '"+button_value+"')]");
     		Thread.sleep(1000);
     		driver.findElement(By.xpath("//*[contains(@text, '"+button_value+"')]")).click();; 
     		System.out.println("Inside Catch , Success");
@@ -961,17 +972,118 @@ public class GenericSteps extends BaseTest{
 		driver.quit();
 	}
  
+ /** @author vaishali.katta  */
  @Given("^user waits for app to load$")
  public void user_waits_for_app_to_load() throws Throwable {
  	wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("android.widget.ProgressBar")));
 	Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 
  }	
  
+ /** @author vaishali.katta  */
  @Then("^user validates that \"([^\"]*)\" is displayed$")
  public void user_validates_that_is_displayed(String locator) throws Throwable {
   		wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(locator)));   
 		VerificationHandler.verifyTrue(driver.findElement(ObjectRepository.getobjectLocator(locator)).isDisplayed());
 		Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 
+ }
+ 
+ /** @author vaishali.katta  */
+ @Given("^user checks the initial \"([^\"]*)\" of \"([^\"]*)\" account$")
+ public void user_checks_the_initial_of_account(String type, String account) throws Throwable {
+	 	String balancelocator1, balancelocator2;
+	 
+		balancelocator1 = "//*[@text='"+account+"']/following-sibling::android.view.View/android.view.View[@text='"+type+": ']/following-sibling::android.view.View[@resource-id='amount-value']";
+	 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(balancelocator1)));
+		String amountvalue = driver.findElement(By.xpath(balancelocator1)).getText();
+		
+		balancelocator2 = "//*[@text='"+account+"']/following-sibling::android.view.View/android.view.View[@text='"+type+": ']/following-sibling::android.view.View[@resource-id='amount-value']/following-sibling::android.view.View[@resource-id='decomal-value']";
+		String decimalvalue = driver.findElement(By.xpath(balancelocator2)).getText();
+		System.err.println("Initial Balance "+amountvalue+decimalvalue);
+		
+		if (account.equalsIgnoreCase("CHECKING")) {
+			checkingBalance = amountvalue+decimalvalue;
+			checkingBalance = checkingBalance.replace("$", "");			
+		}else if (account.equalsIgnoreCase("LINE OF CREDIT")) {
+			locBalance = amountvalue+decimalvalue;
+			locBalance = locBalance.replace("$", "");		
+		}else if (account.equalsIgnoreCase("SAVINGS")) {
+			savingsBalance = amountvalue+decimalvalue;
+			savingsBalance = savingsBalance.replace("$", "");		
+		}	
+ }
+ 
+ /** @author vaishali.katta  */
+ @Given("^user verify that \"([^\"]*)\" of \"([^\"]*)\" account is reduced by \"([^\"]*)\"$")
+ public void user_verify_that_of_account_is_reduced_by(String type, String account, String amount) throws Throwable {
+	 
+	    String actualbalance;
+	 	String balancelocator1, balancelocator2;
+	 	Double dblBalance;
+	 	
+		balancelocator1 = "//*[@text='"+account+"']/following-sibling::android.view.View/android.view.View[@text='"+type+": ']/following-sibling::android.view.View[@resource-id='amount-value']";
+	 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(balancelocator1)));
+		String amountvalue = driver.findElement(By.xpath(balancelocator1)).getText();
+		
+		balancelocator2 = "//*[@text='"+account+"']/following-sibling::android.view.View/android.view.View[@text='"+type+": ']/following-sibling::android.view.View[@resource-id='amount-value']/following-sibling::android.view.View[@resource-id='decomal-value']";
+		String decimalvalue = driver.findElement(By.xpath(balancelocator2)).getText();
+		
+		actualbalance = amountvalue+decimalvalue;
+		actualbalance = actualbalance.replace("$", "");	
+		
+		System.err.println("Actual Balance " + actualbalance );
+		
+		if (account.equalsIgnoreCase("CHECKING")) {
+			dblBalance = Double.parseDouble(checkingBalance)-Double.parseDouble(amount);
+			System.err.println("Expected Balance "+Double.toString(dblBalance));
+			VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));			
+
+		}else if (account.equalsIgnoreCase("LINE OF CREDIT")) {			
+			dblBalance = Double.parseDouble(locBalance)-Double.parseDouble(amount);
+			System.err.println("Expected Balance "+Double.toString(dblBalance));
+			VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));
+				
+		}else if (account.equalsIgnoreCase("SAVINGS")) {
+			dblBalance = Double.parseDouble(savingsBalance)-Double.parseDouble(amount);
+			System.err.println("Expected Balance "+Double.toString(dblBalance));
+			VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));
+		}	
+ }
+ 
+ /** @author vaishali.katta  */
+ @Given("^user verify that \"([^\"]*)\" of \"([^\"]*)\" account is increased by \"([^\"]*)\"$")
+ public void user_verify_that_of_account_is_increased_by(String type, String account, String amount) throws Throwable {
+	 
+	    String actualbalance;
+	 	String balancelocator1, balancelocator2;
+	 	Double dblBalance;
+	 	
+		balancelocator1 = "//*[@text='"+account+"']/following-sibling::android.view.View/android.view.View[@text='"+type+": ']/following-sibling::android.view.View[@resource-id='amount-value']";
+	 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(balancelocator1)));
+		String amountvalue = driver.findElement(By.xpath(balancelocator1)).getText();
+		
+		balancelocator2 = "//*[@text='"+account+"']/following-sibling::android.view.View/android.view.View[@text='"+type+": ']/following-sibling::android.view.View[@resource-id='amount-value']/following-sibling::android.view.View[@resource-id='decomal-value']";
+		String decimalvalue = driver.findElement(By.xpath(balancelocator2)).getText();
+		
+		actualbalance = amountvalue+decimalvalue;
+		actualbalance = actualbalance.replace("$", "");	
+		
+		System.err.println("Actual Balance " + actualbalance );
+		
+		if (account.equalsIgnoreCase("CHECKING")) {
+			dblBalance = Double.parseDouble(checkingBalance)+Double.parseDouble(amount);
+			System.err.println("Expected Balance "+Double.toString(dblBalance));
+			VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));			
+
+		}else if (account.equalsIgnoreCase("LINE OF CREDIT")) {			
+			dblBalance = Double.parseDouble(locBalance)+Double.parseDouble(amount);
+			System.err.println("Expected Balance "+Double.toString(dblBalance));
+			VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));
+				
+		}else if (account.equalsIgnoreCase("SAVINGS")) {
+			dblBalance = Double.parseDouble(savingsBalance)+Double.parseDouble(amount);
+			System.err.println("Expected Balance "+Double.toString(dblBalance));
+			VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));
+		}	
  }
  
 }	
