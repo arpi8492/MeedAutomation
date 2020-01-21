@@ -58,6 +58,8 @@ public class GenericSteps extends BaseTest{
 	private String checkingBalance = null;
 	private String savingsBalance = null;
 	private String locBalance = null;
+	private String fullPaymentloc = null;
+	private String minimumPaymentloc = null;
 	
 	@Before
 	public void setup(Scenario scenario) throws Exception {		
@@ -175,7 +177,7 @@ public class GenericSteps extends BaseTest{
     	try
     	{
     		driver.findElement(ObjectRepository.getobjectLocator(dropdown_name)).click();
- 		Thread.sleep(2000);
+ 		 Thread.sleep(2000);
     	driver.findElement(ObjectRepository.getobjectLocator(dropdown_value)).click();
  	
     	}
@@ -185,9 +187,9 @@ public class GenericSteps extends BaseTest{
     		driver.findElement(By.xpath("//*[contains(@text, '"+dd_value+"')]")).click();
     		
     		String dnd_value = dropdown_value.split("_")[0];
-    		driver.findElement(By.xpath("//*[contains(@text, '"+dnd_value+"')]")).click();
+    		driver.findElement(By.xpath("//*[contains(@text, '"+dnd_value+"')]")).click();*/
     		
-    		System.out.println("Inside Catch , Success");	*/
+    		System.out.println("Inside Catch , Success");	
       
     	}
     	Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));
@@ -1013,8 +1015,8 @@ public class GenericSteps extends BaseTest{
  }
  
  /** @author vaishali.katta  */
- @Given("^user verify that \"([^\"]*)\" of \"([^\"]*)\" account is reduced by \"([^\"]*)\"$")
- public void user_verify_that_of_account_is_reduced_by(String type, String account, String amount) throws Throwable {
+ @Given("^user verify that \"([^\"]*)\" in \"([^\"]*)\" account is \"([^\"]*)\" by \"([^\"]*)\"$")
+ public void user_verify_that_in_account_is_by(String type, String account, String amount, String transaction) throws Throwable {
 	 
 	    String actualbalance;
 	 	String balancelocator1, balancelocator2;
@@ -1032,60 +1034,96 @@ public class GenericSteps extends BaseTest{
 		
 		System.err.println("Actual Balance " + actualbalance );
 		
-		if (account.equalsIgnoreCase("CHECKING")) {
-			dblBalance = Double.parseDouble(checkingBalance)-Double.parseDouble(amount);
-			System.err.println("Expected Balance "+Double.toString(dblBalance));
-			VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));			
+		if (transaction.contains("debit")) {
+			if (account.equalsIgnoreCase("CHECKING")) {
+				dblBalance = Double.parseDouble(checkingBalance)-Double.parseDouble(amount);
+				System.err.println(account+type+" "+Double.toString(dblBalance));
+				VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));			
 
-		}else if (account.equalsIgnoreCase("LINE OF CREDIT")) {			
-			dblBalance = Double.parseDouble(locBalance)-Double.parseDouble(amount);
-			System.err.println("Expected Balance "+Double.toString(dblBalance));
-			VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));
-				
-		}else if (account.equalsIgnoreCase("SAVINGS")) {
-			dblBalance = Double.parseDouble(savingsBalance)-Double.parseDouble(amount);
-			System.err.println("Expected Balance "+Double.toString(dblBalance));
-			VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));
+			}else if (account.equalsIgnoreCase("LINE OF CREDIT")) {			
+				dblBalance = Double.parseDouble(locBalance)-Double.parseDouble(amount);
+				System.err.println(account+type+" "+Double.toString(dblBalance));
+				VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));
+					
+			}else if (account.equalsIgnoreCase("SAVINGS")) {
+				dblBalance = Double.parseDouble(savingsBalance)-Double.parseDouble(amount);
+				System.err.println(account+type+" "+Double.toString(dblBalance));
+				VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));
+			}
+		}else if (transaction.contains("credit")) {
+			if (account.equalsIgnoreCase("CHECKING")) {
+				dblBalance = Double.parseDouble(checkingBalance)+Double.parseDouble(amount);
+				System.err.println(account+type+" "+Double.toString(dblBalance));
+				VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));			
+
+			}else if (account.equalsIgnoreCase("LINE OF CREDIT")) {			
+				dblBalance = Double.parseDouble(locBalance)+Double.parseDouble(amount);
+				System.err.println(account+type+" "+Double.toString(dblBalance));
+				VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));
+					
+			}else if (account.equalsIgnoreCase("SAVINGS")) {
+				dblBalance = Double.parseDouble(savingsBalance)+Double.parseDouble(amount);
+				System.err.println(account+type+" "+Double.toString(dblBalance));
+				VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));
+			}	
 		}	
- }
+ } 
  
- /** @author vaishali.katta  */
- @Given("^user verify that \"([^\"]*)\" of \"([^\"]*)\" account is increased by \"([^\"]*)\"$")
- public void user_verify_that_of_account_is_increased_by(String type, String account, String amount) throws Throwable {
+ @Given("^user checks \"([^\"]*)\" amount$")
+ public void user_checks_amount(String type) throws Throwable {
 	 
-	    String actualbalance;
-	 	String balancelocator1, balancelocator2;
-	 	Double dblBalance;
-	 	
-		balancelocator1 = "//*[@text='"+account+"']/following-sibling::android.view.View/android.view.View[@text='"+type+": ']/following-sibling::android.view.View[@resource-id='amount-value']";
-	 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(balancelocator1)));
-		String amountvalue = driver.findElement(By.xpath(balancelocator1)).getText();
-		
-		balancelocator2 = "//*[@text='"+account+"']/following-sibling::android.view.View/android.view.View[@text='"+type+": ']/following-sibling::android.view.View[@resource-id='amount-value']/following-sibling::android.view.View[@resource-id='decomal-value']";
-		String decimalvalue = driver.findElement(By.xpath(balancelocator2)).getText();
-		
-		actualbalance = amountvalue+decimalvalue;
-		actualbalance = actualbalance.replace("$", "");	
-		
-		System.err.println("Actual Balance " + actualbalance );
-		
-		if (account.equalsIgnoreCase("CHECKING")) {
-			dblBalance = Double.parseDouble(checkingBalance)+Double.parseDouble(amount);
-			System.err.println("Expected Balance "+Double.toString(dblBalance));
-			VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));			
-
-		}else if (account.equalsIgnoreCase("LINE OF CREDIT")) {			
-			dblBalance = Double.parseDouble(locBalance)+Double.parseDouble(amount);
-			System.err.println("Expected Balance "+Double.toString(dblBalance));
-			VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));
-				
-		}else if (account.equalsIgnoreCase("SAVINGS")) {
-			dblBalance = Double.parseDouble(savingsBalance)+Double.parseDouble(amount);
-			System.err.println("Expected Balance "+Double.toString(dblBalance));
-			VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));
-		}	
+	 if (type.equals("Full_Payment")) {
+		 fullPaymentloc = driver.findElement(By.xpath("//android.view.View[@text='AMOUNT TO BE MOVED']/..//android.widget.EditText")).getText();
+		 System.err.println(fullPaymentloc);
+	 }else if (type.equals("Minimum_Payment")) {
+		 minimumPaymentloc = driver.findElement(By.xpath("//android.view.View[@text='AMOUNT TO BE MOVED']/..//android.widget.EditText")).getText();
+		 System.err.println(minimumPaymentloc);
+	} 
  }
  
+ @Given("^user verify that \"([^\"]*)\" transaction is listed in the transaction history of \"([^\"]*)\" account with note \"([^\"]*)\" and amount \"([^\"]*)\"$")
+ public void user_verify_that_transaction_is_listed_in_the_transaction_history_of_account_with_note_and_amount(String type, String account, String note, String amount) throws Throwable {
+
+	 Thread.sleep(2000);
+	 String transAmount = null;
+	 
+	 String locator1 = "//android.view.View[@resource-id='transaction-type']";
+	 String locator2 = "//android.view.View[@resource-id='transaction-type']/../../following-sibling::android.view.View//android.view.View[@resource-id='amount-value']";
+	 String locator3 = "//android.view.View[@resource-id='transaction-type']/../../following-sibling::android.view.View//android.view.View[@resource-id='amount-value']/following-sibling::android.view.View[@resource-id='decomal-value']";
+
+	 VerificationHandler.verifyTrue(driver.findElement(By.xpath(locator1)).getText().contains(note) && driver.findElement(By.xpath(locator1)).getText().contains(type));
+
+	 if (amount.equals("Full_Payment")) {
+		 amount = fullPaymentloc;
+	 }else if (amount.equals("Minimum_Payment")) {
+		 amount = minimumPaymentloc;
+	}	 	 
+	 transAmount = driver.findElement(By.xpath(locator2)).getText()+driver.findElement(By.xpath(locator3)).getText();  
+	 VerificationHandler.verifyTrue(transAmount.contains(amount));
+ }
+ 
+ @Given("^user verify that transfer is scheduled on \"([^\"]*)\" basis from \"([^\"]*)\" for amount \"([^\"]*)\" with \"([^\"]*)\"$")
+ public void user_verify_that_transfer_is_scheduled_on_basis_from_for_amount_with(String frequency, String tofrom, String amount, String note) throws Throwable {
+	 
+	 String locator = ObjectRepository.getString("Latest_Scheduled_Transfer");
+	 wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(locator+"//android.view.View[contains(@text,'"+tofrom+"')]"))));	 
+	 WebElement activeTransfers = driver.findElement(By.xpath(locator+"//android.view.View[contains(@text,'"+tofrom+"')]"));
+	 System.err.println(activeTransfers.getText());
+	 
+	 boolean flag1 = driver.findElement(By.xpath(locator+"//android.view.View[contains(@text,'"+tofrom+"')]")).isDisplayed();
+	 boolean flag2 = driver.findElement(By.xpath(locator+"//android.view.View[contains(@text,'"+amount+"')]")).isDisplayed();
+	 boolean flag3 = driver.findElement(By.xpath(locator+"//android.view.View[contains(@text,'"+frequency+"')]")).isDisplayed();	 
+	 activeTransfers.click();	
+	 user_scrolls_down();
+	 user_scrolls_down();
+	 user_scrolls_down();
+	 
+	 String notes = driver.findElement(ObjectRepository.getobjectLocator("NOTE")).getText();
+	 boolean flag4 = notes.contains(note);
+	 	 
+	 VerificationHandler.verifyTrue(flag1 && flag2 && flag3 && flag4); 	 
+ }
+
 }	
 
 
