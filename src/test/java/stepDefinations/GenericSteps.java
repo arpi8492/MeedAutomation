@@ -1000,7 +1000,6 @@ public class GenericSteps extends BaseTest{
 		
 		balancelocator2 = "//*[@text='"+account+"']/following-sibling::android.view.View/android.view.View[@text='"+type+": ']/following-sibling::android.view.View[@resource-id='amount-value']/following-sibling::android.view.View[@resource-id='decomal-value']";
 		String decimalvalue = driver.findElement(By.xpath(balancelocator2)).getText();
-		System.err.println("Initial Balance "+amountvalue+decimalvalue);
 		
 		if (account.equalsIgnoreCase("CHECKING")) {
 			checkingBalance = amountvalue+decimalvalue;
@@ -1031,39 +1030,31 @@ public class GenericSteps extends BaseTest{
 		
 		actualbalance = amountvalue+decimalvalue;
 		actualbalance = actualbalance.replace("$", "");	
-		
-		System.err.println("Actual Balance " + actualbalance );
-		
+				
 		if (transaction.contains("debit")) {
 			if (account.equalsIgnoreCase("CHECKING")) {
 				dblBalance = Double.parseDouble(checkingBalance)-Double.parseDouble(amount);
-				System.err.println(account+type+" "+Double.toString(dblBalance));
 				VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));			
 
 			}else if (account.equalsIgnoreCase("LINE OF CREDIT")) {			
 				dblBalance = Double.parseDouble(locBalance)-Double.parseDouble(amount);
-				System.err.println(account+type+" "+Double.toString(dblBalance));
 				VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));
 					
 			}else if (account.equalsIgnoreCase("SAVINGS")) {
 				dblBalance = Double.parseDouble(savingsBalance)-Double.parseDouble(amount);
-				System.err.println(account+type+" "+Double.toString(dblBalance));
 				VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));
 			}
 		}else if (transaction.contains("credit")) {
 			if (account.equalsIgnoreCase("CHECKING")) {
 				dblBalance = Double.parseDouble(checkingBalance)+Double.parseDouble(amount);
-				System.err.println(account+type+" "+Double.toString(dblBalance));
 				VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));			
 
 			}else if (account.equalsIgnoreCase("LINE OF CREDIT")) {			
 				dblBalance = Double.parseDouble(locBalance)+Double.parseDouble(amount);
-				System.err.println(account+type+" "+Double.toString(dblBalance));
 				VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));
 					
 			}else if (account.equalsIgnoreCase("SAVINGS")) {
 				dblBalance = Double.parseDouble(savingsBalance)+Double.parseDouble(amount);
-				System.err.println(account+type+" "+Double.toString(dblBalance));
 				VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));
 			}	
 		}	
@@ -1074,10 +1065,8 @@ public class GenericSteps extends BaseTest{
 	 
 	 if (type.equals("Full_Payment")) {
 		 fullPaymentloc = driver.findElement(By.xpath("//android.view.View[@text='AMOUNT TO BE MOVED']/..//android.widget.EditText")).getText();
-		 System.err.println(fullPaymentloc);
 	 }else if (type.equals("Minimum_Payment")) {
 		 minimumPaymentloc = driver.findElement(By.xpath("//android.view.View[@text='AMOUNT TO BE MOVED']/..//android.widget.EditText")).getText();
-		 System.err.println(minimumPaymentloc);
 	} 
  }
  
@@ -1108,7 +1097,6 @@ public class GenericSteps extends BaseTest{
 	 String locator = ObjectRepository.getString("Latest_Scheduled_Transfer");
 	 wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(locator+"//android.view.View[contains(@text,'"+tofrom+"')]"))));	 
 	 WebElement activeTransfers = driver.findElement(By.xpath(locator+"//android.view.View[contains(@text,'"+tofrom+"')]"));
-	 System.err.println(activeTransfers.getText());
 	 
 	 boolean flag1 = driver.findElement(By.xpath(locator+"//android.view.View[contains(@text,'"+tofrom+"')]")).isDisplayed();
 	 boolean flag2 = driver.findElement(By.xpath(locator+"//android.view.View[contains(@text,'"+amount+"')]")).isDisplayed();

@@ -27,5 +27,5 @@ And user waits for "5" seconds
    And user waits for "5" seconds
   
   Examples: 
-    |   Platform    |   Email                   |   Username     |   Password    |  	Invitees						| 
-    |   Android     |   meluser12@yopmail.com   |   meluser12	 |   Password-1  | 		 user@yopmail.com		|
+    |   Platform    |   Email                   |   Username     |   Password    |  	Invitees				    | 
+    |   Android     |   meluser12@yopmail.com   |   meluser12	 |   Password-1  | 		 user22jan@yopmail.com		|

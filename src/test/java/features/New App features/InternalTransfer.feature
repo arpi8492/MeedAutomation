@@ -281,5 +281,5 @@ Given user launches the app in "<Platform>" device
   
   Examples: 
 	|	Platform	|	Email					|	Username		|	Password		|	 	Amount		| Frequency |	Note |
-	|	Android		|	meluser12@yopmail.com 	|	meluser12		|	Password-1		|		1.75		| Monthly 	| Testing Internal transfer Automation |
+	|	Android		|	meluser12@yopmail.com 	|	meluser12		|	Password-1		|		1.00		| Monthly 	| Testing Internal transfer Automation |
 	
