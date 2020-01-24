@@ -6,64 +6,60 @@ Feature: Move Money new app
 @RegressionPack @TC001
 Scenario Outline: Verify Meed customer is able to successfully perform direct deposit 
 Given user launches the app in "<Platform>" device
-And user waits for "5" seconds
  And user clicks on button "Get_started"
- And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
- And user waits for "2" seconds
  And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
- And user waits for "5" seconds
- And user clicks on button "Move_Money"
-  And user waits for "2" seconds
-  And user clicks on button "Direct_Deposit"
-  And user waits for "2" seconds
-  And user clicks on button "Continue"
-  And user enters text "Employer" in textbox "Employer_Name"
-  And user selects checkbox at index "0"
-  # And user selects checkbox "I_agree_to_receive_via_email_a_Direct_Deposit_form_which_includes_my_Employer's_Name,_my_Bank_Account_Number_and_Routing_Number"
-    And user waits for "2" seconds
-    And user clicks on button "Email_Direct_Deposit_Form"
-    And user waits for "2" seconds
-    And user clicks on button "Let's_Explore_A_Bit"
-    And user waits for "2" seconds
- 
 
+ And user clicks on button "Move_Money"
+ And user clicks on button "Direct_Deposit"
+ And user validates that "Direct_Deposit" is displayed
+ And user clicks on button "Continue"
+ And user enters text "Employer" in textbox "Employer_Name"
+ And user selects checkbox at index "0"
+ # And user selects checkbox "I_agree_to_receive_via_email_a_Direct_Deposit_form_which_includes_my_Employer's_Name,_my_Bank_Account_Number_and_Routing_Number"
+ And user clicks on button "Email_Direct_Deposit_Form"
+ And user validates that "Thank_you" is displayed
+ And user clicks on button "Let's_Explore_A_Bit"
+ And user waits for "2" seconds
+  
+ And user switches to "chrome" app
+ And user navigates to "yopmail.com" and go to the account of "<Email>"
+ And user verify that Email is received from "Meed" with subject "<Subject>" and content "<ExpectedContent>"
+ 
   Examples: 
-	|	Platform	|	Email					|	Username		|	Password		|		
-	|	Android		|	meluser12@yopmail.com	|	meluser12		|	Password-1	|	
+	|	Platform	|	Email					|	Username		|	Password	| Subject | ExpectedContent |
+	|	Android		|	meluser12@yopmail.com	|	meluser12		|	Password-1	| Fund Your Meed Account |	Direct Deposit Form |
   
   
   @RegressionPack @TC002
 Scenario Outline: Verify Meed customer is able to successfully transfer from other banks 
 Given user launches the app in "<Platform>" device
-And user waits for "5" seconds
  And user clicks on button "Get_started"
- And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
- And user waits for "2" seconds
  And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
- And user waits for "5" seconds
+ 
  And user clicks on button "Move_Money"
-  And user waits for "2" seconds
-  And user clicks on button "Transfer_From_Other_Banks"
-  And user waits for "5" seconds
-  And user clicks on button "eCheck_from_other_bank"
-   And user clicks on button "Continue"
-  And user waits for "30" seconds
-      And user enters text "<Email>" in textbox "Email_Address"
-  And user enters text "<Amount>" in textbox "Make_a_payment" 
-    #And user enters text "<Email>" in textbox "Email_Address"
-  And user waits for "2" seconds
-  
+ And user clicks on button "Transfer_From_Other_Banks"
+ And user clicks on button "eCheck_from_other_bank"
+ And user clicks on button "Continue"
+ And user validates that "Transfer_From_Other_Bank" is displayed
+ #And user waits for "30" seconds
+ And user enters text "<Email>" in textbox "Email_Address"
+ And user enters text "<Amount>" in textbox "Make_a_payment" 
+ And user clicks on button at index "2"
+ And user waits for "2" seconds
+ And user validates that "Charles_Schwab" is displayed
+ And user clicks on button "Next"
+   
   Examples: 
-	|	Platform	|	Email					|	Username		|	Password	|		Amount	|
-	|	Android		|	meluser1update@yopmail.com	|	meluser1		|	Password@1	|		10			|
+	|	Platform	|	Email						|	Username		|	Password	|		Amount		|
+	|	Android		|	meluser1update@yopmail.com	|	meluser1		|	Password@1	|		12.00			|
   
  @RegressionPack @TC003
 Scenario Outline: Verify Meed customer is able to successfully deposit from Credit/Debit Card 
