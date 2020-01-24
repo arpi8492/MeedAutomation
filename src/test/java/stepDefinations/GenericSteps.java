@@ -54,6 +54,7 @@ public class GenericSteps extends BaseTest{
 	public WebDriverWait wait = null;
 	
 	TouchActions action ;
+	Activity activity;
 
 	private String checkingBalance = null;
 	private String savingsBalance = null;
@@ -145,6 +146,7 @@ public class GenericSteps extends BaseTest{
     			System.out.println("Property Value: " +ObjectRepository.getobjectLocator(textbox_name));
     			
     			driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).click();
+    			driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).clear();
         		driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).sendKeys(text_value);
     			((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.SPACE));
     		}
@@ -161,7 +163,8 @@ public class GenericSteps extends BaseTest{
     	catch(Exception e) {
     		
     		//System.out.println("VALUE OF THE FIELD "+driver.switchTo().activeElement().getText());
-    		
+    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("android.widget.EditText")));   
+    		driver.findElement(By.className("android.widget.EditText")).clear();
     		driver.findElement(By.className("android.widget.EditText")).sendKeys(text_value);
     		
     	}
@@ -1111,8 +1114,75 @@ public class GenericSteps extends BaseTest{
 	 	 
 	 VerificationHandler.verifyTrue(flag1 && flag2 && flag3 && flag4); 	 
  }
+ 
+ @Given("^user validates \"([^\"]*)\" with expected value as \"([^\"]*)\"$")
+ public void user_validates_with_expected_value_as(String actual, String expected) throws Throwable {
+	 
+	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ObjectRepository.getString(actual))));  
+	 VerificationHandler.verifyEquals(driver.findElement(By.xpath(ObjectRepository.getString(actual))).getText(), expected);
+ }
 
-}	
+ @Given("^user switches to \"([^\"]*)\" app$")
+ public void user_switches_to_app(String appname) throws Throwable {
+	 
+	 switch (appname) {
+	 	case "chrome":
+	 		try {
+	 			activity = new Activity(ObjectRepository.getString("global.capability.chromeAppPackage"), ObjectRepository.getString("global.capability.chromeAppActivity"));
+	 	        activity.setStopApp(false);
+	 	        ((AndroidDriver<MobileElement>) this.driver).startActivity(activity);	                    
+	 		} catch (Exception e) {
+	 			System.err.println(driver.findElement(By.xpath(ObjectRepository.getString("Accept_continue"))).getText());
+	 		       if (driver.findElement(By.xpath(ObjectRepository.getString("Accept_continue"))).getText().contains("Accept & continue")) {
+	 		    	   driver.findElement(By.xpath(ObjectRepository.getString("Accept_continue"))).click();
+	 		    	   driver.findElement(By.xpath(ObjectRepository.getString("No_Thanks"))).click();
+	 		       }
+	 		}finally {
+	 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ObjectRepository.getString("chrome_menu"))));
+	 		    driver.findElement(By.xpath(ObjectRepository.getString("chrome_menu"))).click(); 
+	 		    driver.findElement(By.xpath(ObjectRepository.getString("chrome_new_tab"))).click();
+	 		}	 
+		break;
+
+	default:
+		break;
+	}				
+	
+ }
+ 
+ @Given("^user navigates to \"([^\"]*)\" and go to the account of \"([^\"]*)\"$")
+ public void user_navigates_to_and_go_to_the_account_of(String url, String user) throws Throwable {
+	 
+	  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ObjectRepository.getString("search_text_box"))));
+	  driver.findElement(By.xpath(ObjectRepository.getString("search_text_box"))).click();
+      driver.findElement(By.xpath(ObjectRepository.getString("url_bar"))).clear();
+      driver.findElement(By.xpath(ObjectRepository.getString("url_bar"))).sendKeys(url);	
+      
+	  ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.ENTER));        
+	        
+	  if (url.equals("yopmail.com")) {
+	       Thread.sleep(2000);
+	       wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ObjectRepository.getString("yopmail_login"))));
+	       driver.findElement(By.xpath(ObjectRepository.getString("yopmail_login"))).clear();
+	       driver.findElement(By.xpath(ObjectRepository.getString("yopmail_login"))).sendKeys(user);  
+	       driver.findElement(By.xpath("//android.widget.Button[@index='0']")).click();
+	       Thread.sleep(2000);
+	}	       
+ }	
+ 
+ @Given("^user verify that Email is received from \"([^\"]*)\" with subject \"([^\"]*)\" and content \"([^\"]*)\"$")
+ public void user_verify_that_Email_is_received_from_with_subject_and_content(String email, String subject, String content) throws Throwable {
+	 
+	 String locator = "//android.view.View[@resource-id='m1']/android.view.View";
+	 System.err.println(driver.findElement(By.xpath(locator)).getText());
+	 VerificationHandler.verifyTrue(driver.findElement(By.xpath(locator)).getText().contains(email) && driver.findElement(By.xpath(locator)).getText().contains(subject));
+	 driver.findElement(By.xpath(locator)).click();
+	 Thread.sleep(2000);
+	 System.out.println(driver.findElement(By.xpath("//android.view.View[contains(@text,'"+content+"')]")).getText());
+	 VerificationHandler.verifyTrue(driver.findElement(By.xpath("//android.view.View[contains(@text,'"+content+"')]")).isDisplayed());	 
+ }
+
+}
 
 
 
