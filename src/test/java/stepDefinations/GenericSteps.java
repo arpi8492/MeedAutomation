@@ -42,6 +42,7 @@ import net.prodigylabs.config.ObjectRepository;
 import net.prodigylabs.driver.CapabilitiesGenerator;
 import net.prodigylabs.handlers.ScreenshotHandler;
 import net.prodigylabs.handlers.VerificationHandler;
+import net.prodigylabs.handlers.WebElementHandler;
 import net.prodigylabs.test.BaseTest;
 
 import org.junit.Assert;
@@ -50,9 +51,10 @@ public class GenericSteps extends BaseTest{
 
 	//public AndroidDriver<MobileElement> driver;
 	 WebDriver driver;
-   
+
     DesiredCapabilities caps = new DesiredCapabilities();
 	ScreenshotHandler screenshot = null;
+	WebElementHandler webelementHandler = null;
 	String sName = null;
 	public WebDriverWait wait = null;
 	
@@ -79,6 +81,7 @@ public class GenericSteps extends BaseTest{
     	
     	driver = CapabilitiesGenerator.getInstance().launchApp(platform);
         screenshot = new ScreenshotHandler(driver);
+        webelementHandler = new WebElementHandler(driver);
 		wait = new WebDriverWait(driver, ObjectRepository.getLong("global.driver.wait"));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("android.widget.ProgressBar")));
     	Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));  
