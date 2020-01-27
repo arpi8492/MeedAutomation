@@ -6,6 +6,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
+
+import javax.sound.midi.SysexMessage;
 
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -95,6 +98,7 @@ public class GenericSteps extends BaseTest{
     @Given("^user clicks on button \"([^\"]*)\"$")
     public void user_clicks_on_button(String button_name) throws Throwable {
     	action = new TouchActions(driver);
+    	System.err.println(button_name);
     	try 
     		{	
     			System.out.println("Property Value: " +ObjectRepository.getobjectLocator(button_name));
@@ -151,17 +155,17 @@ public class GenericSteps extends BaseTest{
     			((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.SPACE));
     		}
     		else
-    		{
-    			
-    				System.out.println("Property Value : " +ObjectRepository.getobjectLocator(textbox_name));	
-    		     	wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(textbox_name)));   
-    		driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).clear();
-    		driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).sendKeys(text_value);
+    		{    			
+    			System.out.println("Property Value : " +ObjectRepository.getobjectLocator(textbox_name));	
+    		    wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(textbox_name)));   
+    		    driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).click();
+    		    driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).clear();
+    		    driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).sendKeys(text_value);
     		}
     		
     	}
     	catch(Exception e) {
-    		
+    		e.printStackTrace();
     		//System.out.println("VALUE OF THE FIELD "+driver.switchTo().activeElement().getText());
     		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("android.widget.EditText")));   
     		driver.findElement(By.className("android.widget.EditText")).clear();
@@ -1147,7 +1151,7 @@ public class GenericSteps extends BaseTest{
 	default:
 		break;
 	}				
-	
+
  }
  
  @Given("^user navigates to \"([^\"]*)\" and go to the account of \"([^\"]*)\"$")
@@ -1180,6 +1184,53 @@ public class GenericSteps extends BaseTest{
 	 Thread.sleep(2000);
 	 System.out.println(driver.findElement(By.xpath("//android.view.View[contains(@text,'"+content+"')]")).getText());
 	 VerificationHandler.verifyTrue(driver.findElement(By.xpath("//android.view.View[contains(@text,'"+content+"')]")).isDisplayed());	 
+ }
+ 
+ @Given("^user switches to \"([^\"]*)\" context$")
+ public void user_switches_to_context(String contextName) throws Throwable {
+
+		Set<String> availableContext = ((AppiumDriver) driver).getContextHandles();
+		System.err.println("size of context "+ availableContext.size());
+		System.err.println("context name "+availableContext);
+		for (String context : availableContext) {
+			if (context.contains(contextName)) {
+				System.out.println("Context Name is " + context);
+				((AppiumDriver) driver).context(context);
+				break;
+			}
+		}
+ }
+ 
+ @Given("^user login to paystand with \"([^\"]*)\" and \"([^\"]*)\"$")
+ public void user_login_to_paystand_with_and(String un, String pwd) throws Throwable {
+	 driver.switchTo().frame("paystand_checkout_iframe");
+	 //.frame(driver.findElement(ObjectRepository.getobjectLocator("Paystand_frame")));
+	 
+	driver.findElement(By.xpath(ObjectRepository.getString("Paystand_Username"))).clear();
+	driver.findElement(By.xpath(ObjectRepository.getString("Paystand_Username"))).sendKeys(un);
+	
+	driver.findElement(By.xpath(ObjectRepository.getString("Paystand_Password"))).clear();
+	driver.findElement(By.xpath(ObjectRepository.getString("Paystand_Password"))).sendKeys(pwd);
+	
+	driver.findElement(By.xpath(ObjectRepository.getString("Secure_Login"))).click();
+ }
+ 
+ @Given("^user clicks on \"([^\"]*)\" after entering \"([^\"]*)\" in \"([^\"]*)\" and \"([^\"]*)\" in \"([^\"]*)\"$")
+ public void user_clicks_on_after_entering_in_and_in(String login_button, String un, String un_textbox, String pwd, String pwd_textbox) throws Throwable {
+	    driver.switchTo().frame("paystand_checkout_iframe");
+		 
+		driver.findElement(By.xpath(ObjectRepository.getString(un_textbox))).clear();
+		driver.findElement(By.xpath(ObjectRepository.getString(un_textbox))).sendKeys(un);
+		
+		driver.findElement(By.xpath(ObjectRepository.getString(pwd_textbox))).clear();
+		driver.findElement(By.xpath(ObjectRepository.getString(pwd_textbox))).sendKeys(pwd);
+		
+		driver.findElement(By.xpath(ObjectRepository.getString(login_button))).click();
+ }
+ 
+ @Given("^user enters answer as \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" to security questions and selects \"([^\"]*)\" account for payment$")
+ public void user_enters_answer_as_to_security_questions_and_selects_account_for_payment(String ans1, String ans2, String ans3, String accountType) throws Throwable {
+	 
  }
 
 }

@@ -52,14 +52,16 @@ Given user launches the app in "<Platform>" device
  #And user waits for "30" seconds
  And user enters text "<Email>" in textbox "Email_Address"
  And user enters text "<Amount>" in textbox "Make_a_payment" 
- And user clicks on button at index "2"
- And user waits for "2" seconds
+ And user enters text "Charles Schwab" in textbox "Search_Banks" 
  And user validates that "Charles_Schwab" is displayed
  And user clicks on button "Next"
+ And user switches to "WEBVIEW" context 
+ And user clicks on "Secure_Login" after entering "<Paystand_Username>" in "Paystand_Username" and "<Paystand_Password>" in "Paystand_Password" 
+ And user enters answer as "<answer>", "<Name>", "<AccountHolder>" to security questions and selects "<CHECKING>" account for payment
    
   Examples: 
-	|	Platform	|	Email						|	Username		|	Password	|		Amount		|
-	|	Android		|	meluser1update@yopmail.com	|	meluser1		|	Password@1	|		12.00			|
+	|	Platform	|	Email						|	Username		|	Password	|		Amount		| Paystand_Username | Paystand_Password |
+	|	Android		|	meluser1update@yopmail.com	|	meluser1		|	Password@1	|		12.00		| paystand_test    | paystand_good |
   
  @RegressionPack @TC003
 Scenario Outline: Verify Meed customer is able to successfully deposit from Credit/Debit Card 
