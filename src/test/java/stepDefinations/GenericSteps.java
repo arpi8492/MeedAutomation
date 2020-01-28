@@ -6,14 +6,19 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
+
+import javax.sound.midi.SysexMessage;
 
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cucumber.listener.Reporter;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -39,6 +44,7 @@ import net.prodigylabs.config.ObjectRepository;
 import net.prodigylabs.driver.CapabilitiesGenerator;
 import net.prodigylabs.handlers.ScreenshotHandler;
 import net.prodigylabs.handlers.VerificationHandler;
+import net.prodigylabs.handlers.WebElementHandler;
 import net.prodigylabs.test.BaseTest;
 
 import org.junit.Assert;
@@ -47,11 +53,13 @@ public class GenericSteps extends BaseTest{
 
 	//public AndroidDriver<MobileElement> driver;
 	 WebDriver driver;
-   
+
     DesiredCapabilities caps = new DesiredCapabilities();
 	ScreenshotHandler screenshot = null;
+	WebElementHandler webelementHandler = null;
 	String sName = null;
 	public WebDriverWait wait = null;
+	JavascriptExecutor jse;
 	
 	TouchActions action ;
 	Activity activity;
@@ -76,6 +84,8 @@ public class GenericSteps extends BaseTest{
     	
     	driver = CapabilitiesGenerator.getInstance().launchApp(platform);
         screenshot = new ScreenshotHandler(driver);
+        webelementHandler = new WebElementHandler(driver);
+        jse = (JavascriptExecutor) driver;
 		wait = new WebDriverWait(driver, ObjectRepository.getLong("global.driver.wait"));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("android.widget.ProgressBar")));
     	Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));  
@@ -97,6 +107,9 @@ public class GenericSteps extends BaseTest{
     	action = new TouchActions(driver);
     	try 
     		{	
+    		if (webelementHandler.getCurrentAndroidContext().contains("WEBVIEW")) {
+				webelementHandler.switchAndroidContext("NATIVE");
+			}
     			System.out.println("Property Value: " +ObjectRepository.getobjectLocator(button_name));
         	 	wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(button_name)));
         	 	driver.findElement(ObjectRepository.getobjectLocator(button_name)).click();
@@ -151,17 +164,17 @@ public class GenericSteps extends BaseTest{
     			((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.SPACE));
     		}
     		else
-    		{
-    			
-    				System.out.println("Property Value : " +ObjectRepository.getobjectLocator(textbox_name));	
-    		     	wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(textbox_name)));   
-    		driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).clear();
-    		driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).sendKeys(text_value);
+    		{    			
+    			System.out.println("Property Value : " +ObjectRepository.getobjectLocator(textbox_name));	
+    		    wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(textbox_name)));   
+    		    driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).click();
+    		    driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).clear();
+    		    driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).sendKeys(text_value);
     		}
     		
     	}
     	catch(Exception e) {
-    		
+    		e.printStackTrace();
     		//System.out.println("VALUE OF THE FIELD "+driver.switchTo().activeElement().getText());
     		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("android.widget.EditText")));   
     		driver.findElement(By.className("android.widget.EditText")).clear();
@@ -293,7 +306,7 @@ public class GenericSteps extends BaseTest{
     } 
     
   //------------------INDEX METHOD FOR TEXTBOX ---------------------
-    @Given("^user enters \"([^\"]*)\" in textbox at index \"([^\"]*)\"$")
+/*    @Given("^user enters \"([^\"]*)\" in textbox at index \"([^\"]*)\"$")
     public void user_enters_in_textbox_at_index(String text, int index) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
     	
@@ -316,6 +329,27 @@ public class GenericSteps extends BaseTest{
         ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.SPACE));  
 
         Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));
+    }*/
+    
+    //------------------INDEX METHOD FOR TEXTBOX ---------------------
+    @Given("^user enters \"([^\"]*)\" in textbox at index \"([^\"]*)\"$")
+    public void user_enters_in_textbox_at_index(String text, int index) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions  
+
+    	List<MobileElement> elements = driver.findElements(By.className("android.widget.EditText"));
+    	System.out.println("Number of elements:" +elements.size());
+    	for (int i=0; i<elements.size();i++)
+    	{
+    		System.out.println("textbox text:" + elements.get(i).getAttribute("text"));
+    		if(elements.get(i).equals(index))
+    			break;    
+    	}
+
+    	elements.get(index).sendKeys(text);
+
+    	// elements.get(index).click();
+    	((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.SPACE));
+    	Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));
     }
  
   //------------------INDEX METHOD FOR BUTTON--------------------
@@ -1014,6 +1048,7 @@ public class GenericSteps extends BaseTest{
 			savingsBalance = amountvalue+decimalvalue;
 			savingsBalance = savingsBalance.replace("$", "");		
 		}	
+		Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 
  }
  
  /** @author vaishali.katta  */
@@ -1061,8 +1096,10 @@ public class GenericSteps extends BaseTest{
 				VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));
 			}	
 		}	
+		Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 
  } 
  
+ /** @author vaishali.katta  */
  @Given("^user checks \"([^\"]*)\" amount$")
  public void user_checks_amount(String type) throws Throwable {
 	 
@@ -1071,8 +1108,10 @@ public class GenericSteps extends BaseTest{
 	 }else if (type.equals("Minimum_Payment")) {
 		 minimumPaymentloc = driver.findElement(By.xpath("//android.view.View[@text='AMOUNT TO BE MOVED']/..//android.widget.EditText")).getText();
 	} 
+		Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 
  }
  
+ /** @author vaishali.katta  */
  @Given("^user verify that \"([^\"]*)\" transaction is listed in the transaction history of \"([^\"]*)\" account with note \"([^\"]*)\" and amount \"([^\"]*)\"$")
  public void user_verify_that_transaction_is_listed_in_the_transaction_history_of_account_with_note_and_amount(String type, String account, String note, String amount) throws Throwable {
 
@@ -1092,8 +1131,10 @@ public class GenericSteps extends BaseTest{
 	}	 	 
 	 transAmount = driver.findElement(By.xpath(locator2)).getText()+driver.findElement(By.xpath(locator3)).getText();  
 	 VerificationHandler.verifyTrue(transAmount.contains(amount));
+		Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 
  }
  
+ /** @author vaishali.katta  */
  @Given("^user verify that transfer is scheduled on \"([^\"]*)\" basis from \"([^\"]*)\" for amount \"([^\"]*)\" with \"([^\"]*)\"$")
  public void user_verify_that_transfer_is_scheduled_on_basis_from_for_amount_with(String frequency, String tofrom, String amount, String note) throws Throwable {
 	 
@@ -1113,8 +1154,10 @@ public class GenericSteps extends BaseTest{
 	 boolean flag4 = notes.contains(note);
 	 	 
 	 VerificationHandler.verifyTrue(flag1 && flag2 && flag3 && flag4); 	 
+		Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 
  }
  
+ /** @author vaishali.katta  */
  @Given("^user validates \"([^\"]*)\" with expected value as \"([^\"]*)\"$")
  public void user_validates_with_expected_value_as(String actual, String expected) throws Throwable {
 	 
@@ -1122,6 +1165,7 @@ public class GenericSteps extends BaseTest{
 	 VerificationHandler.verifyEquals(driver.findElement(By.xpath(ObjectRepository.getString(actual))).getText(), expected);
  }
 
+ /** @author vaishali.katta  */
  @Given("^user switches to \"([^\"]*)\" app$")
  public void user_switches_to_app(String appname) throws Throwable {
 	 
@@ -1141,15 +1185,18 @@ public class GenericSteps extends BaseTest{
 	 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ObjectRepository.getString("chrome_menu"))));
 	 		    driver.findElement(By.xpath(ObjectRepository.getString("chrome_menu"))).click(); 
 	 		    driver.findElement(By.xpath(ObjectRepository.getString("chrome_new_tab"))).click();
+	 			Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 
 	 		}	 
 		break;
 
 	default:
 		break;
-	}				
-	
+	}			
+	 
+
  }
  
+ /** @author vaishali.katta  */
  @Given("^user navigates to \"([^\"]*)\" and go to the account of \"([^\"]*)\"$")
  public void user_navigates_to_and_go_to_the_account_of(String url, String user) throws Throwable {
 	 
@@ -1170,6 +1217,7 @@ public class GenericSteps extends BaseTest{
 	}	       
  }	
  
+ /** @author vaishali.katta  */
  @Given("^user verify that Email is received from \"([^\"]*)\" with subject \"([^\"]*)\" and content \"([^\"]*)\"$")
  public void user_verify_that_Email_is_received_from_with_subject_and_content(String email, String subject, String content) throws Throwable {
 	 
@@ -1182,6 +1230,41 @@ public class GenericSteps extends BaseTest{
 	 VerificationHandler.verifyTrue(driver.findElement(By.xpath("//android.view.View[contains(@text,'"+content+"')]")).isDisplayed());	 
  }
 
+ /** @author vaishali.katta  */
+ @Given("^user clicks on \"([^\"]*)\" after entering \"([^\"]*)\" in \"([^\"]*)\" and \"([^\"]*)\" in \"([^\"]*)\"$")
+ public void user_clicks_on_after_entering_in_and_in(String login_button, String un, String un_textbox, String pwd, String pwd_textbox) throws Throwable {
+	 	webelementHandler.switchAndroidContext("WEBVIEW"); 
+	 	driver.switchTo().frame("paystand_checkout_iframe");
+		 webelementHandler.enterText(ObjectRepository.getString(un_textbox), un);	
+		 webelementHandler.enterText(ObjectRepository.getString(pwd_textbox), pwd);	
+		 webelementHandler.clickButton(ObjectRepository.getString(login_button));	 
+ }
+ 
+ /** @author vaishali.katta  */
+ @Given("^user enters answers to security questions and select \"([^\"]*)\" account for Payment$")
+ public void user_enters_answers_to_security_questions_and_select_account_for_Payment(String accountType) throws Throwable {
+	 
+	 webelementHandler.enterText(ObjectRepository.getString("You_say_tomato_I_say"), "tomato");	 
+	 webelementHandler.clickButton(ObjectRepository.getString("Submit_Answers"));	 
+	 webelementHandler.enterText(ObjectRepository.getString("Name_on_account"), "name");	 
+	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ObjectRepository.getString("Account_holder_type"))));
+	 driver.findElement(By.xpath(ObjectRepository.getString("Account_holder_type"))).click();	 
+	 webelementHandler.selectByVisibleTextInMdSelectDropdown("Account_holder_type_dropdown", "Individual");	 
+	 webelementHandler.clickButton(ObjectRepository.getString("Submit_Answers"));
+	 Thread.sleep(5000);
+	 	webelementHandler.clickElementByTextUsingActions("//div[@class='md-label']/div", accountType);
+	 	webelementHandler.clickButton(ObjectRepository.getString("Select_Fund"));
+	}
+ 
+ @Given("^user enters \"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\" in paystand and click on \"([^\"]*)\"$")
+ public void user_enters_in_paystand_and_click_on(String street, String city, String postalcode, String state, String paybutton) throws Throwable {
+	 webelementHandler.enterText(ObjectRepository.getString("Paystand_Street"), "Test Street");
+	 webelementHandler.enterText(ObjectRepository.getString("Paystand_City"), "Test City");
+	 webelementHandler.enterText(ObjectRepository.getString("Paystand_Postal_Code"), "22222");
+	 webelementHandler.enterText(ObjectRepository.getString("Paystand_State"), "New Jersey");
+	 webelementHandler.clickButton(ObjectRepository.getString("Paystand_Pay"));
+ }
+	
 }
 
 

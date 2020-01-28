@@ -17,7 +17,7 @@ import cucumber.api.junit.Cucumber;
  glue= {"stepDefinations"},
  plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/TestAutomationReport.html"},
  monochrome = true,
- tags= {"@TC001"},
+ tags= {"@TC002"},
  dryRun = false
  )
  
