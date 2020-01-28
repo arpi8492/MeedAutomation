@@ -120,7 +120,7 @@ And user waits for "5" seconds
 	|	Android		|	meluser1update@yopmail.com	|	meluser1		|	Password@1	|		10		|	4242424242424242	|
 	
 
-	@RegressionPackTC004
+	@RegressionPack @TC004
 Scenario Outline: Verify that the user is able to select 'E-Transfer' from other bank option 
 Given user launches the app in "<Platform>" device
 And user waits for "5" seconds
@@ -145,6 +145,111 @@ And user waits for "5" seconds
   Examples: 
 	|	Platform	|	Email					|	Username		|	Password	|
 	|	Android		|	meluser12@yopmail.com	|	meluser14		|	Password-1	|
+@RegressionPack @TC005
+Scenario Outline: Verify that the user is able to delete the P2P contacts 
+Given user launches the app in "<Platform>" device
+And user waits for "5" seconds
+And user clicks on button "Get_started"
+And user waits for "3" seconds
+And user enters text "<Email>" in textbox "Your_email"
+And user clicks on button "Continue"
+And user waits for "2" seconds
+And user enters text "<Username>" in textbox "Username"
+And user enters text "<Password>" in textbox "Password"
+And user clicks on button "Log_In"
+And user waits for "5" seconds
+And user clicks on button "Move_Money"
+And user waits for "2" seconds
+And user scrolls down
+And user clicks on button "Send_Money"
+And user waits for "5" seconds
+And user clicks on button "Allow"
+And user waits for "3" seconds
+And user clicks on button "EDIT/DELETE"
+And user clicks on button "EDIT1" 
+And user waits for "2" seconds 
+And user clicks on button "Delete_Contact" 
+And user waits for "2" seconds
+And user clicks on button "Yes" 
+And user waits for "2" seconds
+
+   
+	#Need to write verification method
+
+  Examples: 
+	|	Platform	|	Email					|	Username		|	Password	| 
+	|	Android		|	meluser14@yopmail.com	|	meluser14		|	Tester-1	| 
+	
+@RegressionPack @TC006
+Scenario Outline: Verify that the user is able to edit the P2P contacts 
+Given user launches the app in "<Platform>" device
+And user waits for "5" seconds
+And user clicks on button "Get_started"
+And user waits for "3" seconds
+And user enters text "<Email>" in textbox "Your_email"
+And user clicks on button "Continue"
+And user waits for "2" seconds
+And user enters text "<Username>" in textbox "Username"
+And user enters text "<Password>" in textbox "Password"
+And user clicks on button "Log_In"
+And user waits for "5" seconds
+And user clicks on button "Move_Money"
+And user waits for "2" seconds
+And user scrolls down
+And user clicks on button "Send_Money"
+And user waits for "5" seconds
+And user clicks on button "Allow"
+And user waits for "3" seconds
+And user clicks on button "EDIT/DELETE"
+And user clicks on button "EDIT1" 
+And user waits for "2" seconds 
+And user enters text "<Email_Edit>" in textbox "Friends_Email"   
+And user clicks on button "Save_Changes" 
+And user waits for "2" seconds
+And user clicks on button "Yes" 
+And user waits for "2" seconds
+
+  Examples: 
+	|	Platform	|	Email					|	Username		|	Password	| Email_Edit | Edited_Contact |
+	|	Android		|	meluser14@yopmail.com	|	meluser14		|	Tester-1	| meluser21@yopmail.com | meluser21@yopmail.com |		
+	
+@RegressionPack @TC007
+Scenario Outline: Verify that the user is able to delete the bill payee contact
+Given user launches the app in "<Platform>" device
+And user waits for "5" seconds
+And user clicks on button "Get_started"
+And user waits for "3" seconds
+And user enters text "<Email>" in textbox "Your_email"
+And user clicks on button "Continue"
+And user waits for "2" seconds
+And user enters text "<Username>" in textbox "Username"
+And user enters text "<Password>" in textbox "Password"
+And user clicks on button "Log_In"
+And user waits for "5" seconds
+And user clicks on button "Move_Money"
+And user waits for "2" seconds
+And user scrolls down
+And user scrolls down
+And user scrolls down
+And user scrolls down
+And user scrolls down
+And user scrolls down
+And user clicks on button "Pay_Bills"
+And user clicks on button "Bill_Pay_Service"
+And user clicks on button "Continue"
+And user waits for "10" seconds
+And user selects option "TEST" from the list
+And user waits for "15" seconds
+And user clicks on button "VIEW/DELETE"
+And user waits for "10" seconds
+And user clicks on button "Delete"
+And user clicks on button "Yes"
+ 
+ 
+  Examples: 
+	|	Platform	|	Email					|	Username		|	Password	| 
+	|	Android		|	meluser14@yopmail.com	|	meluser14		|	Tester-1	| 	
+	
 	
 	
 	
