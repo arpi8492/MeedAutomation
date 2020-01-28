@@ -18,7 +18,7 @@ import cucumber.api.junit.Cucumber;
  plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/TestAutomationReport.html"},
  monochrome = true,
  tags= {"@TC002"},
- dryRun = true
+ dryRun = false
  )
  
 public class TestRunner {

@@ -44,6 +44,7 @@ Given user launches the app in "<Platform>" device
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
  
+ And user checks the initial "Balance" of "CHECKING" account
  And user clicks on button "Move_Money"
  And user clicks on button "Transfer_From_Other_Banks"
  And user clicks on button "eCheck_from_other_bank"
@@ -55,13 +56,22 @@ Given user launches the app in "<Platform>" device
  And user enters text "Charles Schwab" in textbox "Search_Banks" 
  And user validates that "Charles_Schwab" is displayed
  And user clicks on button "Next"
- And user switches to "WEBVIEW" context 
- And user clicks on "Secure_Login" after entering "<Paystand_Username>" in "Paystand_Username" and "<Paystand_Password>" in "Paystand_Password" 
- And user enters answer as "<answer>", "<Name>", "<AccountHolder>" to security questions and selects "<CHECKING>" account for payment
+ 
+ And user clicks on "Secure_Login" after entering "<Paystand_Username>" in "Paystand_Username" and "<Paystand_Password>" in "Paystand_Password"  
+ And user enters answers to security questions and select "CHECKING" account for Payment
+ And user enters "<Street>","<City>","<Postal Code>","<State>" in paystand and click on "Pay"
+ And user validates "Paystand_Success_Message" with expected value as "<ExpectedMessage>"
+ 
+ And user clicks on button "Done"
+ And user waits for "10" seconds
+   
+ And user clicks on button "Home"
+ And user waits for "3" seconds
+ And user verify that "Balance" in "CHECKING" account is "credited" by "<Amount>"
    
   Examples: 
-	|	Platform	|	Email						|	Username		|	Password	|		Amount		| Paystand_Username | Paystand_Password |
-	|	Android		|	meluser1update@yopmail.com	|	meluser1		|	Password@1	|		12.00		| paystand_test    | paystand_good |
+	|	Platform	|	Email						|	Username		|	Password	|		Amount		| Paystand_Username | Paystand_Password | ExpectedMessage |
+	|	Android		|	meluser1update@yopmail.com	|	meluser1		|	Password@1	|		22.20		| paystand_test    | paystand_good |  Your money's being moved. |
   
  @RegressionPack @TC003
 Scenario Outline: Verify Meed customer is able to successfully deposit from Credit/Debit Card 
