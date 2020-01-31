@@ -76,48 +76,34 @@ Given user launches the app in "<Platform>" device
  @RegressionPack @TC003
 Scenario Outline: Verify Meed customer is able to successfully deposit from Credit/Debit Card 
 Given user launches the app in "<Platform>" device
-And user waits for "5" seconds
  And user clicks on button "Get_started"
- And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
- And user waits for "2" seconds
  And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
- And user waits for "5" seconds
+
+ And user checks the initial "Balance" of "CHECKING" account
  And user clicks on button "Move_Money"
-  And user waits for "2" seconds
-  And user scrolls down
-  And user clicks on button "Credit/Debit_Cards"
-    And user waits for "2" seconds
-   # And user clicks on button "Continue_1"
-   And user clicks on button at index "1"
-  And user waits for "5" seconds
-  And user enters text "<Amount>" in textbox "Make_a_payment"  
-  And user enters text "<Email>" in textbox "Email_Address"
-  And user enters text "Manoj" in textbox "Name_on_Card"
-  And user enters text "<CardNumber>" in textbox "Card_Number"
-  And user enters text "01/22" in textbox "MM/YY"
-  And user enters text "111" in textbox "CSC"
-  And user scrolls down
-  And user clicks on button "Enter_Billing_Information"
-   And user waits for "3" seconds
-  And user enters text "81 street" in textbox "Street"
-  And user enters text "Tulsa" in textbox "City"
-  And user enters text "11111" in textbox "Postal_Code"
-  And user enters text "Oklahoma" in textbox "State"  
-  And user scrolls down
-  And user waits for "2" seconds
-  And user clicks on button "Pay"
-   And user waits for "10" seconds
-  And user clicks on button "DONE"
-  And user waits for "2" seconds    
+ And user scrolls down
+ And user clicks on button "Credit/Debit_Cards"
+ And user clicks on button "Continue_On_Credit/Debit_Card_popup"
+
+ And user enters "<Amount>","<Email>","<CardName>","<CardNumber>","<Expiry>","<SecurityCode>" in paystand and click on "Paystand_Enter_Billing_Information"
+ And user enters "<Street>","<City>","<Postal Code>","<State>" in paystand and click on "Pay"
+ And user validates "Paystand_Success_Message" with expected value as "<ExpectedMessage>"
+  
+ And user clicks on button "Done"
+ And user waits for "10" seconds
+   
+ And user clicks on button "Home"
+ And user waits for "3" seconds
+ And user verify that "Balance" in "CHECKING" account is "credited" by "<Amount>"
 
 
   Examples: 
-	|	Platform	|	Email					|	Username		|	Password	|		Amount	|	CardNumber			|
-	|	Android		|	meluser1update@yopmail.com	|	meluser1		|	Password@1	|		10		|	4242424242424242	|
+	|	Platform	|	Email					|	Username		|	Password	|		Amount	|	CardNumber			| CardName 			 | Expiry | SecurityCode | ExpectedMessage |
+	|	Android		|	meluser12@yopmail.com	|	meluser12		|	Password-1	|		11.50	|	4242424242424242	| TestAutomationCard | 02/28  | 222 | Your money's being moved. |
 	
 
 	@RegressionPack @TC004
@@ -134,84 +120,69 @@ And user waits for "5" seconds
  And user clicks on button "Log_In"
  And user waits for "5" seconds
  And user clicks on button "Move_Money"
-  And user waits for "2" seconds
-  And user scrolls down
-  And user clicks on button "Transfer_From_Other_Banks"
-   And user waits for "5" seconds
-   And user clicks on button "eTransfer_from_other_bank"
-   And user clicks on button "Continue"  
-	#Need to write verification method
+ And user waits for "2" seconds
+ And user scrolls down
+ And user clicks on button "Transfer_From_Other_Banks"
+ And user waits for "5" seconds
+ And user clicks on button "eTransfer_from_other_bank"
+ And user clicks on button "Continue"  
+ And user validates "Coming_Soon" with expected value as "<ExpectedMessage>"
 
   Examples: 
-	|	Platform	|	Email					|	Username		|	Password	|
-	|	Android		|	meluser12@yopmail.com	|	meluser14		|	Password-1	|
+	|	Platform	|	Email					|	Username		|	Password	| ExpectedMessage |
+	|	Android		|	meluser12@yopmail.com	|	meluser12		|	Password-1	| We’re working hard to bring you this and other useful ways to manage your money. Please check back with us later! |
+	
 @RegressionPack @TC005
 Scenario Outline: Verify that the user is able to delete the P2P contacts 
 Given user launches the app in "<Platform>" device
-And user waits for "5" seconds
 And user clicks on button "Get_started"
-And user waits for "3" seconds
 And user enters text "<Email>" in textbox "Your_email"
 And user clicks on button "Continue"
-And user waits for "2" seconds
 And user enters text "<Username>" in textbox "Username"
 And user enters text "<Password>" in textbox "Password"
 And user clicks on button "Log_In"
-And user waits for "5" seconds
+
 And user clicks on button "Move_Money"
-And user waits for "2" seconds
 And user scrolls down
 And user clicks on button "Send_Money"
-And user waits for "5" seconds
 And user clicks on button "Allow"
-And user waits for "3" seconds
 And user clicks on button "EDIT/DELETE"
-And user clicks on button "EDIT1" 
-And user waits for "2" seconds 
+And user clicks on "Edit_Icon" of contact with email "<P2P Contact Email>"
 And user clicks on button "Delete_Contact" 
-And user waits for "2" seconds
 And user clicks on button "Yes" 
-And user waits for "2" seconds
-
+And user validates that contact with email "<P2P Contact Email>" is "deleted"
    
 	#Need to write verification method
 
   Examples: 
-	|	Platform	|	Email					|	Username		|	Password	| 
-	|	Android		|	meluser14@yopmail.com	|	meluser14		|	Tester-1	| 
+	|	Platform	|	Email					|	Username		|	Password	| P2P Contact Email |
+	|	Android		|	meluser1update@yopmail.com	|	meluser1	|	Password@1	| external@yopmail.com |
 	
 @RegressionPack @TC006
 Scenario Outline: Verify that the user is able to edit the P2P contacts 
 Given user launches the app in "<Platform>" device
-And user waits for "5" seconds
 And user clicks on button "Get_started"
-And user waits for "3" seconds
 And user enters text "<Email>" in textbox "Your_email"
 And user clicks on button "Continue"
-And user waits for "2" seconds
 And user enters text "<Username>" in textbox "Username"
 And user enters text "<Password>" in textbox "Password"
 And user clicks on button "Log_In"
-And user waits for "5" seconds
+
 And user clicks on button "Move_Money"
-And user waits for "2" seconds
 And user scrolls down
 And user clicks on button "Send_Money"
-And user waits for "5" seconds
 And user clicks on button "Allow"
-And user waits for "3" seconds
 And user clicks on button "EDIT/DELETE"
-And user clicks on button "EDIT1" 
-And user waits for "2" seconds 
-And user enters text "<Email_Edit>" in textbox "Friends_Email"   
+And user clicks on "Edit_Icon" of contact with email "<P2P Contact Email>"
+And user enters text "<New Email>" in textbox "Friends_Email"   
 And user clicks on button "Save_Changes" 
-And user waits for "2" seconds
 And user clicks on button "Yes" 
 And user waits for "2" seconds
+And user validates that contact with email "<New Email>" is "displayed"
 
-  Examples: 
-	|	Platform	|	Email					|	Username		|	Password	| Email_Edit | Edited_Contact |
-	|	Android		|	meluser14@yopmail.com	|	meluser14		|	Tester-1	| meluser21@yopmail.com | meluser21@yopmail.com |		
+Examples: 
+	|	Platform	|	Email					    |	Username	|	Password	| P2P Contact Email     | New Email |
+	|	Android		|	meluser1update@yopmail.com	|	meluser1	|	Password@1	| meluser21@yopmail.com | meluser12@yopmail.com |		
 	
 @RegressionPack @TC007
 Scenario Outline: Verify that the user is able to delete the bill payee contact

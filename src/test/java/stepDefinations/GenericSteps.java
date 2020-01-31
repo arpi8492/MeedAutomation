@@ -107,18 +107,19 @@ public class GenericSteps extends BaseTest{
     	action = new TouchActions(driver);
     	try 
     		{	
-    		if (webelementHandler.getCurrentAndroidContext().contains("WEBVIEW")) {
-				webelementHandler.switchAndroidContext("NATIVE");
-			}
+    			if (webelementHandler.getCurrentAndroidContext().contains("WEBVIEW")) {
+    				webelementHandler.switchAndroidContext("NATIVE");
+    			}else if (ObjectRepository.getString(button_name).contains("//div")) {
+    				webelementHandler.switchAndroidContext("WEBVIEW");
+				}    			
     			System.out.println("Property Value: " +ObjectRepository.getobjectLocator(button_name));
-        	 	wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(button_name)));
+    			wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(button_name)));
         	 	driver.findElement(ObjectRepository.getobjectLocator(button_name)).click();
         	 	if (button_name.equals("Home")) {
         	 		System.err.println(driver.findElement(ObjectRepository.getobjectLocator(button_name)).getText());
             		action.singleTap(driver.findElement(ObjectRepository.getobjectLocator(button_name))).perform();   
         		}        		
-    		}
-    
+    		}    
     	catch(Exception e) 
     		{
     		String button_value = button_name.split("_")[0];
@@ -126,8 +127,7 @@ public class GenericSteps extends BaseTest{
     		Thread.sleep(1000);
     		driver.findElement(By.xpath("//*[contains(@text, '"+button_value+"')]")).click();; 
     		System.out.println("Inside Catch , Success");
-   		}
-    	Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));   	
+   		} 	
     }
     
   //------------------LABEL CLICK---------------------
@@ -153,6 +153,9 @@ public class GenericSteps extends BaseTest{
     public void user_enters_text_in_textbox(String text_value, String textbox_name) throws Throwable {
 	
     	try {
+    		if(ObjectRepository.getString(textbox_name).contains("//android")) {
+				webelementHandler.switchAndroidContext("NATIVE");
+			}   
     		if(textbox_name.contentEquals("AMOUNT_TO_BE_MOVED") || textbox_name.contentEquals("AMOUNT_TO_BE_SENT") || ObjectRepository.getString("frameElement").contains(textbox_name))
     		{
     	     	wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(textbox_name)));   
@@ -260,7 +263,6 @@ public class GenericSteps extends BaseTest{
 		TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
     	touchAction.longPress(PointOption.point(200, 550)).moveTo(PointOption.point(200, 200)).release().perform();
     	Thread.sleep(1000);
-    	Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 
     }
     
     
@@ -301,8 +303,7 @@ public class GenericSteps extends BaseTest{
     public void user_waits_for_seconds(long arg1) throws Throwable 
     {
        arg1 = arg1*1000;
-    	Thread.sleep(arg1);
-    	Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));  
+    	Thread.sleep(arg1); 
     } 
     
   //------------------INDEX METHOD FOR TEXTBOX ---------------------
@@ -1006,9 +1007,13 @@ public class GenericSteps extends BaseTest{
 
  @After()
 	public void tearDown() throws Exception {		
-		System.out.println("Executing After of Step Defination");
-        Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));  
-		driver.quit();
+	 System.out.println("Executing After of Step Defination");
+	 	if (webelementHandler.getCurrentAndroidContext().contains("WEBVIEW")) {
+	 		driver.quit();
+	 	}else {
+	 		Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));  
+	 		driver.quit();
+	 	}
 	}
  
  /** @author vaishali.katta  */
@@ -1160,9 +1165,14 @@ public class GenericSteps extends BaseTest{
  /** @author vaishali.katta  */
  @Given("^user validates \"([^\"]*)\" with expected value as \"([^\"]*)\"$")
  public void user_validates_with_expected_value_as(String actual, String expected) throws Throwable {
-	 
+	 if (ObjectRepository.getString(actual).contains("//div")) {
+		 webelementHandler.switchAndroidContext("WEBVIEW");
+		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ObjectRepository.getString(actual))));  
+		 VerificationHandler.verifyEquals(driver.findElement(By.xpath(ObjectRepository.getString(actual))).getText(), expected);
+	}else {	 
 	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ObjectRepository.getString(actual))));  
 	 VerificationHandler.verifyEquals(driver.findElement(By.xpath(ObjectRepository.getString(actual))).getText(), expected);
+	}
  }
 
  /** @author vaishali.katta  */
@@ -1263,6 +1273,53 @@ public class GenericSteps extends BaseTest{
 	 webelementHandler.enterText(ObjectRepository.getString("Paystand_Postal_Code"), "22222");
 	 webelementHandler.enterText(ObjectRepository.getString("Paystand_State"), "New Jersey");
 	 webelementHandler.clickButton(ObjectRepository.getString("Paystand_Pay"));
+ }
+ 
+ @Given("^user enters \"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\" in paystand and click on \"([^\"]*)\"$")
+ public void user_enters_in_paystand_and_click_on(String payamount, String payemail, String paycardname, String paycardnumber, String paycardexpiry, String payscode, String button) throws Throwable {
+	 Thread.sleep(5000);
+	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("paystand_checkout_iframe")));
+	 driver.switchTo().frame("paystand_checkout_iframe");
+	 webelementHandler.enterText(ObjectRepository.getString("Paystand_Amount"), payamount);
+	 webelementHandler.enterText(ObjectRepository.getString("Paystand_Email"), payemail);
+	 webelementHandler.enterText(ObjectRepository.getString("Paystand_Card_Name"), paycardname);
+	 webelementHandler.enterText(ObjectRepository.getString("Paystand_Card_Number"), paycardnumber);
+	 webelementHandler.enterText(ObjectRepository.getString("Paystand_Card_expiry"), paycardexpiry);
+	 webelementHandler.enterText(ObjectRepository.getString("Paystand_Card_Security_Code"), payscode);
+	 webelementHandler.clickButton(ObjectRepository.getString(button));
+ }
+ 
+ @Given("^user clicks on \"([^\"]*)\" of contact with email \"([^\"]*)\"$")
+ public void user_clicks_on_of_contact_with_email(String element, String contactEmail) throws Throwable {
+	 String locator =null;
+	 try {
+		 if (element.equals("Edit_Icon")) {
+				 locator = "//android.view.View[contains(@text,'"+contactEmail+"')]/../../following-sibling::android.widget.Image";
+				 webelementHandler.clickButton(locator);	
+				}
+		} catch (Exception e) {
+			throw new Exception("Unable to click on contact with email "+contactEmail+e);
+	}
+ }
+
+
+ @Given("^user validates that contact with email \"([^\"]*)\" is \"([^\"]*)\"$")
+ public void user_validates_that_contact_with_email_is(String contactEmail, String action) throws Throwable {
+	 String locator = null;
+	 try {
+		 locator = "//android.view.View[@resource-id='recent-list']//android.view.View[contains(@text,'"+contactEmail+"')]";
+		 	if (webelementHandler.getCurrentAndroidContext().contains("WEBVIEW")) {
+				webelementHandler.switchAndroidContext("NATIVE");
+			}
+	 		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(locator)));
+		 	if (action.equals("deleted")) {		 		
+		 		VerificationHandler.verifyTrue(driver.findElements(By.xpath(locator)).isEmpty());
+		 	}else if (action.equals("displayed")) {
+				VerificationHandler.verifyTrue(driver.findElements(By.xpath(locator)).size()>0);		 		
+			}
+	} catch (Exception e) {
+		throw new Exception("Unable to validate if deleted/edited "+contactEmail+e);
+	}
  }
 	
 }
