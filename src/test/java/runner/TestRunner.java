@@ -13,11 +13,11 @@ import cucumber.api.junit.Cucumber;
  
 @RunWith(Cucumber.class)
 @CucumberOptions(		
- features = "src/test/java/features/New App features/MoveMoney.feature",
+ features = "src/test/java/features/New App features/More.feature",
  glue= {"stepDefinations"},
  plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/TestAutomationReport.html"},
  monochrome = true,
- tags= {"@TC006"},
+ tags= {"@TC006_More_Card_PIN"},
  dryRun = false
  )
  

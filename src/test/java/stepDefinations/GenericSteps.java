@@ -111,6 +111,7 @@ public class GenericSteps extends BaseTest{
     				webelementHandler.switchAndroidContext("NATIVE");
     			}else if (ObjectRepository.getString(button_name).contains("//div")) {
     				webelementHandler.switchAndroidContext("WEBVIEW");
+    				wait.until(ExpectedConditions.elementToBeClickable(ObjectRepository.getobjectLocator(button_name)));
 				}    			
     			System.out.println("Property Value: " +ObjectRepository.getobjectLocator(button_name));
     			wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(button_name)));
@@ -135,6 +136,7 @@ public class GenericSteps extends BaseTest{
     public void label(String label_name) throws Throwable {  
     	try
     	{
+    		wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(label_name)));
     		driver.findElement(ObjectRepository.getobjectLocator(label_name)).click();
     	}
     	catch(Exception e)
@@ -952,6 +954,7 @@ public class GenericSteps extends BaseTest{
     	public void user_selects_option_from_the_list(String list_value) throws Throwable {
     	    // Write code here that turns the phrase above into concrete actions
     		System.out.println("List name" + list_value);
+    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.view.View[@text='"+list_value+"']")));
     	    driver.findElement(By.xpath("//android.view.View[@text='"+list_value+"']")).click();
     	}
     	
@@ -1169,9 +1172,9 @@ public class GenericSteps extends BaseTest{
 		 webelementHandler.switchAndroidContext("WEBVIEW");
 		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ObjectRepository.getString(actual))));  
 		 VerificationHandler.verifyEquals(driver.findElement(By.xpath(ObjectRepository.getString(actual))).getText(), expected);
-	}else {	 
-	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ObjectRepository.getString(actual))));  
-	 VerificationHandler.verifyEquals(driver.findElement(By.xpath(ObjectRepository.getString(actual))).getText(), expected);
+	}else {
+		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ObjectRepository.getString(actual))));  
+		 VerificationHandler.verifyEquals(driver.findElement(By.xpath(ObjectRepository.getString(actual))).getText(), expected);
 	}
  }
 
@@ -1197,6 +1200,17 @@ public class GenericSteps extends BaseTest{
 	 		    driver.findElement(By.xpath(ObjectRepository.getString("chrome_new_tab"))).click();
 	 			Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 
 	 		}	 
+		break;
+	 	case "Dialer":
+	 		try {
+	 			activity = new Activity(ObjectRepository.getString("global.capability.dialerAppPackage"), ObjectRepository.getString("global.capability.dialerAppActivity"));
+	 	        activity.setStopApp(false);
+	 	        ((AndroidDriver<MobileElement>) this.driver).startActivity(activity);	
+	 	        webelementHandler.switchAndroidContext("NATIVE");
+	 		} catch (Exception e) {
+	 			System.out.println("Inside Catch , Success"+e);
+	 		       }
+	 			 
 		break;
 
 	default:
@@ -1289,8 +1303,9 @@ public class GenericSteps extends BaseTest{
 	 webelementHandler.clickButton(ObjectRepository.getString(button));
  }
  
- @Given("^user clicks on \"([^\"]*)\" of contact with email \"([^\"]*)\"$")
- public void user_clicks_on_of_contact_with_email(String element, String contactEmail) throws Throwable {
+
+ @Given("^user clicks on \"([^\"]*)\" of contact \"([^\"]*)\"$")
+ public void user_clicks_on_of_contact(String element, String contactEmail) throws Throwable {
 	 String locator =null;
 	 try {
 		 if (element.equals("Edit_Icon")) {
@@ -1302,19 +1317,19 @@ public class GenericSteps extends BaseTest{
 	}
  }
 
-
- @Given("^user validates that contact with email \"([^\"]*)\" is \"([^\"]*)\"$")
- public void user_validates_that_contact_with_email_is(String contactEmail, String action) throws Throwable {
+ @Given("^user validates that contact \"([^\"]*)\" is \"([^\"]*)\"$")
+ public void user_validates_that_contact_is(String contactEmail, String action) throws Throwable {
 	 String locator = null;
 	 try {
-		 locator = "//android.view.View[@resource-id='recent-list']//android.view.View[contains(@text,'"+contactEmail+"')]";
+		 //locator = "//android.view.View[@resource-id='recent-list']//android.view.View[contains(@text,'"+contactEmail+"')]";
+		 locator = "//android.view.View[contains(@text,'"+contactEmail+"')]";
 		 	if (webelementHandler.getCurrentAndroidContext().contains("WEBVIEW")) {
 				webelementHandler.switchAndroidContext("NATIVE");
-			}
-	 		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(locator)));
+			}	 		
 		 	if (action.equals("deleted")) {		 		
 		 		VerificationHandler.verifyTrue(driver.findElements(By.xpath(locator)).isEmpty());
 		 	}else if (action.equals("displayed")) {
+		 		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(locator)));
 				VerificationHandler.verifyTrue(driver.findElements(By.xpath(locator)).size()>0);		 		
 			}
 	} catch (Exception e) {

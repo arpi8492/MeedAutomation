@@ -106,7 +106,7 @@ Given user launches the app in "<Platform>" device
 	|	Android		|	meluser12@yopmail.com	|	meluser12		|	Password-1	|		11.50	|	4242424242424242	| TestAutomationCard | 02/28  | 222 | Your money's being moved. |
 	
 
-	@RegressionPack @TC004
+@RegressionPack @TC004
 Scenario Outline: Verify that the user is able to select 'E-Transfer' from other bank option 
 Given user launches the app in "<Platform>" device
 And user waits for "5" seconds
@@ -147,10 +147,10 @@ And user scrolls down
 And user clicks on button "Send_Money"
 And user clicks on button "Allow"
 And user clicks on button "EDIT/DELETE"
-And user clicks on "Edit_Icon" of contact with email "<P2P Contact Email>"
+And user clicks on "Edit_Icon" of contact "<P2P Contact Email>"
 And user clicks on button "Delete_Contact" 
 And user clicks on button "Yes" 
-And user validates that contact with email "<P2P Contact Email>" is "deleted"
+And user validates that contact "<P2P Contact Email>" is "deleted"
    
 	#Need to write verification method
 
@@ -173,12 +173,12 @@ And user scrolls down
 And user clicks on button "Send_Money"
 And user clicks on button "Allow"
 And user clicks on button "EDIT/DELETE"
-And user clicks on "Edit_Icon" of contact with email "<P2P Contact Email>"
+And user clicks on "Edit_Icon" of contact "<P2P Contact Email>"
 And user enters text "<New Email>" in textbox "Friends_Email"   
 And user clicks on button "Save_Changes" 
 And user clicks on button "Yes" 
 And user waits for "2" seconds
-And user validates that contact with email "<New Email>" is "displayed"
+And user validates that contact "<New Email>" is "displayed"
 
 Examples: 
 	|	Platform	|	Email					    |	Username	|	Password	| P2P Contact Email     | New Email |
@@ -187,18 +187,13 @@ Examples:
 @RegressionPack @TC007
 Scenario Outline: Verify that the user is able to delete the bill payee contact
 Given user launches the app in "<Platform>" device
-And user waits for "5" seconds
 And user clicks on button "Get_started"
-And user waits for "3" seconds
 And user enters text "<Email>" in textbox "Your_email"
 And user clicks on button "Continue"
-And user waits for "2" seconds
 And user enters text "<Username>" in textbox "Username"
 And user enters text "<Password>" in textbox "Password"
 And user clicks on button "Log_In"
-And user waits for "5" seconds
 And user clicks on button "Move_Money"
-And user waits for "2" seconds
 And user scrolls down
 And user scrolls down
 And user scrolls down
@@ -208,18 +203,17 @@ And user scrolls down
 And user clicks on button "Pay_Bills"
 And user clicks on button "Bill_Pay_Service"
 And user clicks on button "Continue"
-And user waits for "10" seconds
-And user selects option "TEST" from the list
-And user waits for "15" seconds
+And user selects option "VAISHALI KATTA" from the list
 And user clicks on button "VIEW/DELETE"
-And user waits for "10" seconds
 And user clicks on button "Delete"
 And user clicks on button "Yes"
- 
+And user waits for "5" seconds
+And user clicks on button "OK"
+And user validates that contact "VAISHALI KATTA" is "deleted"
  
   Examples: 
 	|	Platform	|	Email					|	Username		|	Password	| 
-	|	Android		|	meluser14@yopmail.com	|	meluser14		|	Tester-1	| 	
+	|	Android		|	meluser12@yopmail.com	|	meluser12		|	Password-1	| 	
 	
 	
 	
