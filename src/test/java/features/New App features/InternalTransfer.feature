@@ -283,3 +283,37 @@ Given user launches the app in "<Platform>" device
 	|	Platform	|	Email					|	Username		|	Password		|	 	Amount		| Frequency |	Note |
 	|	Android		|	meluser12@yopmail.com 	|	meluser12		|	Password-1		|		1.00		| Monthly 	| Testing Internal transfer Automation |
 	
+@RegressionPack @TC001_Akash
+Scenario Outline: Verify that the user gets valid error message when the user is performing internal transfer from DDA to SAV more than available balance
+Given user launches the app in "<Platform>" device
+And user waits for "5" seconds
+  And user clicks on button "Get_started"
+ And user waits for "3" seconds
+ And user enters text "<Email>" in textbox "Your_email"
+ And user clicks on button "Continue"
+ And user waits for "2" seconds
+ And user enters text "<Username>" in textbox "Username"
+ And user enters text "<Password>" in textbox "Password"
+ And user clicks on button "Log_In"
+ And user waits for "5" seconds
+ And user clicks on button "Move_Money"
+  And user waits for "2" seconds
+  And user scrolls down
+     And user waits for "5" seconds
+   And user scrolls down
+   And user waits for "5" seconds
+      And user scrolls down
+   And user waits for "5" seconds
+   And user scrolls down
+  And user clicks on button "Move_Between_Accounts"
+  And user waits for "5" seconds
+   And user scrolls down
+  And user enters text "<Amount>" in textbox "AMOUNT_TO_BE_MOVED"
+  And user validates "InsufficientFundsError" field with expected value as "<Error>"
+   #
+  
+  Examples: 
+	|	Platform	|	Email					|	Username		|	Password	|	 	Amount		|	Error	|
+	|	Android		|	meluser14@yopmail.com	|	meluser14		|	Tester-1	|		999.00		|	There are insufficient funds available to make the requested transfer.|
+	
+	
