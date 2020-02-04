@@ -181,68 +181,51 @@ Given user launches the app in "<Platform>" device
     |   Platform    |   Email                   |   Username     |   Password    |  	Expected Contact No |
     |   Android     |   meluser12@yopmail.com   |   meluser12 |   Password-1 | 	(833) 213-6333 |	 
  
-  @RegressionPack @TC007_More_Statements
+@RegressionPack @TC007_More_Statements
 Scenario Outline: Verify Meed customer is able to view Statements in Meed app 
 Given user launches the app in "<Platform>" device
-And user waits for "5" seconds
  And user clicks on button "Get_started"
- And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
- And user waits for "2" seconds
  And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
- And user waits for "5" seconds
  And user clicks on button "More"
-  And user waits for "2" seconds
- 
+
  And user clicks on button "Statements"
-  And user waits for "2" seconds
-  And user scrolls down 
-  And user clicks on button "Back"
-   And user waits for "5" seconds
+ And user validates that "Statements" is displayed
+ And user scrolls down 
+ And user clicks on button "Back"
   
   Examples: 
-    |   Platform    |   Email                           |   Username     |   Password    |  	
-    |   Android     |   meluser12@yopmail.com   |   meluser12 |   Password-1 | 		
+    |   Platform    |   Email                   |   Username     |   Password    |  	
+    |   Android     |   meluser12@yopmail.com   |   meluser12 |   Password-1 | 		   
     
     
-    
-    
-    @RegressionPack @TC008_More_Change_Language
+@RegressionPack @TC008_More_Change_Language
 Scenario Outline: Verify Meed customer is able to Change Language to Spanish in Meed app 
 Given user launches the app in "<Platform>" device
-And user waits for "5" seconds
  And user clicks on button "Get_started"
- And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
- And user waits for "2" seconds
  And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
- And user waits for "5" seconds
  And user clicks on button "More"
-  And user waits for "2" seconds
  And user scrolls down
- And user clicks on button "Settings"
-  And user waits for "2" seconds
-  
-  And user clicks on label "Change_Language"
-   And user waits for "2" seconds
-
-  And user clicks on label "Espanol"
-   And user waits for "1" seconds
-
-   And user clicks on button "Back"
-   And user clicks on label "Cambiar_idioma"
-   And user waits for "2" seconds
-
-  And user clicks on label "English"
-   And user clicks on button "Back"
-   And user waits for "5" seconds
-   
+ And user clicks on button "Settings"  
+And user clicks on label "Change_Language"
+And user clicks on label "Espanol"
+And user validates that "Cambiar_Idioma" is displayed
+And user clicks on button "Back"
+And user validates that "Configuración" is displayed
+And user validates that "Preferencias_de_contacto" is displayed
+And user validates that "Información_de_la_versión" is displayed
+And user validates that "Transferencia_automática" is displayed
+And user clicks on label "Cambiar_idioma"
+And user clicks on label "English"
+And user validates that "Change_Language" is displayed
+And user clicks on button "Back"
   
   Examples: 
     |   Platform    |   Email                           |   Username     |   Password    |  	
@@ -252,24 +235,17 @@ And user waits for "5" seconds
     @RegressionPack @TC009_More_Contact_preferences
 Scenario Outline: Verify Meed customer is able to Change Contact Preferences in Meed app 
 Given user launches the app in "<Platform>" device
-And user waits for "5" seconds
  And user clicks on button "Get_started"
- And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
- And user waits for "2" seconds
  And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
- And user waits for "5" seconds
  And user clicks on button "More"
-  And user waits for "2" seconds
  And user scrolls down
  And user clicks on button "Settings"
-  And user waits for "2" seconds
-  
-  And user clicks on label "Contact_Preferences"
-   And user waits for "2" seconds
+   
+And user clicks on label "Contact_Preferences"
 And user scrolls down
 And user scrolls down
 And user selects checkbox at index "2"
@@ -524,5 +500,28 @@ And user waits for "5" seconds
   Examples: 
 	|	Platform	|	Email					|	Username		|	Password	|	 	Amount		|	
 	|	Android		|	meluser14@yopmail.com	|	meluser14		|	Password-1	|		999.00		|
+	
+@TC001_VA_Launch
+Scenario Outline: Verify Meed customer is able to successfully launch VA in the app
+Given user launches the app in "<Platform>" device
+And user clicks on button "Get_started"
+And user enters text "<Email>" in textbox "Your_email"
+And user clicks on button "Continue"
+And user enters text "<Username>" in textbox "Username"
+And user enters text "<Password>" in textbox "Password"
+And user clicks on button "Log_In"
+And user clicks on button "More"
+And user scrolls down
+And user scrolls down
+And user scrolls down
+And user scrolls down
+And user scrolls down
+And user clicks on button "Contact_Us"
+And user clicks on button "How_do_I_make_a_transfer"
+And user validates "Great_question" with expected value as "<Answer1>"
+And user validates "An_Internal_Transfer" with expected value as "<Answer2>"
+And user validates "A_P2P_or_Send/Receive_Money_Transfer" with expected value as "<Answer3>"
       
-    
+ Examples: 
+|	Platform	|	Email					|	Username		|	Password	| Answer1 |	Answer2 | Answer3 |
+|	Android		|	meluser12@yopmail.com	|	meluser12		|	Password-1	| Great question, to make a transfer you must first select the type of transfer you would like to make from the options under move money at the bottom of the home page. | An Internal Transfer is used to transfer between your Meed accounts. To do an internal transfer, select the From & To accounts then tap Next and complete the remaining fields. When done, tap Next and then Confirm the transfer. | A P2P or Send/Receive Money Transfer is used to transfer between your Meed account and another Meed Member. The guided prompts are easy and simple to follow. |

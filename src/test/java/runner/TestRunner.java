@@ -17,7 +17,7 @@ import cucumber.api.junit.Cucumber;
  glue= {"stepDefinations"},
  plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/TestAutomationReport.html"},
  monochrome = true,
- tags= {"@TC006_More_Card_PIN"},
+ tags= {"@TC001_VA_Launch"},
  dryRun = false
  )
  
