@@ -340,6 +340,7 @@ public class GenericSteps extends BaseTest{
     // Write code here that turns the phrase above into concrete actions  
 
     	List<MobileElement> elements = driver.findElements(By.className("android.widget.EditText"));
+    	wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("android.widget.EditText")));
     	System.out.println("Number of elements:" +elements.size());
     	for (int i=0; i<elements.size();i++)
     	{

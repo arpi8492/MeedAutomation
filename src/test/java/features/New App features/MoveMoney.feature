@@ -216,6 +216,22 @@ And user validates that contact "VAISHALI KATTA" is "deleted"
 	|	Android		|	meluser12@yopmail.com	|	meluser12		|	Password-1	| 	
 	
 	
+@RegressionPack @TC001_3%_Charge
+Scenario Outline: Verify that when the user is funding the account from in app, there is 3% charge on the transaction
+Given user launches the app in "<Platform>" device
+And user clicks on button "Get_started"
+And user enters text "<Email>" in textbox "Your_email"
+And user clicks on button "Continue"
+And user enters text "<Username>" in textbox "Username"
+And user enters text "<Password>" in textbox "Password"
+And user clicks on button "Log_In"
+And user clicks on button "Move_Money"
+And user clicks on button "Credit/Debit_Cards"
+And user validates "Pass_through_charge" with expected value as "<Service_Charge_Message>"
+
+Examples:
+|	Platform	|	Email					|	Username		|	Password	|Service_Charge_Message|
+|	Android		|	meluser12@yopmail.com	|	meluser12		|	Password-1	|There is a pass-through charge of 3% that will be added to your card transaction.|	
 	
 	
 	
