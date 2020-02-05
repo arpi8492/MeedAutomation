@@ -290,6 +290,7 @@ public class GenericSteps extends BaseTest{
     public void user_selects_checkbox(String checkbox_name) throws Throwable {
     	try
     	{
+    		wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(checkbox_name)));
     		driver.findElement(ObjectRepository.getobjectLocator(checkbox_name)).click();
     	}
     	catch (Exception e)
@@ -1336,6 +1337,21 @@ public class GenericSteps extends BaseTest{
 	} catch (Exception e) {
 		throw new Exception("Unable to validate if deleted/edited "+contactEmail+e);
 	}
+ }
+ 
+ @Given("^user validates that \"([^\"]*)\" is \"([^\"]*)\"$")
+ public void user_validates_that_is(String locator, String attribute) throws Throwable {
+	 WebElement we = null;
+	 if (webelementHandler.getCurrentAndroidContext().contains("WEBVIEW")) {
+			webelementHandler.switchAndroidContext("NATIVE");}
+	 if (ObjectRepository.getString(locator).contains("Xpath")) {
+		 wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(locator)));
+		 we = driver.findElement(ObjectRepository.getobjectLocator(locator));
+	}else {
+	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ObjectRepository.getString(locator))));
+	 we = driver.findElement(By.xpath(ObjectRepository.getString(locator)));
+	}
+	 VerificationHandler.verifyTrue(we.getAttribute(attribute).equals("true"));
  }
 	
 }

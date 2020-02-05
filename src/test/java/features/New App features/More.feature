@@ -233,7 +233,7 @@ And user clicks on button "Back"
     
     
     @RegressionPack @TC009_More_Contact_preferences
-Scenario Outline: Verify Meed customer is able to Change Contact Preferences in Meed app 
+Scenario Outline: Verify Meed customer is able to Change Contact Preferences of Meed Banking Club in Meed app 
 Given user launches the app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
@@ -247,42 +247,33 @@ Given user launches the app in "<Platform>" device
    
 And user clicks on label "Contact_Preferences"
 And user scrolls down
-And user scrolls down
 And user selects checkbox at index "2"
-
-  And user waits for "3" seconds
+And user waits for "2" seconds
 And user selects checkbox at index "3"
-
-And user clicks on button "Back"
 And user waits for "3" seconds
-
+And user validates that "Meed_Banking_Club_Email" is "checked"
+And user validates that "Meed_Banking_Club_Push_Notification" is "checked"
   
   Examples: 
-    |   Platform    |   Email                           |   Username     |   Password    |  	
+    |   Platform    |   Email                   |   Username     |   Password    |  	
     |   Android     |   meluser12@yopmail.com   |   meluser12 |   Password-1 | 		 
     
     
-    @RegressionPack @TC010_More_Version_Info
+@RegressionPack @TC010_More_Version_Info
 Scenario Outline: Verify Meed customer is able to view App version info in Meed app 
 Given user launches the app in "<Platform>" device
-And user waits for "5" seconds
  And user clicks on button "Get_started"
- And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
- And user waits for "2" seconds
  And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
- And user waits for "5" seconds
  And user clicks on button "More"
-  And user waits for "2" seconds
  And user scrolls down
  And user clicks on button "Settings"
-  And user waits for "2" seconds
-  
-  And user clicks on label "Version_Info"
-  And user waits for "3" seconds
+ And user clicks on label "Version_Info"
+ And user validates that "VERSION" is displayed
+ And user validates that "RELEASE_DATE" is displayed
 And user clicks on button "Back"
 And user waits for "3" seconds
 
@@ -325,80 +316,80 @@ And user waits for "3" seconds
 @RegressionPack @TC001_Privacy_&_legal
 Scenario Outline: Verify Meed customer is able to view legal documents in Meed app 
 Given user launches the app in "<Platform>" device
-
-And user waits for "10" seconds
  And user clicks on button "Get_started"
- And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
- And user waits for "2" seconds
  And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
- And user waits for "5" seconds
  And user clicks on button "More"
-  And user waits for "2" seconds
   And user scrolls down
+    And user waits for "2" seconds  
   And user scrolls down
+    And user waits for "2" seconds  
   And user scrolls down
+    And user waits for "2" seconds  
+  And user scrolls down
+    And user waits for "2" seconds 
+      And user scrolls down
+    And user waits for "2" seconds 
   And user clicks on button "Privacy_&_Legal"
-  And user waits for "15" seconds
-     
   And user clicks on label "Fee_Schedule"
   And user clicks on button "Allow"
-  And user waits for "2" seconds  
+  And user validates that "Fee_Scheduletc.pdf" is displayed  
   And user clicks on button "back" 
-  And user waits for "5" seconds
- 
-  And user clicks on label "Funds_Availability_Disclosure"   
-  And user clicks on button "back"
-  And user waits for "5" seconds  
 
-  And user clicks on label "Online_Banking_Agreement"  
+  And user clicks on label "Funds_Availability_Disclosure"   
+  And user validates that "Funds_Availability_Disclosuretc.pdf" is displayed 
+  And user clicks on button "back"
+
+  And user clicks on label "Online_Banking_Agreement" 
+  And user validates that "Online_Banking_Agreementtc.pdf" is displayed  
   And user clicks on button "back" 
-  And user waits for "5" seconds
   
   And user clicks on label "Privacy_Notice"  
+  And user validates that "Privacy_Noticetc.pdf" is displayed  
   And user clicks on button "back" 
-  And user waits for "5" seconds
+  
+  And user clicks on label "Savings_Account_Agreement"  
+  And user validates that "Savings_Account_Agreementtc.pdf" is displayed  
+  And user clicks on button "back" 
 
   And user clicks on label "Savings_Truth_In_Savings_Disclosure"  
+  And user validates that "Savings_Truth_In_Savings_Disclosuretc.pdf" is displayed  
   And user clicks on button "back" 
-  And user waits for "5" seconds
-  
+
   And user clicks on label "Truth_In_Lending_Disclosure_and_Agreement"  
+    And user validates that "Truth_In_Lending_Disclosure_and_Agreementtc.pdf" is displayed
   And user clicks on button "back" 
   And user waits for "5" seconds  
-
   And user scrolls down
   And user waits for "5" seconds  
-  And user clicks on label "W-9"  
+  And user clicks on label "W-9" 
+    And user validates that "W-9tc.pdf" is displayed 
   And user clicks on button "back" 
-  And user waits for "5" seconds  
      
   And user clicks on label "Checking_Account_Agreement"
+    And user validates that "Checking_Account_Agreementtc.pdf" is displayed
   And user clicks on button "back"
     
-  # And user presses device "BACK" button
-  And user waits for "5" seconds
   And user clicks on label "Checking_Truth_In_Savings_Disclosure"
-  # And user scrolls down
-  # And user scrolls down
-  And user waits for "2" seconds
+  And user validates that "Checking_Truth_In_Savings_Disclosuretc.pdf" is displayed
   And user clicks on button "back"
   
   And user waits for "5" seconds
   And user scrolls down
   And user waits for "5" seconds
   And user clicks on label "Electronic_Communications"
+    And user validates that "Electronic_Communicationstc.pdf" is displayed
   And user clicks on button "back"
   
   And user waits for "5" seconds
   And user scrolls down
   And user waits for "5" seconds
   And user clicks on label "Electronic_Funds_Transfer_Disclosure"
+    And user validates that "Electronic_Funds_Transfer_Disclosuretc.pdf" is displayed
   And user clicks on button "back" 
-  And user waits for "20" seconds
 
   Examples: 
     |   Platform    |   Email                           |   Username     |   Password    |   
@@ -408,69 +399,29 @@ And user waits for "10" seconds
    @RegressionPack @TC001_Message_Center
 Scenario Outline: Verify Meed customer is able view Message Center in Meed app 
 Given user launches the app in "<Platform>" device
-
-And user waits for "10" seconds
  And user clicks on button "Get_started"
- And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
- And user waits for "2" seconds
  And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
- And user waits for "5" seconds
  And user clicks on button "More"
+   And user waits for "2" seconds
+  And user scrolls down
   And user waits for "2" seconds
   And user scrolls down
+  And user waits for "2" seconds
   And user scrolls down
-     And user waits for "5" seconds
-   And user scrolls down
-   And user waits for "5" seconds
-      And user scrolls down
-   And user waits for "5" seconds
+  And user waits for "2" seconds
+  And user scrolls down
+  And user waits for "2" seconds
   And user clicks on button "Message_Center"
-  And user waits for "3" seconds
+  And user validates that "Message_Center" is displayed
   And user clicks on button "Back"
-  And user waits for "10" seconds
 
   Examples: 
     |   Platform    |   Email                           |   Username     |   Password    |   
     |   Android     |   meluser12@yopmail.com   |   meluser12 |   Password-1 |   
-    
-   
-    @RegressionPack @TC001_Contact_Us
-Scenario Outline: Verify Meed customer is able contact us in Meed app 
-Given user launches the app in "<Platform>" device
-
-And user waits for "10" seconds
- And user clicks on button "Get_started"
- And user waits for "3" seconds
- And user enters text "<Email>" in textbox "Your_email"
- And user clicks on button "Continue"
- And user waits for "2" seconds
- And user enters text "<Username>" in textbox "Username"
- And user enters text "<Password>" in textbox "Password"
- And user clicks on button "Log_In"
- And user waits for "5" seconds
- And user clicks on button "More"
-  And user waits for "2" seconds
-  And user scrolls down
-  And user scrolls down
-     And user waits for "2" seconds
-   And user scrolls down
-   And user waits for "2" seconds
-      And user scrolls down
-   And user waits for "2" seconds
-         And user scrolls down
-   And user waits for "2" seconds
-  And user clicks on button "Contact_Us"
-  And user waits for "3" seconds
-  And user clicks on button "Back"
-  And user waits for "10" seconds
-
-  Examples: 
-    |   Platform    |   Email                           |   Username     |   Password    |   
-    |   Android     |   meluser12@yopmail.com   |   meluser12 |   Password-1 |      
     
 
 @RegressionPack @TC001_SweepToggle_ON
@@ -493,16 +444,17 @@ And user waits for "5" seconds
   And user waits for "2" seconds
   And user clicks on button "Sweep"
   And user waits for "2" seconds
-  And user selects checkbox "SweepOn"
+  And user selects checkbox "Slide_to_turn_Sweep_OFF/ON"
   And user clicks on button "Save_Changes"
-   
+  And user clicks on button "OK"
+  And user validates that "Slide_to_turn_Sweep_OFF/ON" is "checked"
   
   Examples: 
 	|	Platform	|	Email					|	Username		|	Password	|	 	Amount		|	
-	|	Android		|	meluser14@yopmail.com	|	meluser14		|	Password-1	|		999.00		|
+	|	Android		|	meluser12@yopmail.com	|	meluser12		|	Password-1	|		999.00		|
 	
-@TC001_VA_Launch
-Scenario Outline: Verify Meed customer is able to successfully launch VA in the app
+@TC001_Contact_Us
+Scenario Outline: Verify Meed customer is able to use Contact Us functionality
 Given user launches the app in "<Platform>" device
 And user clicks on button "Get_started"
 And user enters text "<Email>" in textbox "Your_email"
@@ -511,11 +463,17 @@ And user enters text "<Username>" in textbox "Username"
 And user enters text "<Password>" in textbox "Password"
 And user clicks on button "Log_In"
 And user clicks on button "More"
+  And user waits for "2" seconds
 And user scrolls down
+  And user waits for "2" seconds
 And user scrolls down
+  And user waits for "2" seconds
 And user scrolls down
+  And user waits for "2" seconds
 And user scrolls down
+  And user waits for "2" seconds
 And user scrolls down
+  And user waits for "2" seconds
 And user clicks on button "Contact_Us"
 And user clicks on button "How_do_I_make_a_transfer"
 And user validates "Great_question" with expected value as "<Answer1>"

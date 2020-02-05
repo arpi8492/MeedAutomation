@@ -20,16 +20,16 @@ And user waits for "5" seconds
  And user clicks on button "Move_Money"
   And user waits for "2" seconds
   And user scrolls down
-     And user waits for "5" seconds
-   And user scrolls down
-   And user waits for "5" seconds
-      And user scrolls down
-   And user waits for "5" seconds
+  And user waits for "5" seconds
+  And user scrolls down
+  And user waits for "5" seconds
+  And user scrolls down
+  And user waits for "5" seconds
   And user clicks on button "Send_Money_Internationally"
-   And user clicks on button "Remitly"
-   And user waits for "5" seconds
-   And user clicks on button "I'm_Good_With_That"
- #validation left(User should reach external website)
+  And user clicks on button "Remitly"
+  And user waits for "5" seconds
+  And user clicks on button "I'm_Good_With_That"
+  #validation left(User should reach external website)
   
   Examples: 
 	|	Platform	|	Email					|	Username		|	Password	|

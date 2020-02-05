@@ -15,23 +15,20 @@ Given user launches the app in "<Platform>" device
  And user clicks on button "Log_In"
 
  And user clicks on button "Rewards"
- And user validates that "Rewards" is displayed
-   
+ And user validates that "Rewards" is displayed   
   And user clicks on button "MeedExtras"
   And user clicks on button "Okay"
   And user validates that "Featured_Offers" is displayed
   And user validates that "Categories" is displayed  
   And user scrolls down
-  And user scrolls down
-  
+  And user scrolls down  
   And user clicks on label "See_All_Offers"
   And user validates that "All_deals" is displayed
   And user clicks on button "Back"
   And user clicks on label "See_Nearby_Offers"
   And user clicks on button "Allow_only_while_using_the_app"
   And user validates that "Nearby_Offers" is displayed
-  And user validates that "Your_Location" is displayed
- 
+  And user validates that "Your_Location" is displayed 
   And user waits for "5" seconds
 
   Examples: 
@@ -77,13 +74,10 @@ Given user launches the app in "<Platform>" device
  And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
-
  And user clicks on button "Rewards"
  And user validates that "Rewards" is displayed
- 
   And user clicks on button "MeedTravel"
-  And user scrolls down  
-  
+  And user scrolls down    
   And user clicks on button "Book_via_MeedTravel"
   And user validates "Note" with expected value as "<ExpectedNote>"
   And user clicks on button "Im_good_with_that"
@@ -104,18 +98,15 @@ Given user launches the app in "<Platform>" device
  And user clicks on button "Continue"
  And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
- And user clicks on button "Log_In"
- 
+ And user clicks on button "Log_In" 
  And user clicks on button "Rewards"
- And user validates that "Rewards" is displayed
-  
+ And user validates that "Rewards" is displayed  
  And user clicks on button "MeedCover"
  And user clicks on button "View_Policy"
  And user clicks on button "Allow"
-  And user validates that "cover_policy.pdf" is displayed
+ And user validates that "cover_policy.pdf" is displayed
  And user clicks on button "back" 
-
   
   Examples: 
-    |   Platform    |   Email                           |   Username     |   Password    |   
-    |   Android     |   meluser12@yopmail.com   |   meluser12 |   Password-1 |  
+    |   Platform    |   Email                   |   Username     |   Password    |   
+    |   Android     |   meluser12@yopmail.com   |   meluser12    |   Password-1  |  
