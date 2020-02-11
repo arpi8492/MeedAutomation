@@ -7,34 +7,31 @@ Feature: P2P Transfer
 @RegressionPack @TC001_P2P_Send_Money
 Scenario Outline: Verify Meed customer is able to successfully Pay Friends having Meed membership - Send Money
 Given user launches the app in "<Platform>" device
-And user waits for "5" seconds
  And user clicks on button "Get_started"
- And user waits for "3" seconds
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
- And user waits for "2" seconds
  And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
- And user waits for "5" seconds
- And user clicks on button "Move_Money"
-  And user waits for "2" seconds
-  And user scrolls down
-  And user clicks on button "Send_Money" 
-  And user clicks on button "Allow"
-  And user waits for "5" seconds
+ 
+ #And user clicks on button "Move_Money"
+ # And user waits for "2" seconds
+ # And user scrolls down
+ # And user clicks on button "Send_Money" 
+  #And user clicks on button "Allow"
+  #And user waits for "5" seconds
 
-  And user enters text "<recipient>" in textbox "Email_or_existing_contact_name"  
-  And user selects option "<recipient>" from the list
-  And user clicks on button "Next"
-  And user waits for "2" seconds 
+  #And user enters text "<recipient>" in textbox "Email_or_existing_contact_name"  
+ # And user selects option "<recipient>" from the list
+ # And user clicks on button "Next"
+ # And user waits for "2" seconds 
   
-  And user enters text "<Amount>" in textbox "AMOUNT_TO_BE_SENT"
-  And user enters text "P2P automation notes" in textbox "NOTES"
-  And user clicks on button "Confirm_Details"
-  And user clicks on button "Send_Money"
-  And user switches to app "message" to get "OTP"
-  
+ # And user enters text "<Amount>" in textbox "AMOUNT_TO_BE_SENT"
+ # And user enters text "P2P automation notes" in textbox "NOTES"
+ # And user clicks on button "Confirm_Details"
+ # And user clicks on button "Send_Money"
+  And user switches to "Samsung Messaging" app
+  And user enters OTP received for "transfer" into "Enter_OTP" field
   # TO BD COMPLETED
 
   Examples: 

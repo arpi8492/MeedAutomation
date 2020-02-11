@@ -13,11 +13,12 @@ import cucumber.api.junit.Cucumber;
  
 @RunWith(Cucumber.class)
 @CucumberOptions(		
- features = "src/test/java/features/New App features",
+ features = "src/test/java/features/New App features/P2P.feature",
  glue= {"stepDefinations"},
- plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/TestAutomationReport.html"},
+ plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/ExtentReport/TestAutomationReport.html",
+		 "json:target/cucumber-reports/JSON/TestResultJson.json"},
  monochrome = true,
- tags= {"@SmokePack"},
+ tags= {"@TC001_P2P_Send_Money"},
  dryRun = false
  )
  

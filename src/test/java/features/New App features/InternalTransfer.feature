@@ -17,9 +17,9 @@ Given user launches the app in "<Platform>" device
   And user checks the initial "Available" of "CHECKING" account
   And user checks the initial "Available" of "SAVINGS" account
   And user clicks on button "Move_Money"
-  And user scrolls down
-  And user scrolls down
-  And user scrolls down
+  And user scrolls to "Move_Between_Accounts" 
+  And user scrolls to "Scheduled_Transfers" 
+  
   And user clicks on button "Move_Between_Accounts"
   And user scrolls down
   And user enters text "<Amount>" in textbox "AMOUNT_TO_BE_MOVED"
