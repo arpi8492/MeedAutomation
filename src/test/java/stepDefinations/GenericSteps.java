@@ -47,6 +47,7 @@ import net.prodigylabs.handlers.ScreenshotHandler;
 import net.prodigylabs.handlers.VerificationHandler;
 import net.prodigylabs.handlers.WebElementHandler;
 import net.prodigylabs.test.BaseTest;
+import net.prodigylabs.utils.JiraXrayUtils;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
@@ -1017,7 +1018,7 @@ public class GenericSteps extends BaseTest{
  @After()
 	public void tearDown() throws Throwable {		
 	 System.out.println("Executing After of Step Defination");
-	 	if (webelementHandler.getCurrentAndroidContext().contains("WEBVIEW")) {
+	 if (webelementHandler.getCurrentAndroidContext().contains("WEBVIEW")) {
 	 		((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.APP_SWITCH));
 	 		webelementHandler.clickButton(ObjectRepository.getString("Close_all"));
 	 	}else {
@@ -1390,10 +1391,10 @@ public class GenericSteps extends BaseTest{
 	Thread.sleep(5000);	
  }
  
- @Given("^user enters OTP received for \"([^\"]*)\" into \"([^\"]*)\" field$")
- public void user_enters_OTP_received_for_into_field(String transactionType, String field) throws Throwable {
+ @Given("^user enters OTP received for \"([^\"]*)\"$")
+ public void user_enters_OTP_received_for(String transactionType) throws Throwable {
 	 user_clicks_on_button("2055093851");
-	 Thread.sleep(5000);
+	 Thread.sleep(8000);
 	 String otp = null;
 	 List<WebElement> allelements = driver.findElements(By.xpath("//android.widget.TextView[contains(@text,'"+transactionType+"')]"));
 	 if (allelements.size()>0) {
@@ -1401,6 +1402,20 @@ public class GenericSteps extends BaseTest{
 		otp = StringUtils.remove(otpMsg, StringUtils.substringBetween(otpMsg, "$", " ")).replace("P2P", "").replaceAll("[^0-9]", "");
 		System.err.println(otp);
 	}
+	 System.err.println("Breakpoint");
+     activity = new Activity(ObjectRepository.getString("global.capability.NewMeedAppPackage"), ObjectRepository.getString("global.capability.NewMeedAppActivity"));
+     activity.setStopApp(false);
+     ((AndroidDriver<MobileElement>) this.driver).startActivity(activity);
+     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.view.View[@resource-id='signup-verification-info']")));
+     Thread.sleep(5000);
+	 for (int i = 0; i < otp.length(); i++) {
+		webelementHandler.pressAndroidKeyPadKey(String.valueOf(otp.charAt(i)));	
+	 }	 
+ }
+ 
+ @Given("^user adds status in jira$")
+ public void user_adds_status_in_jira() throws Throwable {
+	 JiraXrayUtils.importCucumberJsonResults();
  }
  
 }
