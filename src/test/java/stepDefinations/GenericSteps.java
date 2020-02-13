@@ -18,6 +18,7 @@ import com.cucumber.listener.Reporter;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
@@ -46,7 +47,9 @@ import net.prodigylabs.handlers.ScreenshotHandler;
 import net.prodigylabs.handlers.VerificationHandler;
 import net.prodigylabs.handlers.WebElementHandler;
 import net.prodigylabs.test.BaseTest;
+import net.prodigylabs.utils.JiraXrayUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 
 public class GenericSteps extends BaseTest{
@@ -62,6 +65,7 @@ public class GenericSteps extends BaseTest{
 	JavascriptExecutor jse;
 	
 	TouchActions action ;
+	TouchAction appaction ;
 	Activity activity;
 
 	private String checkingBalance = null;
@@ -86,6 +90,7 @@ public class GenericSteps extends BaseTest{
         screenshot = new ScreenshotHandler(driver);
         webelementHandler = new WebElementHandler(driver);
         jse = (JavascriptExecutor) driver;
+        appaction=new TouchAction((PerformsTouchActions) driver);
 		wait = new WebDriverWait(driver, ObjectRepository.getLong("global.driver.wait"));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("android.widget.ProgressBar")));
     	Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));  
@@ -290,6 +295,7 @@ public class GenericSteps extends BaseTest{
     public void user_selects_checkbox(String checkbox_name) throws Throwable {
     	try
     	{
+    		wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(checkbox_name)));
     		driver.findElement(ObjectRepository.getobjectLocator(checkbox_name)).click();
     	}
     	catch (Exception e)
@@ -1010,13 +1016,15 @@ public class GenericSteps extends BaseTest{
     	
 
  @After()
-	public void tearDown() throws Exception {		
+	public void tearDown() throws Throwable {		
 	 System.out.println("Executing After of Step Defination");
-	 	if (webelementHandler.getCurrentAndroidContext().contains("WEBVIEW")) {
-	 		driver.quit();
+	 if (webelementHandler.getCurrentAndroidContext().contains("WEBVIEW")) {
+	 		((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.APP_SWITCH));
+	 		webelementHandler.clickButton(ObjectRepository.getString("Close_all"));
 	 	}else {
 	 		Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));  
-	 		driver.quit();
+	 		((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.APP_SWITCH));
+	 		webelementHandler.clickButton(ObjectRepository.getString("Close_all"));
 	 	}
 	}
  
@@ -1210,10 +1218,17 @@ public class GenericSteps extends BaseTest{
 	 	        webelementHandler.switchAndroidContext("NATIVE");
 	 		} catch (Exception e) {
 	 			System.out.println("Inside Catch , Success"+e);
-	 		       }
-	 			 
+	 		       }	 			 
 		break;
-
+	 	case "Samsung Messaging":
+	 		try {
+	 			activity = new Activity(ObjectRepository.getString("global.capability.samsung.MessagingAppPackage"), ObjectRepository.getString("global.capability.samsung.MessagingAppActivity"));
+	 	        activity.setStopApp(false);
+	 	        ((AndroidDriver<MobileElement>) this.driver).startActivity(activity);	
+	 		} catch (Exception e) {
+	 			System.out.println("Inside Catch , Success"+e);
+	 		       }	 			 
+		break;
 	default:
 		break;
 	}			
@@ -1337,7 +1352,72 @@ public class GenericSteps extends BaseTest{
 		throw new Exception("Unable to validate if deleted/edited "+contactEmail+e);
 	}
  }
+ 
+ @Given("^user validates that \"([^\"]*)\" is \"([^\"]*)\"$")
+ public void user_validates_that_is(String locator, String attribute) throws Throwable {
+	 WebElement we = null;
+	 if (webelementHandler.getCurrentAndroidContext().contains("WEBVIEW")) {
+			webelementHandler.switchAndroidContext("NATIVE");}
+	 if (ObjectRepository.getString(locator).contains("Xpath")) {
+		 wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(locator)));
+		 we = driver.findElement(ObjectRepository.getobjectLocator(locator));
+	}else {
+	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ObjectRepository.getString(locator))));
+	 we = driver.findElement(By.xpath(ObjectRepository.getString(locator)));
+	}
+	 VerificationHandler.verifyTrue(we.getAttribute(attribute).equals("true"));
+ }
 	
+ @Given("^user scrolls to \"([^\"]*)\"$")
+ public void user_scrolls_to(String locator) throws Throwable {
+	 Dimension windowdimension = driver.manage().window().getSize();
+	 int expectedx = (int) ((windowdimension.getWidth())*0.5);
+	 int expectedy = (int) ((windowdimension.getHeight())*0.5);
+	 System.err.println(" Window Position "+expectedx+ " " + expectedy);	 
+	wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(locator)));
+	WebElement element = driver.findElement(ObjectRepository.getobjectLocator(locator));
+	int x = element.getLocation().getX();
+	int y = element.getLocation().getY();
+	int updatedx, updatedy;
+	System.err.println(locator+" x location "+x+" y location "+y);
+	//appaction.longPress(PointOption.point(x, y)).moveTo(PointOption.point(expectedx, expectedy)).release().perform();
+	//appaction.longPress(PointOption.point(x, y)).moveTo(PointOption.point(x,100)).release().perform();
+	do {
+		appaction.longPress(PointOption.point(x, y)).moveTo(PointOption.point(expectedx, expectedy)).release().perform();
+		updatedx = element.getLocation().getX();
+		updatedy = element.getLocation().getY();
+		System.err.println(locator+" updated x location "+updatedx+" updated y location "+updatedy);
+	} while (y>=updatedy);	
+	Thread.sleep(5000);	
+ }
+ 
+ @Given("^user enters OTP received for \"([^\"]*)\"$")
+ public void user_enters_OTP_received_for(String transactionType) throws Throwable {
+	 user_clicks_on_button("2055093851");
+	 Thread.sleep(8000);
+	 String otp = null;
+	 List<WebElement> allelements = driver.findElements(By.xpath("//android.widget.TextView[contains(@text,'"+transactionType+"')]"));
+	 if (allelements.size()>0) {
+		String otpMsg = allelements.get(allelements.size()-1).getText()+" ";
+		otp = StringUtils.remove(otpMsg, StringUtils.substringBetween(otpMsg, "$", " ")).replace("P2P", "").replaceAll("[^0-9]", "");
+		System.err.println(otp);
+	}
+	 System.err.println("Breakpoint");
+     activity = new Activity(ObjectRepository.getString("global.capability.NewMeedAppPackage"), ObjectRepository.getString("global.capability.NewMeedAppActivity"));
+     activity.setStopApp(false);
+     ((AndroidDriver<MobileElement>) this.driver).startActivity(activity);
+     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.view.View[@resource-id='signup-verification-info']")));
+     Thread.sleep(5000);
+	 for (int i = 0; i < otp.length(); i++) {
+		webelementHandler.pressAndroidKeyPadKey(String.valueOf(otp.charAt(i)));	
+	 }	 
+ }
+ 
+ @Given("^user adds status in jira$")
+ public void user_adds_status_in_jira() throws Throwable {
+	 JiraXrayUtils.importCucumberJsonResults();
+ }
+ 
 }
 
 
