@@ -32,10 +32,9 @@ Given user launches the app in "<Platform>" device
  And user clicks on button "Confirm_Details"
  And user clicks on button "Send_Money"
  And user switches to "Samsung Messaging" app
- And user enters OTP received for "transfer"
+ And user enters "authorization code" in meed app
  
  And user validates "Success_Message" with expected value as "You've sent $<Amount> to <recipient>"
-  # TO BD COMPLETED
 
   Examples: 
     |   Platform    |   Email                   	  |   Username  |   Password   |   recipient             |  Amount  |
