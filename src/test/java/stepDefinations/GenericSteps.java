@@ -1391,19 +1391,21 @@ public class GenericSteps extends BaseTest{
 	Thread.sleep(5000);	
  }
  
- @Given("^user enters OTP received for \"([^\"]*)\"$")
- public void user_enters_OTP_received_for(String transactionType) throws Throwable {
+ @Given("^user enters \"([^\"]*)\" in meed app$")
+ public void user_enters_in_meed_app(String transactionType) throws Throwable {
 	 user_clicks_on_button("2055093851");
 	 Thread.sleep(8000);
 	 String otp = null;
 	 List<WebElement> allelements = driver.findElements(By.xpath("//android.widget.TextView[contains(@text,'"+transactionType+"')]"));
-	 if (allelements.size()>0) {
-		String otpMsg = allelements.get(allelements.size()-1).getText()+" ";
-		otp = StringUtils.remove(otpMsg, StringUtils.substringBetween(otpMsg, "$", " ")).replace("P2P", "").replaceAll("[^0-9]", "");
-		System.err.println(otp);
-	}
-	 System.err.println("Breakpoint");
-     activity = new Activity(ObjectRepository.getString("global.capability.NewMeedAppPackage"), ObjectRepository.getString("global.capability.NewMeedAppActivity"));
+	 String otpMsg = allelements.get(allelements.size()-1).getText()+" ";
+	 if (otpMsg.contains("Enter the authorization code ")) {
+		otp=StringUtils.substringBetween(otpMsg, "Enter the authorization code ", " ");
+	 }else {
+		otp = StringUtils.remove(otpMsg, StringUtils.substringBetween(otpMsg, "$", " ")).replace("P2P", "").replaceAll("[^0-9]", ""); 
+	 }
+	 System.err.println(otp);
+	 
+	 activity = new Activity(ObjectRepository.getString("global.capability.NewMeedAppPackage"), ObjectRepository.getString("global.capability.NewMeedAppActivity"));
      activity.setStopApp(false);
      ((AndroidDriver<MobileElement>) this.driver).startActivity(activity);
      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.view.View[@resource-id='signup-verification-info']")));
