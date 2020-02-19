@@ -512,4 +512,4 @@ And user clicks on button "Save"
 
 Examples: 
 |	Platform	|	Email					|	Username		|	Password	| Phone_Number     | Work_Phone_Number | Expected Mobile Phone Number | Expected Work Phone Number |
-|	Android		|	meluser12@yopmail.com	|	meluser12		|	Password-1	| (918) 951-8064   | (918) 951-8081 | +19189518064 | +19189518081 |
+|	Android		|	meedtest80@yopmail.com	|	Meedtest80		|	Password-1	| (918) 951-8064   | (918) 951-8081 | +19189518064 | +19189518081 |
