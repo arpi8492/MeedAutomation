@@ -483,3 +483,33 @@ And user validates "A_P2P_or_Send/Receive_Money_Transfer" with expected value as
  Examples: 
 |	Platform	|	Email					|	Username		|	Password	| Answer1 |	Answer2 | Answer3 |
 |	Android		|	meluser12@yopmail.com	|	meluser12		|	Password-1	| Great question, to make a transfer you must first select the type of transfer you would like to make from the options under move money at the bottom of the home page. | An Internal Transfer is used to transfer between your Meed accounts. To do an internal transfer, select the From & To accounts then tap Next and complete the remaining fields. When done, tap Next and then Confirm the transfer. | A P2P or Send/Receive Money Transfer is used to transfer between your Meed account and another Meed Member. The guided prompts are easy and simple to follow. |
+
+@TC001_Update_Phone_Number
+Scenario Outline: Validate that user is successfully able to update the phone number in the app
+Given user launches the app in "<Platform>" device
+And user clicks on button "Get_started"
+And user enters text "<Email>" in textbox "Your_email"
+And user clicks on button "Continue"
+And user enters text "<Username>" in textbox "Username"
+And user enters text "<Password>" in textbox "Password"
+And user clicks on button "Log_In"
+And user waits for "5" seconds
+And user clicks on button "More"
+And user waits for "10" seconds
+And user clicks on button "Personal_Details"
+And user scrolls down
+And user waits for "5" seconds
+And user scrolls down
+And user clicks on button "PHONE_NUMBER_EDIT"
+And user enters text "<Phone_Number>" in textbox "New_Phone_Number"
+And user enters text "<Work_Phone_Number>" in textbox "New_Work_Phone_Number"
+And user clicks on button "Save"
+ And user switches to "LG Messaging" app
+ And user enters "authorization code" in meed app
+ And user validates "Mobile_Phone_Number" with expected value as "<Expected Mobile Phone Number>"
+ And user scrolls down
+ And user validates "Work_Phone_Number" with expected value as "<Expected Work Phone Number>"
+
+Examples: 
+|	Platform	|	Email					|	Username		|	Password	| Phone_Number     | Work_Phone_Number | Expected Mobile Phone Number | Expected Work Phone Number |
+|	Android		|	meluser12@yopmail.com	|	meluser12		|	Password-1	| (918) 951-8064   | (918) 951-8081 | +19189518064 | +19189518081 |

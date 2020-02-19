@@ -17,14 +17,10 @@ Given user launches the app in "<Platform>" device
   And user checks the initial "Available" of "CHECKING" account
   And user checks the initial "Available" of "SAVINGS" account
   And user clicks on button "Move_Money"
-  And user scrolls to "Move_Between_Accounts" 
-  And user scrolls to "Scheduled_Transfers" 
-  
+  And user scrolls down to "Move_Between_Accounts" 
   And user clicks on button "Move_Between_Accounts"
-  And user scrolls down
   And user enters text "<Amount>" in textbox "AMOUNT_TO_BE_MOVED"
-  And user scrolls down 
-  #And user clicks on button "SCHEDULE"
+  And user scrolls down to "NOTE" 
   And user enters text "<Note>" in textbox "NOTE"
   And user clicks on button "Confirm_details" 
   And user clicks on button "Move_money"
@@ -44,8 +40,8 @@ Given user launches the app in "<Platform>" device
   And user verify that "Credit" transaction is listed in the transaction history of "SAVINGS" account with note "<Note>" and amount "<Amount>"
   
   Examples: 
-	|	Platform	|	Email					|	Username		|	Password	|	 	Amount		|	Note 							              |
-	|	Android		|	meluser12@yopmail.com	|	meluser12		|	Password-1	|		1.00		| Testing Checking to Savings transfer Automation |
+	|	Platform	|	Email						|	Username	|	Password	|	 	Amount		|	Note 							              |
+	|	Android		|	meeduat54update@yopmail.com	|	Meeduat54	|	Password@1	|		1.00		| Testing Checking to Savings transfer Automation |
 	
 	
 	@RegressionPack @TC002
