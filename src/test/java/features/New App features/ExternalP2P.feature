@@ -6,12 +6,9 @@ Feature: External P2P
 @TC001_P2P_External_Transfer
 Scenario Outline: Verify Meed customer is able to successfully send P2P external transfers
 Given user launches the app in "<Platform>" device
-And user waits for "5" seconds
 And user clicks on button "Get_started"
-And user waits for "3" seconds
 And user enters text "<Email>" in textbox "Your_email"
 And user clicks on button "Continue"
-And user waits for "2" seconds
 And user enters text "<Username>" in textbox "Username"
 And user enters text "<Password>" in textbox "Password"
 And user clicks on button "Log_In"

@@ -1,5 +1,6 @@
 package stepDefinations;
 
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -106,7 +107,7 @@ public class GenericSteps extends BaseTest{
     }
     
     
-  //------------------BUTTON CLICK---------------------
+    //------------------BUTTON CLICK---------------------
     @Given("^user clicks on button \"([^\"]*)\"$")
     public void user_clicks_on_button(String button_name) throws Throwable {
     	action = new TouchActions(driver);
@@ -163,7 +164,7 @@ public class GenericSteps extends BaseTest{
     		if(ObjectRepository.getString(textbox_name).contains("//android")) {
 				webelementHandler.switchAndroidContext("NATIVE");
 			}   
-    		if(textbox_name.contentEquals("AMOUNT_TO_BE_MOVED") || textbox_name.contentEquals("AMOUNT_TO_BE_SENT") || ObjectRepository.getString("frameElement").contains(textbox_name))
+    		if(textbox_name.contains("Phone_Number") || textbox_name.contentEquals("AMOUNT_TO_BE_MOVED") || textbox_name.contentEquals("AMOUNT_TO_BE_SENT") || textbox_name.contentEquals("AMOUNT_REQUESTED") || ObjectRepository.getString("frameElement").contains(textbox_name))
     		{
     	     	wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(textbox_name)));   
     			System.out.println("Property Value: " +ObjectRepository.getobjectLocator(textbox_name));
@@ -265,11 +266,11 @@ public class GenericSteps extends BaseTest{
     @Given("^user scrolls down$")
     public void user_scrolls_down() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-       
-    	@SuppressWarnings("rawtypes")
-		TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
-    	touchAction.longPress(PointOption.point(200, 550)).moveTo(PointOption.point(200, 200)).release().perform();
     	Thread.sleep(1000);
+    	@SuppressWarnings("rawtypes")
+    	TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
+    	touchAction.longPress(PointOption.point(200, 550)).moveTo(PointOption.point(200, 200)).release().perform();
+    	Thread.sleep(2000);
     }
     
     
@@ -1012,20 +1013,24 @@ public class GenericSteps extends BaseTest{
     		}
  		
     	}
-
     	
 
  @After()
 	public void tearDown() throws Throwable {		
 	 System.out.println("Executing After of Step Defination");
-	 if (webelementHandler.getCurrentAndroidContext().contains("WEBVIEW")) {
-	 		((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.APP_SWITCH));
-	 		webelementHandler.clickButton(ObjectRepository.getString("Close_all"));
-	 	}else {
-	 		Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));  
-	 		((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.APP_SWITCH));
-	 		webelementHandler.clickButton(ObjectRepository.getString("Close_all"));
-	 	}
+	 try {
+		 if (webelementHandler.getCurrentAndroidContext().contains("WEBVIEW")) {
+		 		((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.APP_SWITCH));
+		 		webelementHandler.clickButton(ObjectRepository.getString("Close_all"));
+		 	}else {
+		 		Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));  
+		 		((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.APP_SWITCH));
+		 		webelementHandler.clickButton(ObjectRepository.getString("Close_all"));
+		 	}
+	} catch (Exception e) {
+		driver.quit();
+	}
+	 
 	}
  
  /** @author vaishali.katta  */
@@ -1070,7 +1075,7 @@ public class GenericSteps extends BaseTest{
  
  /** @author vaishali.katta  */
  @Given("^user verify that \"([^\"]*)\" in \"([^\"]*)\" account is \"([^\"]*)\" by \"([^\"]*)\"$")
- public void user_verify_that_in_account_is_by(String type, String account, String amount, String transaction) throws Throwable {
+ public void user_verify_that_in_account_is_by(String type, String account, String transaction, String amount) throws Throwable {
 	 
 	    String actualbalance;
 	 	String balancelocator1, balancelocator2;
@@ -1138,7 +1143,8 @@ public class GenericSteps extends BaseTest{
 	 String locator1 = "//android.view.View[@resource-id='transaction-type']";
 	 String locator2 = "//android.view.View[@resource-id='transaction-type']/../../following-sibling::android.view.View//android.view.View[@resource-id='amount-value']";
 	 String locator3 = "//android.view.View[@resource-id='transaction-type']/../../following-sibling::android.view.View//android.view.View[@resource-id='amount-value']/following-sibling::android.view.View[@resource-id='decomal-value']";
-
+	 
+	 wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(locator1)));
 	 VerificationHandler.verifyTrue(driver.findElement(By.xpath(locator1)).getText().contains(note) && driver.findElement(By.xpath(locator1)).getText().contains(type));
 
 	 if (amount.equals("Full_Payment")) {
@@ -1225,9 +1231,24 @@ public class GenericSteps extends BaseTest{
 	 			activity = new Activity(ObjectRepository.getString("global.capability.samsung.MessagingAppPackage"), ObjectRepository.getString("global.capability.samsung.MessagingAppActivity"));
 	 	        activity.setStopApp(false);
 	 	        ((AndroidDriver<MobileElement>) this.driver).startActivity(activity);	
+		 	       Thread.sleep(8000);
+		 	       user_clicks_on_button("2055093851");
+		 	       Thread.sleep(3000);
 	 		} catch (Exception e) {
 	 			System.out.println("Inside Catch , Success"+e);
-	 		       }	 			 
+	 		}	 			 
+		break;
+	 	case "LG Messaging":
+	 		try {
+	 			activity = new Activity(ObjectRepository.getString("global.capability.lg.MessagingAppPackage"), ObjectRepository.getString("global.capability.lg.MessagingAppActivity"));
+	 	        activity.setStopApp(false);
+	 	        ((AndroidDriver<MobileElement>) this.driver).startActivity(activity);	
+	 	        Thread.sleep(8000);
+	 	        webelementHandler.findElement(By.xpath(ObjectRepository.getString("New_LG_Message"))).click();
+	 	        Thread.sleep(3000);
+	 		} catch (Exception e) {
+	 			System.out.println("Inside Catch , Success"+e);
+	 		}	 			 
 		break;
 	default:
 		break;
@@ -1368,33 +1389,32 @@ public class GenericSteps extends BaseTest{
 	 VerificationHandler.verifyTrue(we.getAttribute(attribute).equals("true"));
  }
 	
- @Given("^user scrolls to \"([^\"]*)\"$")
- public void user_scrolls_to(String locator) throws Throwable {
+ @Given("^user scrolls down to \"([^\"]*)\"$")
+ public void user_scrolls_down_to(String locator) throws Throwable {
 	 Dimension windowdimension = driver.manage().window().getSize();
 	 int expectedx = (int) ((windowdimension.getWidth())*0.5);
 	 int expectedy = (int) ((windowdimension.getHeight())*0.5);
 	 System.err.println(" Window Position "+expectedx+ " " + expectedy);	 
-	wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(locator)));
+	Thread.sleep(3000);
 	WebElement element = driver.findElement(ObjectRepository.getobjectLocator(locator));
 	int x = element.getLocation().getX();
 	int y = element.getLocation().getY();
 	int updatedx, updatedy;
 	System.err.println(locator+" x location "+x+" y location "+y);
-	//appaction.longPress(PointOption.point(x, y)).moveTo(PointOption.point(expectedx, expectedy)).release().perform();
-	//appaction.longPress(PointOption.point(x, y)).moveTo(PointOption.point(x,100)).release().perform();
-	do {
-		appaction.longPress(PointOption.point(x, y)).moveTo(PointOption.point(expectedx, expectedy)).release().perform();
-		updatedx = element.getLocation().getX();
-		updatedy = element.getLocation().getY();
-		System.err.println(locator+" updated x location "+updatedx+" updated y location "+updatedy);
-	} while (y>=updatedy);	
+	if (y>(int)((windowdimension.getHeight())*0.9)) {
+		do {
+			appaction.longPress(PointOption.point(x, y)).moveTo(PointOption.point(expectedx, expectedy)).release().perform();
+			updatedx = element.getLocation().getX();
+			updatedy = element.getLocation().getY();
+			System.err.println(locator+" updated x location "+updatedx+" updated y location "+updatedy);
+		} while (y<=updatedy);	
+	}
+
 	Thread.sleep(5000);	
  }
  
  @Given("^user enters \"([^\"]*)\" in meed app$")
  public void user_enters_in_meed_app(String transactionType) throws Throwable {
-	 user_clicks_on_button("2055093851");
-	 Thread.sleep(8000);
 	 String otp = null;
 	 List<WebElement> allelements = driver.findElements(By.xpath("//android.widget.TextView[contains(@text,'"+transactionType+"')]"));
 	 String otpMsg = allelements.get(allelements.size()-1).getText()+" ";
@@ -1413,11 +1433,44 @@ public class GenericSteps extends BaseTest{
 	 for (int i = 0; i < otp.length(); i++) {
 		webelementHandler.pressAndroidKeyPadKey(String.valueOf(otp.charAt(i)));	
 	 }	 
+	 Thread.sleep(2000);
  }
  
  @Given("^user adds status in jira$")
  public void user_adds_status_in_jira() throws Throwable {
 	 JiraXrayUtils.importCucumberJsonResults();
+ }
+ 
+ @Given("^user verify that \"([^\"]*)\" percent charge is applied to the \"([^\"]*)\" in CHECKING account for money movement of \"([^\"]*)\"$")
+ public void user_verify_that_percent_charge_is_applied_to_the_in_CHECKING_account_for_money_movement_of(String percent, String type, String amount) throws Throwable {
+	    String actualbalance;
+	 	String balancelocator1, balancelocator2;
+	 	Double dblBalance;
+	 	DecimalFormat df = new DecimalFormat("0.00");
+	 	df.setRoundingMode(RoundingMode.UP);
+	 	
+		balancelocator1 = "//*[@text='CHECKING']/following-sibling::android.view.View/android.view.View[@text='"+type+": ']/following-sibling::android.view.View[@resource-id='amount-value']";
+	 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(balancelocator1)));
+		String amountvalue = driver.findElement(By.xpath(balancelocator1)).getText();
+		
+		balancelocator2 = "//*[@text='CHECKING']/following-sibling::android.view.View/android.view.View[@text='"+type+": ']/following-sibling::android.view.View[@resource-id='amount-value']/following-sibling::android.view.View[@resource-id='decomal-value']";
+		String decimalvalue = driver.findElement(By.xpath(balancelocator2)).getText();
+				
+		actualbalance = amountvalue+decimalvalue;
+		actualbalance = actualbalance.replace("$", "");
+		
+/*		checkingBalance = "75.00";
+		amount="110.50";
+		percent="3";*/
+		
+		String percentDeduction = df.format(Double.parseDouble(amount)*(Double.parseDouble(percent)/100));
+		System.out.println("percentDeduction "+percentDeduction);
+		dblBalance = Double.parseDouble(checkingBalance)+(Double.parseDouble(amount)-Double.parseDouble(percentDeduction));
+		System.out.println("dblBalance "+dblBalance);
+		VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));			
+
+		user_clicks_on_button("CHECKING");
+		user_verify_that_transaction_is_listed_in_the_transaction_history_of_account_with_note_and_amount("Fee","CHECKING", "Money Movement Transt Fee", percentDeduction);
  }
  
 }

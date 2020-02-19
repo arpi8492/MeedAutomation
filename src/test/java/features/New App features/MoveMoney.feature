@@ -98,12 +98,12 @@ Given user launches the app in "<Platform>" device
    
  And user clicks on button "Home"
  And user waits for "3" seconds
- And user verify that "Balance" in "CHECKING" account is "credited" by "<Amount>"
+ And user verify that "3" percent charge is applied to the "Balance" in CHECKING account for money movement of "<Amount>"
 
 
   Examples: 
-	|	Platform	|	Email					|	Username		|	Password	|		Amount	|	CardNumber			| CardName 			 | Expiry | SecurityCode | ExpectedMessage |
-	|	Android		|	meluser12@yopmail.com	|	meluser12		|	Password-1	|		11.50	|	4242424242424242	| TestAutomationCard | 02/28  | 222 | Your money's being moved. |
+	|	Platform	|	Email				|	Username		|	Password	|		Amount	|	CardNumber			| CardName 			 | Expiry | SecurityCode | ExpectedMessage |
+	|	Android		|	meluser14@yopmail.com	|	meluser14		|	Password-1	|		110.50	|	4242424242424242	| TestAutomationCard | 02/28  | 222 | Your money's being moved. |
 	
 
 @RegressionPack @TC004
