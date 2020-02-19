@@ -1062,13 +1062,13 @@ public class GenericSteps extends BaseTest{
 		
 		if (account.equalsIgnoreCase("CHECKING")) {
 			checkingBalance = amountvalue+decimalvalue;
-			checkingBalance = checkingBalance.replace("$", "");			
+			checkingBalance = checkingBalance.replace("$", "").replace(",", "");			
 		}else if (account.equalsIgnoreCase("LINE OF CREDIT")) {
 			locBalance = amountvalue+decimalvalue;
-			locBalance = locBalance.replace("$", "");		
+			locBalance = locBalance.replace("$", "").replace(",", "");			
 		}else if (account.equalsIgnoreCase("SAVINGS")) {
 			savingsBalance = amountvalue+decimalvalue;
-			savingsBalance = savingsBalance.replace("$", "");		
+			savingsBalance = savingsBalance.replace("$", "").replace(",", "");	
 		}	
 		Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 
  }
@@ -1083,7 +1083,7 @@ public class GenericSteps extends BaseTest{
 	 	
 		balancelocator1 = "//*[@text='"+account+"']/following-sibling::android.view.View/android.view.View[@text='"+type+": ']/following-sibling::android.view.View[@resource-id='amount-value']";
 	 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(balancelocator1)));
-		String amountvalue = driver.findElement(By.xpath(balancelocator1)).getText();
+		String amountvalue = driver.findElement(By.xpath(balancelocator1)).getText().replace(",", "");	
 		
 		balancelocator2 = "//*[@text='"+account+"']/following-sibling::android.view.View/android.view.View[@text='"+type+": ']/following-sibling::android.view.View[@resource-id='amount-value']/following-sibling::android.view.View[@resource-id='decomal-value']";
 		String decimalvalue = driver.findElement(By.xpath(balancelocator2)).getText();
@@ -1451,7 +1451,7 @@ public class GenericSteps extends BaseTest{
 	 	
 		balancelocator1 = "//*[@text='CHECKING']/following-sibling::android.view.View/android.view.View[@text='"+type+": ']/following-sibling::android.view.View[@resource-id='amount-value']";
 	 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(balancelocator1)));
-		String amountvalue = driver.findElement(By.xpath(balancelocator1)).getText();
+		String amountvalue = driver.findElement(By.xpath(balancelocator1)).getText().replace(",", "");
 		
 		balancelocator2 = "//*[@text='CHECKING']/following-sibling::android.view.View/android.view.View[@text='"+type+": ']/following-sibling::android.view.View[@resource-id='amount-value']/following-sibling::android.view.View[@resource-id='decomal-value']";
 		String decimalvalue = driver.findElement(By.xpath(balancelocator2)).getText();
@@ -1459,15 +1459,11 @@ public class GenericSteps extends BaseTest{
 		actualbalance = amountvalue+decimalvalue;
 		actualbalance = actualbalance.replace("$", "");
 		
-/*		checkingBalance = "75.00";
-		amount="110.50";
-		percent="3";*/
-		
 		String percentDeduction = df.format(Double.parseDouble(amount)*(Double.parseDouble(percent)/100));
 		System.out.println("percentDeduction "+percentDeduction);
 		dblBalance = Double.parseDouble(checkingBalance)+(Double.parseDouble(amount)-Double.parseDouble(percentDeduction));
 		System.out.println("dblBalance "+dblBalance);
-		VerificationHandler.verifyTrue(actualbalance.contains(Double.toString(dblBalance)));			
+		VerificationHandler.verifyTrue(Double.toString(dblBalance).contains(actualbalance));			
 
 		user_clicks_on_button("CHECKING");
 		user_verify_that_transaction_is_listed_in_the_transaction_history_of_account_with_note_and_amount("Fee","CHECKING", "Money Movement Transt Fee", percentDeduction);
