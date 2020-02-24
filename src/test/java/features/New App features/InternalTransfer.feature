@@ -17,10 +17,12 @@ Given user launches the app in "<Platform>" device
   And user checks the initial "Available" of "CHECKING" account
   And user checks the initial "Available" of "SAVINGS" account
   And user clicks on button "Move_Money"
-  And user scrolls down to "Move_Between_Accounts" 
+  #And user scrolls down to "Move_Between_Accounts" 
+  And user scrolls down
+  And user scrolls down
   And user clicks on button "Move_Between_Accounts"
   And user enters text "<Amount>" in textbox "AMOUNT_TO_BE_MOVED"
-  And user scrolls down to "NOTE" 
+  And user scrolls down
   And user enters text "<Note>" in textbox "NOTE"
   And user clicks on button "Confirm_details" 
   And user clicks on button "Move_money"

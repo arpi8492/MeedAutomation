@@ -164,7 +164,7 @@ public class GenericSteps extends BaseTest{
     		if(ObjectRepository.getString(textbox_name).contains("//android")) {
 				webelementHandler.switchAndroidContext("NATIVE");
 			}   
-    		if(textbox_name.contains("Phone_Number") || textbox_name.contentEquals("AMOUNT_TO_BE_MOVED") || textbox_name.contentEquals("AMOUNT_TO_BE_SENT") || textbox_name.contentEquals("AMOUNT_REQUESTED") || ObjectRepository.getString("frameElement").contains(textbox_name))
+    		if(textbox_name.contains("Phone_Number") || textbox_name.contentEquals("AMOUNT_TO_BE_MOVED") || textbox_name.contentEquals("AMOUNT_TO_BE_SENT") || textbox_name.contains("AMOUNT") || ObjectRepository.getString("frameElement").contains(textbox_name))
     		{
     	     	wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(textbox_name)));   
     			System.out.println("Property Value: " +ObjectRepository.getobjectLocator(textbox_name));
@@ -269,7 +269,7 @@ public class GenericSteps extends BaseTest{
     	Thread.sleep(1000);
     	@SuppressWarnings("rawtypes")
     	TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
-    	touchAction.longPress(PointOption.point(200, 550)).moveTo(PointOption.point(200, 200)).release().perform();
+    	touchAction.longPress(PointOption.point(200, 1000)).moveTo(PointOption.point(200, 200)).release().perform();
     	Thread.sleep(2000);
     }
     
@@ -345,7 +345,7 @@ public class GenericSteps extends BaseTest{
     @Given("^user enters \"([^\"]*)\" in textbox at index \"([^\"]*)\"$")
     public void user_enters_in_textbox_at_index(String text, int index) throws Throwable {
     // Write code here that turns the phrase above into concrete actions  
-
+    	Thread.sleep(1000);
     	List<MobileElement> elements = driver.findElements(By.className("android.widget.EditText"));
     	wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("android.widget.EditText")));
     	System.out.println("Number of elements:" +elements.size());
@@ -355,7 +355,6 @@ public class GenericSteps extends BaseTest{
     		if(elements.get(i).equals(index))
     			break;    
     	}
-
     	elements.get(index).sendKeys(text);
 
     	// elements.get(index).click();
@@ -1229,10 +1228,12 @@ public class GenericSteps extends BaseTest{
 	 	case "Samsung Messaging":
 	 		try {
 	 			activity = new Activity(ObjectRepository.getString("global.capability.samsung.MessagingAppPackage"), ObjectRepository.getString("global.capability.samsung.MessagingAppActivity"));
-	 	        activity.setStopApp(false);
+	 	        activity.setStopApp(true);
 	 	        ((AndroidDriver<MobileElement>) this.driver).startActivity(activity);	
 		 	       Thread.sleep(8000);
-		 	       user_clicks_on_button("2055093851");
+		 	       if (webelementHandler.findElements(ObjectRepository.getString("2055093851")).size()>0) {
+		 	    		  webelementHandler.clickButton(ObjectRepository.getString("2055093851"));
+				   }
 		 	       Thread.sleep(3000);
 	 		} catch (Exception e) {
 	 			System.out.println("Inside Catch , Success"+e);
@@ -1241,7 +1242,7 @@ public class GenericSteps extends BaseTest{
 	 	case "LG Messaging":
 	 		try {
 	 			activity = new Activity(ObjectRepository.getString("global.capability.lg.MessagingAppPackage"), ObjectRepository.getString("global.capability.lg.MessagingAppActivity"));
-	 	        activity.setStopApp(false);
+	 	        activity.setStopApp(true);
 	 	        ((AndroidDriver<MobileElement>) this.driver).startActivity(activity);	
 	 	        Thread.sleep(8000);
 	 	        webelementHandler.findElement(By.xpath(ObjectRepository.getString("New_LG_Message"))).click();
@@ -1395,7 +1396,8 @@ public class GenericSteps extends BaseTest{
 	 int expectedx = (int) ((windowdimension.getWidth())*0.5);
 	 int expectedy = (int) ((windowdimension.getHeight())*0.5);
 	 System.err.println(" Window Position "+expectedx+ " " + expectedy);	 
-	Thread.sleep(3000);
+	Thread.sleep(5000);
+	wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(ObjectRepository.getobjectLocator(locator)));
 	WebElement element = driver.findElement(ObjectRepository.getobjectLocator(locator));
 	int x = element.getLocation().getX();
 	int y = element.getLocation().getY();
