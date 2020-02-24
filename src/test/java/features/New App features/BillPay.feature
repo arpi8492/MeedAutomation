@@ -3,6 +3,38 @@
 #Feature: Bill pay service
 #Scenario: #NA
 Feature: Bill pay service
+@TC001_Pay_with_debit_card
+Scenario Outline: Verify Meed customer is able to pay using debit card 
+Given user launches the app in "<Platform>" device
+And user waits for "10" seconds
+ And user clicks on button "Get_started"
+ And user waits for "3" seconds
+ And user enters text "<Email>" in textbox "Your_email"
+ And user clicks on button "Continue"
+ And user waits for "2" seconds
+ And user enters text "<Username>" in textbox "Username"
+ And user enters text "<Password>" in textbox "Password"
+ And user clicks on button "Log_In"
+ And user waits for "5" seconds
+ And user clicks on button "Move_Money"
+ And user waits for "2" seconds
+ And user scrolls down
+ And user scrolls down
+ And user waits for "2" seconds
+ And user scrolls down
+ And user waits for "2" seconds
+ And user scrolls down
+ And user clicks on button "Pay_Bills"
+ And user waits for "2" seconds
+ And user clicks on button "Pay_with_Debit_Card"
+ And user clicks on button "Continue"
+ And user clicks on button "Skip"
+ And user cicks on button "Netfix"
+  Examples: 
+    |   Platform    |   Email                   |   Username  |   Password   |    
+    |   Android     |   meluser993@yopmail.com  |   meluser992 |   Password-1 |   
+    
+ 
 @TC001_BillPay_Add_Payee
 Scenario Outline: Verify Meed customer is able to add a bill payee in the app
 Given user launches the app in "<Platform>" device

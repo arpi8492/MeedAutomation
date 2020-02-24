@@ -120,6 +120,7 @@ public class GenericSteps extends BaseTest{
     				wait.until(ExpectedConditions.elementToBeClickable(ObjectRepository.getobjectLocator(button_name)));
 				}    			
     			System.out.println("Property Value: " +ObjectRepository.getobjectLocator(button_name));
+    			//((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.TAB));
     			wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(button_name)));
         	 	driver.findElement(ObjectRepository.getobjectLocator(button_name)).click();
         	 	if (button_name.equals("Home")) {
@@ -164,25 +165,16 @@ public class GenericSteps extends BaseTest{
     		if(ObjectRepository.getString(textbox_name).contains("//android")) {
 				webelementHandler.switchAndroidContext("NATIVE");
 			}   
-    		if(textbox_name.contains("Phone_Number") || textbox_name.contentEquals("AMOUNT_TO_BE_MOVED") || textbox_name.contentEquals("AMOUNT_TO_BE_SENT") || textbox_name.contains("AMOUNT") || ObjectRepository.getString("frameElement").contains(textbox_name))
-    		{
-    	     	wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(textbox_name)));   
-    			System.out.println("Property Value: " +ObjectRepository.getobjectLocator(textbox_name));
-    			
-    			driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).click();
-    			driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).clear();
-        		driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).sendKeys(text_value);
-    			((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.SPACE));
-    		}
-    		else
-    		{    			
+    		 		
     			System.out.println("Property Value : " +ObjectRepository.getobjectLocator(textbox_name));	
     		    wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(textbox_name)));   
     		    driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).click();
     		    driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).clear();
     		    driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).sendKeys(text_value);
-    		}
     		
+    		if (ObjectRepository.getString("SpaceElement").contains(textbox_name) || ObjectRepository.getString("frameElement").contains(textbox_name)) {
+    			((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.SPACE));
+			}    		
     	}
     	catch(Exception e) {
     		e.printStackTrace();
