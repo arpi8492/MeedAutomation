@@ -13,12 +13,12 @@ import cucumber.api.junit.Cucumber;
  
 @RunWith(Cucumber.class)
 @CucumberOptions(		
- features = "src/test/java/features/New App features/InternalTransfer.feature",
+ features = "src/test/java/features/New App features/BillPay.feature",
  glue= {"stepDefinations"},
  plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/ExtentReport/TestAutomationReport.html",
 		 "json:target/cucumber-reports/JSON/TestAutomationResult.json"},
  monochrome = true,
- tags= {"@TC001"},
+ tags= {"@TC001_BillPayment_Person"},
  dryRun = false
  )
  
