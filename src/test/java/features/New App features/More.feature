@@ -29,35 +29,6 @@ Given user launches the app in "<Platform>" device
     |   Android     |   meluser12@yopmail.com   |   meluser12 |   Password-1 | 		AutoNickName		| 
 
 
-@RegressionPack @TC001.1_More_Update_Email
-Scenario Outline: Verify Meed customer is able to update email id in Meed app 
-Given user launches the app in "<Platform>" device
- And user clicks on button "Get_started"
- And user enters text "<Email>" in textbox "Your_email"
- And user clicks on button "Continue"
- And user enters text "<Username>" in textbox "Username"
- And user enters text "<Password>" in textbox "Password"
- And user clicks on button "Log_In"
- And user clicks on button "More"
-
- And user clicks on button "Personal_Details"
-  And user scrolls down
-  And user scrolls down
-  And user select label "EDIT" at index "3"
-  And user enters text "<NewEmail>" in textbox "NEW_EMAIL"
-  And user enters text "<NewEmail>" in textbox "CONFIRM_EMAIL"
-  And user clicks on button "SAVE"
-  And user waits for "10" seconds
- 	#OTP Journey
- 	
-   
-  
-  Examples: 
-    |   Platform    |   Email                           |   Username     |   Password    |  NewEmail	|
-    |   Android     |   meluser12@yopmail.com   |   meluser12 |   Password-1 | 		autoemail@yopmail.com		| 
-
-
-
 @RegressionPack @TC002_More_Account_Details
 Scenario Outline: Verify Meed customer is able to view Account Details in Meed app 
 Given user launches the app in "<Platform>" device
@@ -513,3 +484,64 @@ And user clicks on button "Save"
 Examples: 
 |	Platform	|	Email					|	Username		|	Password	| Phone_Number     | Work_Phone_Number | Expected Mobile Phone Number | Expected Work Phone Number |
 |	Android		|	meedtest80@yopmail.com	|	Meedtest80		|	Password-1	| (918) 951-8064   | (918) 951-8081 | +19189518064 | +19189518081 |
+
+@RegressionPack @TC001.1_More_Update_Email
+Scenario Outline: Verify Meed customer is able to update email id in Meed app 
+Given user launches the app in "<Platform>" device
+ And user clicks on button "Get_started"
+ And user enters text "<Email>" in textbox "Your_email"
+ And user clicks on button "Continue"
+ And user enters text "<Username>" in textbox "Username"
+ And user enters text "<Password>" in textbox "Password"
+ And user clicks on button "Log_In"
+ And user waits for "8" seconds
+ And user clicks on button "More"
+ And user waits for "3" seconds
+ And user clicks on button "Personal_Details"
+  And user waits for "3" seconds
+ And user select label "EDIT" at index "3"
+ And user enters text "<NewEmail>" in textbox "NEW_EMAIL"
+ And user enters text "<NewEmail>" in textbox "CONFIRM_EMAIL"
+ And user clicks on button "SAVE"
+ And user switches to "Samsung Messaging" app
+ And user enters "authorization code" in meed app
+ And user waits for "8" seconds
+ And user validates "EMAIL_ID" with expected value as "<NewEmail>"
+  And user waits for "2" seconds
+
+  Examples: 
+    |   Platform    |   Email                    |   Username  |   Password   |  NewEmail	|
+    |   Android     |   meluser12new@yopmail.com   |   meluser12 |   Password-1 | meluser12@yopmail.com		| 
+
+@RegressionPack @TC001.1_More_Update_Address
+Scenario Outline: Verify Meed customer is able to update Address in Meed app 
+Given user launches the app in "<Platform>" device
+ And user clicks on button "Get_started"
+ And user enters text "<Email>" in textbox "Your_email"
+ And user clicks on button "Continue"
+ And user enters text "<Username>" in textbox "Username"
+ And user enters text "<Password>" in textbox "Password"
+ And user clicks on button "Log_In"
+ And user waits for "8" seconds
+ And user clicks on button "More"
+ And user waits for "3" seconds
+ And user clicks on button "Personal_Details"
+ And user waits for "3" seconds
+ And user select label "EDIT" at index "2"
+ And user enters text "<Address Line>" in textbox "ADDRESS_LINE"
+ And user enters text "<City>" in textbox "CITY"
+ And user clicks on button "STATE"
+ And user clicks on button "Alaska"
+ And user enters text "<ZIP CODE>" in textbox "ZIP_CODE"
+  And user waits for "8" seconds
+ And user clicks on button "SAVE"
+ And user switches to "Samsung Messaging" app
+ And user enters "authorization code" in meed app
+ And user waits for "8" seconds
+ And user validates "STREET_ADDRESS_Line1" with expected value as "<Address Line>"
+ And user validates "STREET_ADDRESS_Line2" with expected value as "<City>,"
+ And user waits for "2" seconds
+
+  Examples: 
+    |   Platform    |   Email                    |   Username  |   Password   |  Address Line	    | City   | State  | ZIP CODE    |
+    |   Android     |   meluser12new@yopmail.com |   meluser12 |   Password-1 | 123 Automation St	| Appium | Alaska | 73006-8011	 |
