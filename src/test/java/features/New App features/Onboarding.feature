@@ -10,11 +10,12 @@ Given user launches the app in "<Platform>" device
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
  And user enters text "<Nickname>" in textbox "Name_or_Nickname"
- And user waits for "2" seconds
  And user clicks on button "Next"
  And user waits for "2" seconds
  And user clicks on button "Let's_do_it"
+ And user waits for "10" seconds
  And user clicks on button "No_one_invited_me"
+ #And user clicks on button at index "1"
  And user waits for "5" seconds
  And user clicks on button "USA"
 
@@ -136,6 +137,6 @@ And user scrolls down
  
 
   Examples: 
-    |   Platform    |   Email                  |	Nickname	| Username  |   Password    |  FirstName		| LastName	|	dob					|	SSN					|	HomeAddress			|	City				|	State				|	ZIPCode	|	Mobile			|	IdentityNumber	|
-    |   Android     |   vaishaliuat4@yopmail.com	 |  ManojUAT	|	manojuat4 |   Password-1	| 	Andrew			|	Lopez			|	09/20/1960	|	666124085		|	307 Supor Blvd	|	New Jersey	|	New Jersey	|	07229		|	6479391989	|	J31000000000059	|
+    |   Platform    |   Email                  	 |	Nickname | Username      |   Password   |  FirstName	| LastName	|	dob			|	SSN			|	HomeAddress			    |	City	|	State|	ZIPCode	|	Mobile		|	IdentityNumber	|
+    |   Android     |   Prodigyauto1@yopmail.com |  PA	     |	Prodigyauto1 |   Prodigy5*	| 	ELLEN		|	GARZA	|	11/11/1955  |	666994832	|	4311 COM CADDO LINE RD	|	APACHE	|	OK	 |	73006	|	5804920012	|	100000012	|
 
