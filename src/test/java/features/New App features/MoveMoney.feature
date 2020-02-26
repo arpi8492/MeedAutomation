@@ -102,7 +102,7 @@ Given user launches the app in "<Platform>" device
 
 
   Examples: 
-	|	Platform	|	Email				|	Username		|	Password	|		Amount	|	CardNumber			| CardName 			 | Expiry | SecurityCode | ExpectedMessage |
+	|	Platform	|	Email				    |	Username		|	Password	|		Amount	|	CardNumber			| CardName 			 | Expiry | SecurityCode | ExpectedMessage |
 	|	Android		|	meedtest80@yopmail.com	|	mchauhan9189	|	Qwerty123!!	|		12	|	4242424242424242	| TestAutomationCard | 02/28  | 222 | Your money's being moved. |
 	
 
