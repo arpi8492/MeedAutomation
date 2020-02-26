@@ -102,8 +102,45 @@ Given user launches the app in "<Platform>" device
 
 
   Examples: 
-	|	Platform	|	Email				|	Username		|	Password	|		Amount	|	CardNumber			| CardName 			 | Expiry | SecurityCode | ExpectedMessage |
+	|	Platform	|	Email				    |	Username		|	Password	|		Amount	|	CardNumber			| CardName 			 | Expiry | SecurityCode | ExpectedMessage |
 	|	Android		|	meedtest80@yopmail.com	|	mchauhan9189	|	Qwerty123!!	|		12	|	4242424242424242	| TestAutomationCard | 02/28  | 222 | Your money's being moved. |
+	
+@TC001_Daily_Counter_Limit
+Scenario Outline: Validate daily counter limit for funding
+Given user launches the app in "<Platform>" device
+ And user clicks on button "Get_started"
+ And user enters text "<Email>" in textbox "Your_email"
+ And user clicks on button "Continue"
+ And user enters text "<Username>" in textbox "Username"
+ And user enters text "<Password>" in textbox "Password"
+ And user clicks on button "Log_In"
+
+ And user checks the initial "Balance" of "CHECKING" account
+ And user clicks on button "Move_Money"
+ And user scrolls down
+ And user clicks on button "Credit/Debit_Cards"
+And user clicks on button "Continue_On_Credit/Debit_Card_popup"
+And user waits for "10" seconds
+
+ And user enters "<Amount>","<Email>","<CardName>","<CardNumber>","<Expiry>","<SecurityCode>" in paystand and click on "Paystand_Enter_Billing_Information"
+ And user enters "<Street>","<City>","<Postal Code>","<State>" in paystand and click on "Pay"
+ And user validates "Paystand_Success_Message" with expected value as "<ExpectedMessage>"
+  
+ And user clicks on button "Done"
+ And user waits for "10" seconds
+   
+And user clicks on button "Home"
+And user waits for "3" seconds
+And user clicks on button "Move_Money"
+#And user scrolls down
+And user clicks on button "Credit/Debit_Cards"
+And user validates "Message_1" with expected value as "<Message_1>"
+#And user validates "Message_2" with expected value as "<Message_2>"
+And user validates "Message_3" with expected value as "<Message_3>"
+
+  Examples: 
+	|	Platform	|	Email				|	Username		|	Password	|		Amount	|	CardNumber			| CardName 			 | Expiry | SecurityCode | ExpectedMessage |Message_1                          |Message_3                                                     |                        
+	|	Android		|	meluser21@yopmail.com	|	meluser21	|	Password-1	|		9	|	4242424242424242	| TestAutomationCard | 02/28  | 222 | Your money's being moved. |Your Money Movement transaction limits|If you exceed your limit, please consider setting up direct deposit or mobile check deposit.|
 	
 
 @RegressionPack @TC004

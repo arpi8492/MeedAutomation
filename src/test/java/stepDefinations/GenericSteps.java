@@ -85,8 +85,6 @@ public class GenericSteps extends BaseTest{
 	//------------------LAUNCHING APP---------------------
     @Given("^user launches the app in \"(.*?)\" device$")
     public void user_launches_the_app_in_device(String platform) throws Throwable {    	 
-       
-    	
     	driver = CapabilitiesGenerator.getInstance().launchApp(platform);
         screenshot = new ScreenshotHandler(driver);
         webelementHandler = new WebElementHandler(driver);
@@ -120,7 +118,6 @@ public class GenericSteps extends BaseTest{
     				wait.until(ExpectedConditions.elementToBeClickable(ObjectRepository.getobjectLocator(button_name)));
 				}    			
     			System.out.println("Property Value: " +ObjectRepository.getobjectLocator(button_name));
-    			//((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.TAB));
     			wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(button_name)));
         	 	driver.findElement(ObjectRepository.getobjectLocator(button_name)).click();
         	 	if (button_name.equals("Home")) {
@@ -1018,10 +1015,9 @@ public class GenericSteps extends BaseTest{
 		 		((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.APP_SWITCH));
 		 		webelementHandler.clickButton(ObjectRepository.getString("Close_all"));
 		 	}
-	} catch (Exception e) {
-		driver.quit();
-	}
-	 
+	 	} catch (Exception e) {
+	 		driver.quit();
+	 	}	 
 	}
  
  /** @author vaishali.katta  */
@@ -1180,7 +1176,7 @@ public class GenericSteps extends BaseTest{
 		 VerificationHandler.verifyEquals(driver.findElement(By.xpath(ObjectRepository.getString(actual))).getText(), expected);
 	}else {
 		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ObjectRepository.getString(actual))));  
-		 VerificationHandler.verifyEquals(driver.findElement(By.xpath(ObjectRepository.getString(actual))).getText(), expected);
+		 VerificationHandler.verifyEquals(driver.findElement(By.xpath(ObjectRepository.getString(actual))).getText().replace("\n", ""), expected);
 	}
  }
 

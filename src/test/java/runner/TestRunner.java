@@ -1,6 +1,5 @@
 package runner;
 
-
 import java.io.File;
 
 import org.junit.AfterClass;
@@ -18,7 +17,7 @@ import cucumber.api.junit.Cucumber;
  plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/ExtentReport/TestAutomationReport.html",
 		 "json:target/cucumber-reports/JSON/TestAutomationResult.json"},
  monochrome = true,
- tags= {"@TC001.1_More_Update_Address"},
+ tags= {"@TC001_Contact_Us_New_Question"},
  dryRun = false
  )
  

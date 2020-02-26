@@ -203,7 +203,7 @@ And user clicks on button "Back"
     |   Android     |   meluser12@yopmail.com   |   meluser12 |   Password-1 |  
     
     
-    @RegressionPack @TC009_More_Contact_preferences
+@RegressionPack @TC009_More_Contact_preferences_Meed
 Scenario Outline: Verify Meed customer is able to Change Contact Preferences of Meed Banking Club in Meed app 
 Given user launches the app in "<Platform>" device
  And user clicks on button "Get_started"
@@ -227,8 +227,39 @@ And user validates that "Meed_Banking_Club_Push_Notification" is "checked"
   
   Examples: 
     |   Platform    |   Email                   |   Username     |   Password    |  	
-    |   Android     |   meluser12@yopmail.com   |   meluser12 |   Password-1 | 		 
+    |   Android     |   meluser12@yopmail.com   |   meluser12 |   Password-1 | 	
     
+@RegressionPack @TC009_More_Contact_preferences_Vast
+Scenario Outline: Verify Meed customer is able to Change Contact Preferences of Vast Bank in Meed app 
+Given user launches the app in "<Platform>" device
+ And user clicks on button "Get_started"
+ And user enters text "<Email>" in textbox "Your_email"
+ And user clicks on button "Continue"
+ And user enters text "<Username>" in textbox "Username"
+ And user enters text "<Password>" in textbox "Password"
+ And user clicks on button "Log_In"
+ And user waits for "5" seconds
+ And user clicks on button "More"
+ And user scrolls down
+ And user clicks on button "Settings"
+   
+And user clicks on label "Contact_Preferences"
+And user scrolls down
+And user selects checkbox at index "0"
+And user switches to "Samsung Messaging" app
+And user enters "authorization code" in meed app
+And user waits for "2" seconds
+And user validates that "Meed_Banking_Vast_Email" is "checked"
+
+And user selects checkbox at index "1"
+And user switches to "Samsung Messaging" app
+And user enters "authorization code" in meed app
+And user waits for "2" seconds
+And user validates that "Meed_Banking_Vast_Push_Notification" is "checked"
+  
+  Examples: 
+    |   Platform    |   Email                   |   Username  |   Password    |  	
+    |   Android     |   meluser12new@yopmail.com   |   meluser12 |   Password-1 | 		    
     
 @RegressionPack @TC010_More_Version_Info
 Scenario Outline: Verify Meed customer is able to view App version info in Meed app 
@@ -424,8 +455,8 @@ And user waits for "5" seconds
 	|	Platform	|	Email					|	Username		|	Password	|	 	Amount		|	
 	|	Android		|	meluser12@yopmail.com	|	meluser12		|	Password-1	|		999.00		|
 	
-@TC001_Contact_Us
-Scenario Outline: Verify Meed customer is able to use Contact Us functionality
+@TC001_Contact_Us_Existing_Question
+Scenario Outline: Verify Meed customer is able to use Contact Us functionality using existing questions
 Given user launches the app in "<Platform>" device
 And user clicks on button "Get_started"
 And user enters text "<Email>" in textbox "Your_email"
@@ -434,17 +465,11 @@ And user enters text "<Username>" in textbox "Username"
 And user enters text "<Password>" in textbox "Password"
 And user clicks on button "Log_In"
 And user clicks on button "More"
-  And user waits for "2" seconds
 And user scrolls down
-  And user waits for "2" seconds
 And user scrolls down
-  And user waits for "2" seconds
 And user scrolls down
-  And user waits for "2" seconds
 And user scrolls down
-  And user waits for "2" seconds
 And user scrolls down
-  And user waits for "2" seconds
 And user clicks on button "Contact_Us"
 And user clicks on button "How_do_I_make_a_transfer"
 And user validates "Great_question" with expected value as "<Answer1>"
@@ -545,3 +570,33 @@ Given user launches the app in "<Platform>" device
   Examples: 
     |   Platform    |   Email                    |   Username  |   Password   |  Address Line	    | City   | State  | ZIP CODE    |
     |   Android     |   meluser12new@yopmail.com |   meluser12 |   Password-1 | 123 Automation St	| Appium | Alaska | 73006-8011	 |
+    
+@TC001_Contact_Us_New_Question
+Scenario Outline: Verify Meed customer is able to use Contact Us functionality by typing new questions
+Given user launches the app in "<Platform>" device
+And user clicks on button "Get_started"
+And user enters text "<Email>" in textbox "Your_email"
+And user clicks on button "Continue"
+And user enters text "<Username>" in textbox "Username"
+And user enters text "<Password>" in textbox "Password"
+And user clicks on button "Log_In"
+And user clicks on button "More"
+And user scrolls down
+And user scrolls down
+And user scrolls down
+And user scrolls down
+And user scrolls down
+And user clicks on button "Contact_Us"
+And user enters text "What is interest rate on my Savings?" in textbox "Type_a_question_here"
+And user clicks on button "arrow_up"
+And user waits for "2" seconds
+And user validates "To_locate_the_interest_rate" with expected value as "<Answer>"
+And user waits for "30" seconds
+And user validates that "Is_there_anything_else_I_can_help_you_with?" is displayed
+And user validates that "Yes_arrow_dropright" is displayed
+And user validates that "No_arrow_dropright" is displayed
+      
+ Examples: 
+|	Platform	|	Email					    |	Username		|	Password	| Answer |
+|	Android		|	meluser12new@yopmail.com	|	meluser12		|	Password-1	| To locate the interest rate for your savings or line of credit, tap Account Information, then tap Statements. Your interest rate will be reflected in the Savings and Line of Credit sections of your statement. If the interest rate on your account changes between statement cycles, you will be provided with a notice and the effective date of the change. |
+
