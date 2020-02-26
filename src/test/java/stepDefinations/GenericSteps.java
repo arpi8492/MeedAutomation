@@ -1015,10 +1015,9 @@ public class GenericSteps extends BaseTest{
 		 		((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.APP_SWITCH));
 		 		webelementHandler.clickButton(ObjectRepository.getString("Close_all"));
 		 	}
-	} catch (Exception e) {
-		driver.quit();
-	}
-	 
+	 	} catch (Exception e) {
+	 		driver.quit();
+	 	}	 
 	}
  
  /** @author vaishali.katta  */

@@ -591,6 +591,7 @@ And user enters text "What is interest rate on my Savings?" in textbox "Type_a_q
 And user clicks on button "arrow_up"
 And user waits for "2" seconds
 And user validates "To_locate_the_interest_rate" with expected value as "<Answer>"
+And user waits for "30" seconds
 And user validates that "Is_there_anything_else_I_can_help_you_with?" is displayed
 And user validates that "Yes_arrow_dropright" is displayed
 And user validates that "No_arrow_dropright" is displayed
