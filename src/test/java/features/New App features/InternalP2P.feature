@@ -6,7 +6,7 @@ Feature: InternalP2P Transfer
 
 @RegressionPack @TC001_P2P_Send_Money
 Scenario Outline: Verify Meed customer is able to successfully Pay Friends having Meed membership - Send Money
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -42,7 +42,7 @@ Given user launches the app in "<Platform>" device
     
 @RegressionPack @TC001_P2P_Daily_Limits
 Scenario Outline: Verify Meed customer daily limit exceed message when attempted to transfer more than 2,500
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -78,7 +78,7 @@ Given user launches the app in "<Platform>" device
     
     @RegressionPack @TC001_P2P_Request_Money
 Scenario Outline: Verify Meed customer is able to request money in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"

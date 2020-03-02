@@ -6,7 +6,7 @@ Feature: Internal Transfer
 @RegressionPack @TC001
 Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Checkings to Savings)
 #One time transfer
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
   And user clicks on button "Get_started"
   And user enters text "<Email>" in textbox "Your_email"
   And user clicks on button "Continue"
@@ -48,7 +48,7 @@ Given user launches the app in "<Platform>" device
 	
 	@RegressionPack @TC002
 Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Savings to Checkings)
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
   And user clicks on button "Get_started"
   And user enters text "<Email>" in textbox "Your_email"
   And user clicks on button "Continue"
@@ -95,7 +95,7 @@ Given user launches the app in "<Platform>" device
   @RegressionPack @TC003
 Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Checkings to LOC)
 #CUSTOM AMOUNT
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
   And user clicks on button "Get_started"
   And user enters text "<Email>" in textbox "Your_email"
   And user clicks on button "Continue"
@@ -143,7 +143,7 @@ Given user launches the app in "<Platform>" device
   @RegressionPack @TC004
 Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Checkings to LOC)
 #FULL PAYMENT
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -191,7 +191,7 @@ Given user launches the app in "<Platform>" device
   @RegressionPack @TC005
 Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Checkings to LOC)
 #MINIMUM PAYMENT
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -244,7 +244,7 @@ Given user launches the app in "<Platform>" device
   @RegressionPack @TC006
 Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Checkings to Savings)
 #Scheduled transfer
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -283,7 +283,7 @@ Given user launches the app in "<Platform>" device
 	
 @RegressionPack @TC001_Akash
 Scenario Outline: Verify that the user gets valid error message when the user is performing internal transfer from DDA to SAV more than available balance
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user waits for "5" seconds
   And user clicks on button "Get_started"
  And user waits for "3" seconds

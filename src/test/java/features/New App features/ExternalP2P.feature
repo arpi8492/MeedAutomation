@@ -5,7 +5,7 @@
 Feature: External P2P
 @TC001_P2P_External_Transfer
 Scenario Outline: Verify Meed customer is able to successfully send P2P external transfers to new external contacts
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user clicks on button "Get_started"
 And user enters text "<Email>" in textbox "Your_email"
 And user clicks on button "Continue"
@@ -48,7 +48,7 @@ Examples:
 
 @RegressionPack @TC001_Ext_P2P_Daily_Limits
 Scenario Outline: Verify Meed customer daily limit exceed message when attempted to transfer more than 2,500
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"

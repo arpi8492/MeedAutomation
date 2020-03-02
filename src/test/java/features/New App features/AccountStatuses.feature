@@ -6,7 +6,7 @@ Feature: Validate the behavior of application when user logins when there is dif
 
 @RegressionPack @TC001
 Scenario Outline: Verify that the user is not able to login to Meed app when the account status is Frozen Meed
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user waits for "5" seconds
   And user clicks on button "Get_started"
  And user waits for "3" seconds
@@ -33,7 +33,7 @@ And user validates "LoginScreenWelcomeMessage" field with expected value as "<We
     
     @RegressionPack @TC002
 Scenario Outline: Verify that the user is not able to login to Meed app when the account status is Credit Only Meed
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user waits for "5" seconds
   And user clicks on button "Get_started"
  And user waits for "3" seconds

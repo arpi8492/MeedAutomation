@@ -5,7 +5,7 @@
 Feature: Mail a check
 @TC001_Mail_a_check
 Scenario Outline: Verify the message when customers try adding payee to mail a check
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user clicks on button "Get_started"
 And user enters text "<Email>" in textbox "Your_email"
 And user clicks on button "Continue"

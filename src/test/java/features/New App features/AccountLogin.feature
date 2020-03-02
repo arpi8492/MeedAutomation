@@ -5,7 +5,7 @@
 Feature: Account Login 
 @RegressionPack @TC001
 Scenario Outline: Verify Meed customer is able to successfully able to login in Meed App and not able login successfully
-Given user launches the app in "<Platform>" device  
+Given user launches "Meed" app in "<Platform>" device 
 And user waits for app to load
   And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
@@ -22,7 +22,7 @@ And user waits for app to load
 
 @RegressionPack @TC002
 Scenario Outline: Verify Meed customer is able to view all the accounts in Meed App
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user waits for app to load
 And user clicks on button "Get_started"
 And user enters text "<Email>" in textbox "Your_email"

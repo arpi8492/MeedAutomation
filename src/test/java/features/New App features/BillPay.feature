@@ -5,7 +5,7 @@
 Feature: Bill pay service
 @TC001_Pay_with_debit_card
 Scenario Outline: Verify Meed customer is able to pay bills using debit card 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -33,7 +33,7 @@ Given user launches the app in "<Platform>" device
  
 @TC001_BillPay_Add_Payee
 Scenario Outline: Verify Meed customer is able to add a bill payee in the app
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -85,7 +85,7 @@ Given user launches the app in "<Platform>" device
    
 @TC001_BillPayment_Person
 Scenario Outline: Verify Meed customer is able to send bill payment to payee type person
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -143,7 +143,7 @@ Given user launches the app in "<Platform>" device
     
  @TC001_BillPayment_Company
 Scenario Outline: Verify Meed customer is able to send bill payment to payee type company
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -209,7 +209,7 @@ Given user launches the app in "<Platform>" device
     
 @TC001_Modify_BillPayment
 Scenario Outline: Verify Meed customer is able to modify the scheduled payment
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"

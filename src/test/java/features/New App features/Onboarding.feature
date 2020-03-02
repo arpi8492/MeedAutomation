@@ -5,7 +5,7 @@
 Feature: Customer Onboarding new app
 @RegressionPack @TC001_Meed_Onboarding
 Scenario Outline: Verify Meed customer is able onboard themselves in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -119,7 +119,7 @@ And user scrolls down
 
 @RegressionPack @TC001_Meed_Onboarding1
 Scenario Outline: Verify Meed customer is able onboard themselves in Meed app
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"

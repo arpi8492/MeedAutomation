@@ -83,17 +83,16 @@ public class GenericSteps extends BaseTest{
 	}
 	
 	//------------------LAUNCHING APP---------------------
-    @Given("^user launches the app in \"(.*?)\" device$")
-    public void user_launches_the_app_in_device(String platform) throws Throwable {    	 
-    	driver = CapabilitiesGenerator.getInstance().launchApp(platform);
+    @Given("^user launches \"([^\"]*)\" app in \"([^\"]*)\" device$")
+    public void user_launches_app_in_device(String appName, String platform) throws Throwable { 	 
+    	driver = CapabilitiesGenerator.getInstance().launchApp(platform,appName);
         screenshot = new ScreenshotHandler(driver);
         webelementHandler = new WebElementHandler(driver);
         jse = (JavascriptExecutor) driver;
         appaction=new TouchAction((PerformsTouchActions) driver);
 		wait = new WebDriverWait(driver, ObjectRepository.getLong("global.driver.wait"));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("android.widget.ProgressBar")));
-    	Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));  
-	
+    	Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));  	
     }
     
   //------------------ENTERING EMAIL---------------------
