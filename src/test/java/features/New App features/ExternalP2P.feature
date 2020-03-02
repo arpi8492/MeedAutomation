@@ -44,7 +44,7 @@ And user validates "Success_Message" with expected value as "You've sent $<Amoun
 		
 Examples:
 |Platform | Email                |Username |Password   |recipient                     | Amount|First_Name|Last_Name|Mobile_Number|Key|
-|Android  |jan21meed@yopmail.com |meluser16|Password-1 |external.customer2@yopmail.com| 10.00 |Ext Name  |Sin      |9189516170   |P2P|
+|Android  |jan21meed@yopmail.com |meluser16|Prodigy@1  |external.customer2@yopmail.com| 10.00 |Ext Name  |Sin      |9189516170   |P2P|
 
 @RegressionPack @TC001_Ext_P2P_Daily_Limits
 Scenario Outline: Verify Meed customer daily limit exceed message when attempted to transfer more than 2,500

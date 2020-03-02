@@ -164,7 +164,7 @@ public class GenericSteps extends BaseTest{
 			}   
     		 		
     			System.out.println("Property Value : " +ObjectRepository.getobjectLocator(textbox_name));	
-    		    wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(textbox_name)));   
+    		   // wait.until(ExpectedConditions.visibilityOfElementLocated(ObjectRepository.getobjectLocator(textbox_name)));   
     		    driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).click();
     		    driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).clear();
     		    driver.findElement(ObjectRepository.getobjectLocator(textbox_name)).sendKeys(text_value);
@@ -497,8 +497,7 @@ public class GenericSteps extends BaseTest{
     				
 			   }
 		 
-		   }
-		  
+		   }		  
 		   else if(domain.equalsIgnoreCase("yopmail.com"))  
 		   {
 			   activity = new Activity(ObjectRepository.getString("global.capability.chromeAppPackage"), ObjectRepository.getString("global.capability.chromeAppActivity"));
@@ -531,9 +530,15 @@ public class GenericSteps extends BaseTest{
 			       otp_value= temp[1];
 			       
 			     //  System.out.println("OTP IS: " + otp_value[1]);
-			       
-		        
-		   }
+		   }else if (domain.equalsIgnoreCase("yahoo.com")) {
+		       driver.findElement(By.xpath("//android.widget.ImageButton[@resource-id='com.android.chrome:id/menu_button']")).click(); 
+		       driver.findElement(By.xpath("//android.widget.TextView[@text='New tab']")).click();
+		       Thread.sleep(1000);
+		       driver.findElement(By.className("android.widget.EditText")).clear();
+		       driver.findElement(By.className("android.widget.EditText")).sendKeys(domain);			        
+		       ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.ENTER));
+		       //Incomplete
+		}
 		break;
 				
 			case "message":
@@ -558,44 +563,43 @@ public class GenericSteps extends BaseTest{
      for(int i=0;i<otp_value.length();i++)
      {
     	String temp = otp_value.substring(i, i+1);
-    // 	System.out.println("temp " +temp);
+     	System.out.println("temp " +temp);
  
+     	Thread.sleep(1000);
+     		driver.findElement(By.xpath("//android.view.View[@index='"+j+"']")).click();
+     		Thread.sleep(1000);
+     			switch(temp)
+     			{			
+     				case("1"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_1));
+     				break;
    
-   driver.findElement(By.xpath("//android.view.View[@index='"+j+"']")).click();
-   switch(temp)
-   {
-   case("1"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_1));
-   break;
+     				case("2"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_2));
+     				break;
    
-   case("2"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_2));
-   break;
+     				case("3"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_3));
+     				break;
    
-   case("3"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_3));
-   break;
+     				case("4"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_4));
+     				break;
    
-   case("4"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_4));
-   break;
+     				case("5"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_5));
+     				break;
    
-   case("5"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_5));
-   break;
+     				case("6"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_6));
+     				break;
    
-   case("6"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_6));
-   break;
+     				case("7"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_7));
+     				break;
    
-   case("7"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_7));
-   break;
+     				case("8"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_8));
+     				break;
    
-   case("8"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_8));
-   break;
+     				case("9"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_9));
+     				break;
    
-   case("9"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_9));
-   break;
-   
-   case("0"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_0));
-   break;
-   
-   
-   }
+     				case("0"): ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.DIGIT_0));
+     				break;
+     			}
    
        ++j;
      }  
@@ -739,7 +743,10 @@ public class GenericSteps extends BaseTest{
     	    		}
     	    		else if(month_int<currentmonthInt)
     	    		{
-    	    			
+/*    	    			String dob = webelementHandler.findElement(By.xpath("//android.view.View[@resource-id='dob']/android.view.View")).getText();
+    	    			System.err.println("dob" + dob);
+    	    			currentmonthInt = Integer.parseInt(StringUtils.substringBetween(dob, "/", "/"));*/
+    	    			//System.err.println("currentmonthInt " + currentmonthInt );
     	    			do
     	    			{	
     	    				WebElement current_mon_val, current_mon_oneahead;
@@ -758,7 +765,8 @@ public class GenericSteps extends BaseTest{
     	       	    		 cmon_y = current_mon_val.getLocation().getY();
     	    				}
     					
-    	    				temp=currentmonthInt-1;
+    	    				//temp=currentmonthInt-1;         //commented by vaishali
+    	    				temp = currentmonthInt+2;
     	    				if(temp<10)
     	    				{
     	    					current_mon_oneahead	= driver.findElement(By.xpath("//android.widget.Button[@text ='"+0+temp+"']"));
@@ -772,8 +780,9 @@ public class GenericSteps extends BaseTest{
     	    				 mon_x = current_mon_oneahead.getLocation().getX();
     	            		 mon_y = current_mon_oneahead.getLocation().getY();
     	    				}
-    	    				touchAction.longPress(PointOption.point(mon_x, mon_y)).moveTo(PointOption.point(mon_x, mon_y)).release().perform();
-    	    				--currentmonthInt;
+    	    				System.err.println("currentmonthInt "+currentmonthInt+" month_int "+month_int);
+    	    				touchAction.longPress(PointOption.point(mon_x, mon_y)).moveTo(PointOption.point(cmon_x, cmon_y)).release().perform();
+    	       				--currentmonthInt;
     	    				
     	    			}while (month_int<currentmonthInt);
     	    			
@@ -1264,7 +1273,7 @@ public class GenericSteps extends BaseTest{
 	       driver.findElement(By.xpath(ObjectRepository.getString("yopmail_login"))).sendKeys(user);  
 	       driver.findElement(By.xpath("//android.widget.Button[@index='0']")).click();
 	       Thread.sleep(2000);
-	}	       
+	  }     
  }	
  
  /** @author vaishali.katta  */
@@ -1318,9 +1327,15 @@ public class GenericSteps extends BaseTest{
  @Given("^user enters \"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\" in paystand and click on \"([^\"]*)\"$")
  public void user_enters_in_paystand_and_click_on(String payamount, String payemail, String paycardname, String paycardnumber, String paycardexpiry, String payscode, String button) throws Throwable {
 	 Thread.sleep(5000);
-	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("paystand_checkout_iframe")));
+	 if (webelementHandler.getCurrentAndroidContext().contains("NATIVE")) {
+		webelementHandler.switchAndroidContext("WEBVIEW");
+	}
+	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@id='paystand_checkout_iframe']")));
 	 driver.switchTo().frame("paystand_checkout_iframe");
-	 webelementHandler.enterText(ObjectRepository.getString("Paystand_Amount"), payamount);
+	 Thread.sleep(2000);
+	 if (webelementHandler.findElements(ObjectRepository.getString("Paystand_Amount")).size()>0) {
+		 webelementHandler.enterText(ObjectRepository.getString("Paystand_Amount"), payamount);
+	 }
 	 webelementHandler.enterText(ObjectRepository.getString("Paystand_Email"), payemail);
 	 webelementHandler.enterText(ObjectRepository.getString("Paystand_Card_Name"), paycardname);
 	 webelementHandler.enterText(ObjectRepository.getString("Paystand_Card_Number"), paycardnumber);
@@ -1458,6 +1473,202 @@ public class GenericSteps extends BaseTest{
 		user_clicks_on_button("CHECKING");
 		user_verify_that_transaction_is_listed_in_the_transaction_history_of_account_with_note_and_amount("Fee","CHECKING", "Money Movement Transt Fee", percentDeduction);
  }
+ 
+@Given("^user selects date \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" from calendar$")
+	 public void user_selects_date_from_calendar(int month, int day, int year) throws Throwable {
+	
+	String dob = webelementHandler.findElement(By.xpath("//android.view.View[@resource-id='dob']/android.view.View")).getText();
+	System.err.println("dob" + dob);
+ 	int current_day = Integer.parseInt(dob.split("/")[1]);
+ 	System.out.println("Day VALUE IS RETREIVED AS --- " + current_day);  
+ 	
+ 	int current_year = Integer.parseInt(dob.split("/")[2]);
+ 	System.out.println("Year VALUE IS RETREIVED AS --- " + current_year);  
+ 	
+ 	int currentmonthInt = Integer.parseInt(dob.split("/")[0]);
+ 	System.out.println("Month VALUE IS RETREIVED AS --- " + currentmonthInt);  
+ 	
+	System.err.println("currentmonthInt " + currentmonthInt );
+	TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
+	
+	//code for year selection starts here =======================>
+		if(year>current_year)  
+		{
+			while (year>current_year);
+			{   
+				WebElement current_year_val	= driver.findElement(By.xpath("//android.widget.Button[@text ='"+current_year +"']")); 
+				int cyear_x = current_year_val.getLocation().getX();
+	    		int cyear_y = current_year_val.getLocation().getY();
+	    		
+				int temp=current_year+1;   
+				WebElement current_year_oneahead	= driver.findElement(By.xpath("//android.widget.Button[@text ='"+temp+"']"));  
+				int year_x = current_year_oneahead.getLocation().getX();
+     		    int year_y = current_year_oneahead.getLocation().getY();
+				touchAction.longPress(PointOption.point(year_x, year_y)).moveTo(PointOption.point(cyear_x, cyear_y)).release().perform();
+				++current_year;    
+				System.out.println("Current Year is :" + current_year);
+			}
+		}
+		else
+		{
+			while (year<current_year)
+			{   
+				WebElement current_year_val	= driver.findElement(By.xpath("//android.widget.Button[@text ='"+current_year +"']"));  
+				int cyear_x = current_year_val.getLocation().getX();
+	    		int cyear_y = current_year_val.getLocation().getY();
+	    		
+				int temp=current_year-1;   
+				WebElement current_year_oneahead	= driver.findElement(By.xpath("//android.widget.Button[@text ='"+temp+"']"));  
+				int year_x = current_year_oneahead.getLocation().getX();
+     		    int year_y = current_year_oneahead.getLocation().getY();
+				touchAction.longPress(PointOption.point(year_x, year_y)).moveTo(PointOption.point(cyear_x, cyear_y)).release().perform();
+				--current_year;   
+				System.out.println("Current Year is :" + current_year);
+				
+			}
+		}
+	//code for year selection ends here <====================
+		
+	//code for month selection starts here ========================>
+		if(month>currentmonthInt)   //10>09
+	    		{
+					while (month>currentmonthInt)
+	    			{
+	    				WebElement current_mon_val, current_mon_oneahead;
+	    				int cmon_x, cmon_y, mon_x, mon_y, temp;
+	    				
+	    				if(currentmonthInt<10)
+	    				{
+	    						current_mon_val	= driver.findElement(By.xpath("//android.app.Dialog/android.view.View/android.view.View[@index='1']//android.view.View[@index='0']//android.widget.Button[@text ='"+0+currentmonthInt +"']"));
+	    				}
+	    				else     current_mon_val = driver.findElement(By.xpath("//android.app.Dialog/android.view.View/android.view.View[@index='1']//android.view.View[@index='0']//android.widget.Button[@text ='"+currentmonthInt +"']"));
+	    				
+	    				cmon_x = current_mon_val.getLocation().getX();
+	    	    		cmon_y = current_mon_val.getLocation().getY();
+					
+	    				temp=currentmonthInt+1;
+	    				if(temp<10)
+	    				{
+	    						current_mon_oneahead	= driver.findElement(By.xpath("//android.app.Dialog/android.view.View/android.view.View[@index='1']//android.view.View[@index='0']//android.widget.Button[@text ='"+0+temp+"']"));
+	    				}
+	    				else  	current_mon_oneahead	= driver.findElement(By.xpath("//android.app.Dialog/android.view.View/android.view.View[@index='1']//android.view.View[@index='0']//android.widget.Button[@text ='"+temp+"']"));
+	    				
+	    				 mon_x = current_mon_oneahead.getLocation().getX();
+	               		 mon_y = current_mon_oneahead.getLocation().getY();
+	               		 
+	    				touchAction.longPress(PointOption.point(mon_x, mon_y)).moveTo(PointOption.point(cmon_x, cmon_y)).release().perform();
+	    				++currentmonthInt;
+	    				System.out.println("Current Month is :" + currentmonthInt);
+	    			}
+	    		}
+	    		else if(month<currentmonthInt)
+	    		{
+	    			System.err.println("currentmonthInt " + currentmonthInt );
+	    			while (month<currentmonthInt)
+	    			{	
+	    				WebElement current_mon_val, current_mon_oneahead;
+	    				int cmon_x, cmon_y, mon_x, mon_y, temp;
+	    				
+	    				if(currentmonthInt<10)
+	    				{
+	    				   current_mon_val	= driver.findElement(By.xpath("//android.app.Dialog/android.view.View/android.view.View[@index='1']//android.view.View[@index='0']//android.widget.Button[@text ='"+0+currentmonthInt +"']"));
+	    				}
+	    				else current_mon_val	= driver.findElement(By.xpath("//android.app.Dialog/android.view.View/android.view.View[@index='1']//android.view.View[@index='0']//android.widget.Button[@text ='"+currentmonthInt +"']"));
+
+	       				 cmon_x = current_mon_val.getLocation().getX();
+	       	    		 cmon_y = current_mon_val.getLocation().getY();
+					
+	    				temp=currentmonthInt-1;        
+
+	    				if(temp<10)
+	    				{
+	    					current_mon_oneahead	= driver.findElement(By.xpath("//android.app.Dialog/android.view.View/android.view.View[@index='1']//android.view.View[@index='0']//android.widget.Button[@text ='"+0+temp+"']"));
+	    				}
+	    				
+	    				else current_mon_oneahead	= driver.findElement(By.xpath("//android.app.Dialog/android.view.View/android.view.View[@index='1']//android.view.View[@index='0']//android.widget.Button[@text ='"+temp+"']"));
+	    				
+	    				mon_x = current_mon_oneahead.getLocation().getX();
+	            		mon_y = current_mon_oneahead.getLocation().getY();
+	            		 
+	    				System.err.println("currentmonthInt "+currentmonthInt+" month_int "+month);
+	    				touchAction.longPress(PointOption.point(mon_x, mon_y)).moveTo(PointOption.point(cmon_x, cmon_y)).release().perform();
+	       				--currentmonthInt;
+	    			}
+	    			
+	    		}
+	    
+		//code for month selection ends here <====================	
+		
+		
+		//code for day selection starts here ====================>	
+     if(day>current_day)
+		{
+    	 	while (day>current_day)
+			{
+				WebElement current_day_val, current_day_oneahead;
+				int cday_x, cday_y, day_x, day_y, temp;
+				
+				if(current_day<10)
+				{
+				 current_day_val	= driver.findElement(By.xpath("//android.app.Dialog/android.view.View/android.view.View[@index='1']//android.view.View[@index='1']//android.widget.Button[@text ='"+0+current_day +"']"));
+				}
+				else current_day_val	= driver.findElement(By.xpath("//android.app.Dialog/android.view.View/android.view.View[@index='1']//android.view.View[@index='1']//android.widget.Button[@text ='"+current_day +"']"));
+				 
+				cday_x = current_day_val.getLocation().getX();
+	    		cday_y = current_day_val.getLocation().getY();
+
+				temp=current_day+1;
+				if(temp<10)
+				{
+					current_day_oneahead	= driver.findElement(By.xpath("//android.app.Dialog/android.view.View/android.view.View[@index='1']//android.view.View[@index='1']//android.widget.Button[@text ='"+0+temp+"']"));
+				}
+				else   current_day_oneahead	= driver.findElement(By.xpath("//android.app.Dialog/android.view.View/android.view.View[@index='1']//android.view.View[@index='1']//android.widget.Button[@text ='"+temp+"']"));
+				 
+				day_x = current_day_oneahead.getLocation().getX();
+				day_y = current_day_oneahead.getLocation().getY();
+				
+				touchAction.longPress(PointOption.point(day_x, day_y)).moveTo(PointOption.point(cday_x, cday_y)).release().perform();
+				++current_day;
+				System.out.println("Current Day is :" + current_day);
+			}
+		}
+		else if(day<current_day)
+		{
+			
+			while (day<current_day)
+			{	
+				WebElement current_day_val, current_day_oneahead;
+				int cday_x, cday_y, day_x, day_y, temp;
+				
+				if(current_day<10)
+				{
+				 current_day_val	= driver.findElement(By.xpath("//android.app.Dialog/android.view.View/android.view.View[@index='1']//android.view.View[@index='1']//android.widget.Button[@text ='"+0+current_day +"']"));
+				}
+				else current_day_val	= driver.findElement(By.xpath("//android.app.Dialog/android.view.View/android.view.View[@index='1']//android.view.View[@index='1']//android.widget.Button[@text ='"+current_day +"']"));
+				 
+				cday_x = current_day_val.getLocation().getX();
+	    		cday_y = current_day_val.getLocation().getY();
+
+				temp=current_day-1;
+				if(temp<10)
+				{
+					current_day_oneahead	= driver.findElement(By.xpath("//android.app.Dialog/android.view.View/android.view.View[@index='1']//android.view.View[@index='1']//android.widget.Button[@text ='"+0+temp+"']"));
+				}
+				else   current_day_oneahead	= driver.findElement(By.xpath("//android.app.Dialog/android.view.View/android.view.View[@index='1']//android.view.View[@index='1']//android.widget.Button[@text ='"+temp+"']"));
+				 day_x = current_day_oneahead.getLocation().getX();
+				 day_y = current_day_oneahead.getLocation().getY();
+			
+				touchAction.longPress(PointOption.point(day_x, day_y)).moveTo(PointOption.point(cday_x, cday_y)).release().perform();
+				--current_day;
+				//System.out.println("Current Day is :" + current_day);
+			}
+			
+		}
+		
+	
+ 	Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 	
+		
+	}
  
 }
 
