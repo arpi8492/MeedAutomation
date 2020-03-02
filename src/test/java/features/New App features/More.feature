@@ -51,15 +51,13 @@ Given user launches the app in "<Platform>" device
   Examples: 
     |   Platform    |   Email                   |   Username     |   Password    |  
     |   Android     |   meluser12@yopmail.com   |   meluser12 |   Password-1 | 		 
-   
- 
  
  @RegressionPack @TC003_More_Freeze_Card
 Scenario Outline: Verify Meed customer is able to view Freeze/Unfreeze Card in Meed app 
 Given user launches the app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
-  And user clicks on button "Continue"
+ And user clicks on button "Continue"
  And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
@@ -68,11 +66,11 @@ Given user launches the app in "<Platform>" device
  And user scrolls down 
  And user clicks on label "Freeze_Card"
  And user clicks on button "freeze_Card"
-   And user waits for "3" seconds
+ And user waits for "3" seconds
  And user validates that "Unfreeze_Card" is displayed   
  And user clicks on label "Unfreeze_Card"
  And user clicks on button "Unfreeze_Card"
-    And user waits for "3" seconds
+ And user waits for "3" seconds
  And user validates that "Freeze_Card" is displayed 
   
   Examples: 
@@ -104,7 +102,7 @@ Given user launches the app in "<Platform>" device
     |   Android     |   meluser12@yopmail.com   |   meluser12 |   Password-1 | 		 (833) 213-6333 | 
  
  
- @RegressionPack @TC005_More_Replace_Card
+@RegressionPack @TC005_More_Replace_Card
 Scenario Outline: Verify Meed customer is able to Replace Card in Meed app 
 Given user launches the app in "<Platform>" device
  And user clicks on button "Get_started"

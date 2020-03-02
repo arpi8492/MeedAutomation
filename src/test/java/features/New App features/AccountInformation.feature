@@ -22,11 +22,11 @@ And user clicks on button "Query"
 #Assertion required
 
   Examples: 
-	|	Platform	|	Email					|	Username		|	Password	|	
-	|	Android		|	meluser12@yopmail.com	|	meluser16		|	Password-1	|
+	|	Platform	|	Email					    |	Username		|	Password	|	
+	|	Android		|	meluser12new@yopmail.com	|	meluser16		|	Password-1	|
 	
 	
-	@RegressionPack @TC002
+@RegressionPack @TC002
 Scenario Outline: Verify that the Meed applcation displays the APR rate in the account summary for LOC account
 #One time transfer
 Given user launches the app in "<Platform>" device
