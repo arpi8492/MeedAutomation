@@ -6,7 +6,7 @@ Feature: Meed Rewards
 
 @RegressionPack @TC001+Meed_Extras
 Scenario Outline: Verify Meed customer is able to view Meed Rewards - Meed Extras in to Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -37,7 +37,7 @@ Given user launches the app in "<Platform>" device
     
     @RegressionPack @TC002+Meed_Shares
 Scenario Outline: Verify Meed customer is able to view Meed Share to Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -67,7 +67,7 @@ Given user launches the app in "<Platform>" device
     
     @RegressionPack @TC003+Meed_Travel
 Scenario Outline: Verify Meed customer is able to view Meed Travel to Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -92,7 +92,7 @@ Given user launches the app in "<Platform>" device
     
     @RegressionPack @TC004+Meed_Cover
 Scenario Outline: Verify Meed customer is able to view Meed Cover to Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"

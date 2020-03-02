@@ -5,7 +5,7 @@
 Feature: Move Money new app
 @RegressionPack @TC001
 Scenario Outline: Verify Meed customer is able to successfully perform direct deposit 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -36,7 +36,7 @@ Given user launches the app in "<Platform>" device
   
   @RegressionPack @TC002
 Scenario Outline: Verify Meed customer is able to successfully transfer from other banks 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -75,7 +75,7 @@ Given user launches the app in "<Platform>" device
   
  @RegressionPack @TC003
 Scenario Outline: Verify Meed customer is able to successfully deposit from Credit/Debit Card 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -107,7 +107,7 @@ Given user launches the app in "<Platform>" device
 	
 @TC001_Daily_Counter_Limit
 Scenario Outline: Validate daily counter limit for funding
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -145,7 +145,7 @@ And user validates "Message_3" with expected value as "<Message_3>"
 
 @RegressionPack @TC004
 Scenario Outline: Verify that the user is able to select 'E-Transfer' from other bank option 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user waits for "5" seconds
  And user clicks on button "Get_started"
  And user waits for "3" seconds
@@ -171,7 +171,7 @@ And user waits for "5" seconds
 	
 @RegressionPack @TC005
 Scenario Outline: Verify that the user is able to delete the P2P contacts 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user clicks on button "Get_started"
 And user enters text "<Email>" in textbox "Your_email"
 And user clicks on button "Continue"
@@ -197,7 +197,7 @@ And user validates that contact "<P2P Contact Email>" is "deleted"
 	
 @RegressionPack @TC006
 Scenario Outline: Verify that the user is able to edit the P2P contacts 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user clicks on button "Get_started"
 And user enters text "<Email>" in textbox "Your_email"
 And user clicks on button "Continue"
@@ -223,7 +223,7 @@ Examples:
 	
 @RegressionPack @TC007
 Scenario Outline: Verify that the user is able to delete the bill payee contact
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user clicks on button "Get_started"
 And user enters text "<Email>" in textbox "Your_email"
 And user clicks on button "Continue"
@@ -255,7 +255,7 @@ And user validates that contact "VAISHALI KATTA" is "deleted"
 	
 @RegressionPack @TC001_3%_Charge
 Scenario Outline: Verify that when the user is funding the account from in app, there is 3% charge on the transaction
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user clicks on button "Get_started"
 And user enters text "<Email>" in textbox "Your_email"
 And user clicks on button "Continue"

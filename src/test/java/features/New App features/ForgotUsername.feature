@@ -5,7 +5,7 @@
 Feature: Forgot Username
 @RegressionPack @TC001
 Scenario Outline: Verify that the user is able to retrieve the Username on Android devices
-Given user launches the app in "<Platform>" device  
+Given user launches "Meed" app in "<Platform>" device
 And user waits for "5" seconds
   And user clicks on button "Get_started"
  And user waits for "3" seconds

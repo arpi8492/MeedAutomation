@@ -4,7 +4,7 @@
 Feature: Smoke Testing
 @SmokePack @TC001_Invite_Friends
 Scenario Outline: Verify Meed customer is able to invite friends to Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -37,7 +37,7 @@ Given user launches the app in "<Platform>" device
 	@SmokePack @TC002_Internal_Transfer_DDA_To_SAV
 Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Checkings to Savings)
 #One time transfer
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
   And user clicks on button "Get_started"
   And user enters text "<Email>" in textbox "Your_email"
   And user clicks on button "Continue"
@@ -81,7 +81,7 @@ Given user launches the app in "<Platform>" device
 	
 	@SmokePack @TC003_Internal_Transfer_SAV_To_DDA
 Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Savings to Checkings)
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
   And user clicks on button "Get_started"
   And user enters text "<Email>" in textbox "Your_email"
   And user clicks on button "Continue"
@@ -127,7 +127,7 @@ Given user launches the app in "<Platform>" device
   @SmokePack @TC004_Scheduled_Payment
 Scenario Outline: Verify Meed customer is able to successfully able to move money between accounts (Checkings to Savings)
 #Scheduled transfer
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -166,7 +166,7 @@ Given user launches the app in "<Platform>" device
 	
 	@SmokePack @TC005_Direct_Deposit
 Scenario Outline: Verify Meed customer is able to successfully perform direct deposit 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -197,7 +197,7 @@ Given user launches the app in "<Platform>" device
 	
 	@SmokePack @TC006_Deposit_From_Cards
 Scenario Outline: Verify Meed customer is able to successfully deposit from Credit/Debit Card 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -229,7 +229,7 @@ Given user launches the app in "<Platform>" device
   
   @SmokePack @TC007_More_EDIT_NICKNAME
 Scenario Outline: Verify Meed customer is able to edit Nickname in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -255,7 +255,7 @@ Given user launches the app in "<Platform>" device
     @SmokePack @TC008_More_Freeze_Card
  @RegressionPack @TC003_More_Freeze_Card
 Scenario Outline: Verify Meed customer is able to view Freeze/Unfreeze Card in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
   And user clicks on button "Continue"
@@ -280,7 +280,7 @@ Given user launches the app in "<Platform>" device
     
     @SmokePack @TC009_More_Report_Stolen
 Scenario Outline: Verify Meed customer is able to report Lost/Stolen Card in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -305,7 +305,7 @@ Given user launches the app in "<Platform>" device
     
      @SmokePack @TC010_More_Contact_preferences
 Scenario Outline: Verify Meed customer is able to Change Contact Preferences of Meed Banking Club in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -332,7 +332,7 @@ And user validates that "Meed_Banking_Club_Push_Notification" is "checked"
     
     @SmokePack @TC011_Meed_Extras
 Scenario Outline: Verify Meed customer is able to view Meed Rewards - Meed Extras in to Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -364,7 +364,7 @@ Given user launches the app in "<Platform>" device
   
      @SmokePack @TC012_Meed_Cover
 Scenario Outline: Verify Meed customer is able to view Meed Cover to Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -386,7 +386,7 @@ Given user launches the app in "<Platform>" device
        
     @SmokePack @TC013_Privacy_&_legal
 Scenario Outline: Verify Meed customer is able to view legal documents in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -470,7 +470,7 @@ Given user launches the app in "<Platform>" device
   # needs to be updated based upon new binary
    @SmokePack @TC014_P2P_Sent_money
 Scenario Outline: Verify Meed customer is able to successfully Pay Friends having Meed membership - Send Money
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user waits for "10" seconds
  And user clicks on button "Get_started"
  And user waits for "3" seconds
@@ -500,7 +500,7 @@ And user waits for "10" seconds
   
 @SmokePack @TC016_More_Change_Language
 Scenario Outline: Verify Meed customer is able to Change Language to Spanish in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"

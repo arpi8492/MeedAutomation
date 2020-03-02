@@ -6,7 +6,7 @@ Feature: Account info
 @RegressionPack @TC001
 Scenario Outline: Verify that the Meed application displays the YTD/Year to Date (sum of all interest deposits on SAV account) is displayed in the account summary for SAV account
 #One time transfer
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user waits for "5" seconds
   And user clicks on button "Get_started"
  And user waits for "3" seconds
@@ -29,7 +29,7 @@ And user clicks on button "Query"
 @RegressionPack @TC002
 Scenario Outline: Verify that the Meed applcation displays the APR rate in the account summary for LOC account
 #One time transfer
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user waits for "5" seconds
   And user clicks on button "Get_started"
  And user waits for "3" seconds
@@ -51,7 +51,7 @@ And user validates "APRRate" field with expected value as "<APR>"
 @RegressionPack @TC003
 Scenario Outline: Verify that the Meed application displays the APY rate (1.25%) in the account summary for SAV account
 #One time transfer
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user waits for "5" seconds
   And user clicks on button "Get_started"
  And user waits for "3" seconds

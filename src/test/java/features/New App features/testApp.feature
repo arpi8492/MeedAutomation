@@ -5,7 +5,7 @@
 Feature: Internal P2P Transfer new app
 @RegressionPack @TC005_Direct_Deposit
 Scenario Outline: Verify Meed customer is able to view legal documents in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 
 And user waits for "10" seconds
  And user clicks on button "Get_started"

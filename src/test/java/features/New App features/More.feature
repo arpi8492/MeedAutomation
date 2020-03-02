@@ -6,7 +6,7 @@ Feature: Validate More Menu options in New Meed App
 
 @RegressionPack @TC001_More_EDIT_NICKNAME
 Scenario Outline: Verify Meed customer is able to edit Nickname in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -31,7 +31,7 @@ Given user launches the app in "<Platform>" device
 
 @RegressionPack @TC002_More_Account_Details
 Scenario Outline: Verify Meed customer is able to view Account Details in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -54,7 +54,7 @@ Given user launches the app in "<Platform>" device
  
  @RegressionPack @TC003_More_Freeze_Card
 Scenario Outline: Verify Meed customer is able to view Freeze/Unfreeze Card in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -79,7 +79,7 @@ Given user launches the app in "<Platform>" device
     
     @RegressionPack @TC004_More_Report_Stolen
 Scenario Outline: Verify Meed customer is able to report Lost/Stolen Card in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -104,7 +104,7 @@ Given user launches the app in "<Platform>" device
  
 @RegressionPack @TC005_More_Replace_Card
 Scenario Outline: Verify Meed customer is able to Replace Card in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -129,7 +129,7 @@ Given user launches the app in "<Platform>" device
  
  @RegressionPack @TC006_More_Card_PIN
 Scenario Outline: Verify Meed customer is able to call customer care for Card PIN issues in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -152,7 +152,7 @@ Given user launches the app in "<Platform>" device
  
 @RegressionPack @TC007_More_Statements
 Scenario Outline: Verify Meed customer is able to view Statements in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -173,7 +173,7 @@ Given user launches the app in "<Platform>" device
     
 @RegressionPack @TC008_More_Change_Language
 Scenario Outline: Verify Meed customer is able to Change Language to Spanish in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -203,7 +203,7 @@ And user clicks on button "Back"
     
 @RegressionPack @TC009_More_Contact_preferences_Meed
 Scenario Outline: Verify Meed customer is able to Change Contact Preferences of Meed Banking Club in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -229,7 +229,7 @@ And user validates that "Meed_Banking_Club_Push_Notification" is "checked"
     
 @RegressionPack @TC009_More_Contact_preferences_Vast
 Scenario Outline: Verify Meed customer is able to Change Contact Preferences of Vast Bank in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -261,7 +261,7 @@ And user validates that "Meed_Banking_Vast_Push_Notification" is "checked"
     
 @RegressionPack @TC010_More_Version_Info
 Scenario Outline: Verify Meed customer is able to view App version info in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -315,7 +315,7 @@ And user waits for "3" seconds
     
 @RegressionPack @TC001_Privacy_&_legal
 Scenario Outline: Verify Meed customer is able to view legal documents in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -398,7 +398,7 @@ Given user launches the app in "<Platform>" device
     
    @RegressionPack @TC001_Message_Center
 Scenario Outline: Verify Meed customer is able view Message Center in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -426,7 +426,7 @@ Given user launches the app in "<Platform>" device
 
 @RegressionPack @TC001_SweepToggle_ON
 Scenario Outline: Verify that the user is able to Turn the Sweep Toggle 'on' in the app
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user waits for "5" seconds
   And user clicks on button "Get_started"
  And user waits for "3" seconds
@@ -455,7 +455,7 @@ And user waits for "5" seconds
 	
 @TC001_Contact_Us_Existing_Question
 Scenario Outline: Verify Meed customer is able to use Contact Us functionality using existing questions
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user clicks on button "Get_started"
 And user enters text "<Email>" in textbox "Your_email"
 And user clicks on button "Continue"
@@ -480,7 +480,7 @@ And user validates "A_P2P_or_Send/Receive_Money_Transfer" with expected value as
 
 @TC001_Update_Phone_Number
 Scenario Outline: Validate that user is successfully able to update the phone number in the app
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user clicks on button "Get_started"
 And user enters text "<Email>" in textbox "Your_email"
 And user clicks on button "Continue"
@@ -510,7 +510,7 @@ Examples:
 
 @RegressionPack @TC001.1_More_Update_Email
 Scenario Outline: Verify Meed customer is able to update email id in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -538,7 +538,7 @@ Given user launches the app in "<Platform>" device
 
 @RegressionPack @TC001.1_More_Update_Address
 Scenario Outline: Verify Meed customer is able to update Address in Meed app 
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
  And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Continue"
@@ -571,7 +571,7 @@ Given user launches the app in "<Platform>" device
     
 @TC001_Contact_Us_New_Question
 Scenario Outline: Verify Meed customer is able to use Contact Us functionality by typing new questions
-Given user launches the app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
 And user clicks on button "Get_started"
 And user enters text "<Email>" in textbox "Your_email"
 And user clicks on button "Continue"
