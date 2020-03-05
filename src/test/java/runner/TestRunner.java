@@ -17,7 +17,7 @@ import cucumber.api.junit.Cucumber;
  plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/ExtentReport/TestAutomationReport.html",
 		 "json:target/cucumber-reports/JSON/TestAutomationResult.json"},
  monochrome = true,
- tags= {"@TC001_Meed_Onboarding1"},
+ tags= {"@TC001_Meed_Onboarding"},
  dryRun = false
  )
  
