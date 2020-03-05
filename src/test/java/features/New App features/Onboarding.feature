@@ -19,7 +19,7 @@ Given user launches "Meed" app in "<Platform>" device
  And user waits for "5" seconds
  And user clicks on button "USA"
 
- And user switches to "chrome" app to get "OTP" for account with email "<Email>"  and password ""
+ And user switches to "chrome" app to get "OTP" for account with email "<Email>"  and password "Password-1"
 
  And user waits for "3" seconds
  And user enters text "<Username>" in textbox "Username"
@@ -41,7 +41,7 @@ And user enters text "<FirstName>" in textbox "First_Name"
 And user enters text " " in textbox "Middle_Name"
 And user enters text "<LastName>" in textbox "Last_Name"
 And user clicks on label "DOB"
-And user selects date "02" "01" "1989" from calendar
+And user selects date "01" "11" "1955" from calendar
 And user clicks on button "DONE"
 And user waits for "2" seconds
 And user enters text "<SSN>" in textbox "Social_Security"
@@ -70,7 +70,7 @@ And user selects dropdown at index "0"
 And user scrolls down
 And user scrolls down
  And user clicks on label "<State>" 
- And user waits for "2" seconds
+ And user waits for "10" seconds
  And user enters text "<ZIPCode>" in textbox "ZIP_Code"
  And user enters text "<Mobile>" in textbox "Mobile_Number"
  And user scrolls down
@@ -114,8 +114,8 @@ And user scrolls down
   And user waits for "10" seconds
   
   Examples: 
-    |   Platform    |   Email                  	   |	Nickname | Inviter Code  | Username     	 |   Password   |  FirstName	| LastName		|	dob			|	SSN			|	HomeAddress			    |	City	|	State  		 |	ZIPCode	|	Mobile		   |	IdentityNumber	| Amount	|	CardNumber			| CardName 			 | Expiry | SecurityCode | ExpectedMessage |
-    |   Android     |   onboardtest1@yopmail.com   |  PA	     |	corporate1919| Onboardtest1		 |   Password-1	| 	HAMMEZ		|	MARQUIRDT	|	02/01/1989  |	666995300	|	219 W MADISON ST UNIT 5	|	CHICAGO	|	Illinois	 |	60606	|	(312) 214-0011 |	I31000000436	| 12	    |	4242424242424242	| TestAutomationCard | 02/28  | 222           | Thank you! This payment is now settled. |
+    |   Platform    |   Email                   	 |	Nickname | Inviter Code    | Username     	 |   Password   |  FirstName	| LastName	|	dob			|	SSN			|	HomeAddress			    |	City	|	State  		 |	ZIPCode	|	Mobile		   |	IdentityNumber	| Amount	|	CardNumber			| CardName 			 | Expiry | SecurityCode | ExpectedMessage |
+    |   Android     |   meedprodigy1@gmail.com   |  PA	     |	corporate1850  | Custpromo5		 |   Password-1	| 	ELLEN		|	GARZA	|	11/11/1955  |	666994832	|	4311 COM CADDO LINE RD	|	APACHE	|	Oklahoma	 |	73006	|	(580) 492-0012 |	100000012   	| 12	    |	4242424242424242	| TestAutomationCard | 02/28  | 222           | Thank you! This payment is now settled. |
 
 @RegressionPack @TC001_Meed_Onboarding1
 Scenario Outline: Verify Meed customer is able onboard themselves in Meed app
@@ -149,5 +149,5 @@ And user waits for "5" seconds
  
   Examples: 
     |   Platform    |   Email                  	   |	Nickname | Inviter Code  | Username     	 |   Password   |  FirstName	| LastName		|	dob			|	SSN			|	HomeAddress			    |	City	|	State  		 |	ZIPCode	|	Mobile		   |	IdentityNumber	| Amount	|	CardNumber			| CardName 			 | Expiry | SecurityCode | ExpectedMessage |
-    |   Android     |   prodigy13feb@yopmail.com   |  PA	     |	corporate1919| Prodigy13feb |   Prodigy5*	| 	HAMMEZ		|	MARQUIRDT	|	02/01/1989  |	666995300	|	219 W MADISON ST UNIT 5	|	CHICAGO	|	Illinois	 |	60606	|	(312) 214-0011	|	I31000000436	| 12	|	4242424242424242	| TestAutomationCard | 02/28  | 222 | Thank you! This payment is now setteled |
+    |   Android     |   vaishaliprodigy2@yahoo.com   |  PA	     |	corporate1919| Prodigy13feb |   Prodigy5*	| 	HAMMEZ		|	MARQUIRDT	|	02/01/1989  |	666995300	|	219 W MADISON ST UNIT 5	|	CHICAGO	|	Illinois	 |	60606	|	(312) 214-0011	|	I31000000436	| 12	|	4242424242424242	| TestAutomationCard | 02/28  | 222 | Thank you! This payment is now setteled |
  

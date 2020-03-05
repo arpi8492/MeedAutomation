@@ -472,56 +472,44 @@ public class GenericSteps extends BaseTest{
 		        ((AndroidDriver<MobileElement>) this.driver).startActivity(activity);	
 		        String domain = email_id.split("@")[1];
 		        System.out.println("DOMAIN-- "+ domain);
-		     
-		     //   System.setProperty("webdriver.chrome.driver","\\src\\main\\resources\\chromedriver.exe");
+		        Thread.sleep(1000);
 		        
+			    driver.findElement(By.xpath("//android.widget.ImageButton[@resource-id='com.android.chrome:id/menu_button']")).click(); 
+			    driver.findElement(By.xpath("//android.widget.TextView[@text='New tab']")).click();
+			    Thread.sleep(1000);
+			    driver.findElement(By.className("android.widget.EditText")).clear();
+			    driver.findElement(By.className("android.widget.EditText")).sendKeys(domain);	
+			    Thread.sleep(1000);
+				((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.ENTER));
+		        Thread.sleep(1000);
+				
 		   if(domain.equalsIgnoreCase("gmail.com"))     
-		   {        
-			   try {
-		        	System.out.print("Inside Try block");
-		        //	driver.get("http://www.gmail.com");
-		        	driver.findElement(By.className("android.widget.EditText")).sendKeys("https://"+domain);			        
-			       ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.ENTER));
-			        
-			       System.out.print("Exit try block"); 
-		        }
-		
-			   catch(Exception e)
-			   {
-    				System.out.print("Inside catch block");
-    				
-    					driver.findElement(By.xpath("//android.widget.EditText[@resource-id='com.android.chrome:id/url_bar']")).sendKeys("https://m.yopmail.come/");
-    				((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.ENTER));
-    				Thread.sleep(2000);
-    				
-			   }
-		 
+		   {   			   
+			    if (webelementHandler.findElements("//android.widget.EditText[@resource-id='identifierId']").size()>0) {
+					   webelementHandler.enterText("//android.widget.EditText[@resource-id='identifierId']", email_id);
+					   webelementHandler.clickButton("//android.widget.Button[@resource-id='identifierNext' or @text='Next']");
+					   webelementHandler.enterText("//android.view.View[@resource-id='password']//android.widget.EditText", password);
+					   webelementHandler.clickButton("//android.widget.Button[@resource-id='passwordNext' or @text='Next']");
+			    }
+			   Thread.sleep(2000);
+			   webelementHandler.clickButton("//android.widget.Button[@text='Unread. Meed Your Meed Verification Code!']");
+			   
+		       Thread.sleep(1000);
+		       String otptext=    driver.findElement(By.xpath("//android.view.View[contains(@text,'Here is you verification code: ')]")).getText();
+		       System.out.println("OTP TEXT is"+otptext);
+		       String otp = domain = otptext.split(":")[1];
+		       String[] temp =  otp.split(" ");
+		       otp_value= temp[1];
 		   }		  
 		   else if(domain.equalsIgnoreCase("yopmail.com"))  
 		   {
-			   activity = new Activity(ObjectRepository.getString("global.capability.chromeAppPackage"), ObjectRepository.getString("global.capability.chromeAppActivity"));
-		        activity.setStopApp(false);
-		        ((AndroidDriver<MobileElement>) this.driver).startActivity(activity);	
-		        domain = email_id.split("@")[1];
-		        Thread.sleep(1000);
-			       driver.findElement(By.xpath("//android.widget.ImageButton[@resource-id='com.android.chrome:id/menu_button']")).click(); 
-			       driver.findElement(By.xpath("//android.widget.TextView[@text='New tab']")).click();
-		        Thread.sleep(1000);
-		        driver.findElement(By.className("android.widget.EditText")).clear();
-		        driver.findElement(By.className("android.widget.EditText")).sendKeys(domain);			        
-			       ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.ENTER));
-		        
-			        
-			       Thread.sleep(1000);
-			       driver.findElement(By.xpath("//android.widget.EditText[@resource-id='login']")).clear();
+			   	   driver.findElement(By.xpath("//android.widget.EditText[@resource-id='login']")).clear();
 			       driver.findElement(By.xpath("//android.widget.EditText[@resource-id='login']")).sendKeys(email_id);  
 			       driver.findElement(By.xpath("//android.widget.Button[@index='0']")).click();
 			       Thread.sleep(2000);
-			       
-			
 			       driver.findElement(By.xpath("//android.view.View[contains(@text,'Meed')]")).click();
 			       Thread.sleep(1000);
-			   String otptext=    driver.findElement(By.xpath("//android.view.View[contains(@text, 'Welcome to Meed ')]")).getText();
+			       String otptext=    driver.findElement(By.xpath("//android.view.View[contains(@text, 'Welcome to Meed ')]")).getText();
 			   		
 			       System.out.println("OTP TEXT is"+otptext);
 			       String otp = domain = otptext.split(":")[1];
@@ -530,13 +518,26 @@ public class GenericSteps extends BaseTest{
 			       
 			     //  System.out.println("OTP IS: " + otp_value[1]);
 		   }else if (domain.equalsIgnoreCase("yahoo.com")) {
-		       driver.findElement(By.xpath("//android.widget.ImageButton[@resource-id='com.android.chrome:id/menu_button']")).click(); 
-		       driver.findElement(By.xpath("//android.widget.TextView[@text='New tab']")).click();
+
+			    webelementHandler.clickButton("//android.widget.Button[@resource-id='header-profile-button' or @text='Profile']");
+			    webelementHandler.clickButton("//android.view.View[@resource-id='profile-mail-link' or @text='Inbox']");
+			    Thread.sleep(3000);
+			    if (webelementHandler.findElements("//android.widget.EditText[@resource-id='login-username']").size()>0) {
+				       webelementHandler.enterText("//android.widget.EditText[@resource-id='login-username']", email_id);
+				       webelementHandler.clickButton("//android.widget.Button[@resource-id='login-signin' or @text='Next']");
+				       webelementHandler.enterText("//android.widget.EditText[@resource-id='login-passwd']", password);
+				       webelementHandler.clickButton("//android.widget.Button[@resource-id='login-signin' or @text='Next']");
+				}
+		       Thread.sleep(2000);
+		       webelementHandler.clickButton("//android.widget.ListView//android.view.View[contains(@text,'Subject: Your Meed Verification Code!')]");
 		       Thread.sleep(1000);
-		       driver.findElement(By.className("android.widget.EditText")).clear();
-		       driver.findElement(By.className("android.widget.EditText")).sendKeys(domain);			        
-		       ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.ENTER));
-		       //Incomplete
+			   String otptext=    driver.findElement(By.xpath("//android.view.View[starts-with(@text, 'Welcome to Meed Banking Club!')]")).getText();
+			   		
+			       System.out.println("OTP TEXT is"+otptext);
+			       String otp = domain = otptext.split(":")[1];
+			       String[] temp =  otp.split(" ");
+			       otp_value= temp[1];
+			       System.out.println("OTP IS: " + otp_value);
 		}
 		break;
 				
@@ -552,7 +553,7 @@ public class GenericSteps extends BaseTest{
         Thread.sleep(2000);
         
          //Re launch Meed App
-        activity = new Activity(ObjectRepository.getString("global.capability.NewMeedAppPackage"), ObjectRepository.getString("global.capability.NewMeedAppActivity"));
+        activity = new Activity(ObjectRepository.getString("global.capability.MeedAppPackage"), ObjectRepository.getString("global.capability.MeedAppActivity"));
         activity.setStopApp(false);
         int j=3;
         ((AndroidDriver<MobileElement>) this.driver).startActivity(activity);
@@ -633,7 +634,7 @@ public class GenericSteps extends BaseTest{
     	
     	
    
-    	 activity = new Activity(ObjectRepository.getString("global.capability.NewMeedAppPackage"), ObjectRepository.getString("global.capability.NewMeedAppActivity"));
+    	 activity = new Activity(ObjectRepository.getString("global.capability.MeedAppPackage"), ObjectRepository.getString("global.capability.MeedAppActivity"));
          activity.setStopApp(false);
          
          ((AndroidDriver<MobileElement>) this.driver).startActivity(activity);
@@ -1015,14 +1016,11 @@ public class GenericSteps extends BaseTest{
 	public void tearDown() throws Throwable {		
 	 System.out.println("Executing After of Step Defination");
 	 try {
-		 if (webelementHandler.getCurrentAndroidContext().contains("WEBVIEW")) {
-		 		((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.APP_SWITCH));
-		 		webelementHandler.clickButton(ObjectRepository.getString("Close_all"));
-		 	}else {
-		 		Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName));  
-		 		((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.APP_SWITCH));
-		 		webelementHandler.clickButton(ObjectRepository.getString("Close_all"));
+		 if (!(webelementHandler.getCurrentAndroidContext().contains("WEBVIEW"))) {
+			 Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 
 		 	}
+		 	((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.APP_SWITCH));
+		 	webelementHandler.clickButton(ObjectRepository.getString("Close_all"));
 	 	} catch (Exception e) {
 	 		driver.quit();
 	 	}	 
@@ -1227,8 +1225,8 @@ public class GenericSteps extends BaseTest{
 	 	        activity.setStopApp(true);
 	 	        ((AndroidDriver<MobileElement>) this.driver).startActivity(activity);	
 		 	       Thread.sleep(8000);
-		 	       if (webelementHandler.findElements(ObjectRepository.getString("2055093851")).size()>0) {
-		 	    		  webelementHandler.clickButton(ObjectRepository.getString("2055093851"));
+		 	       if (webelementHandler.findElements(ObjectRepository.getString("New_samsung_Message")).size()>0) {
+		 	    		  webelementHandler.clickButton(ObjectRepository.getString("New_samsung_Message"));
 				   }
 		 	       Thread.sleep(3000);
 	 		} catch (Exception e) {
@@ -1429,7 +1427,7 @@ public class GenericSteps extends BaseTest{
 	 }
 	 System.err.println(otp);
 	 
-	 activity = new Activity(ObjectRepository.getString("global.capability.NewMeedAppPackage"), ObjectRepository.getString("global.capability.NewMeedAppActivity"));
+	 activity = new Activity(ObjectRepository.getString("global.capability.MeedAppPackage"), ObjectRepository.getString("global.capability.MeedAppActivity"));
      activity.setStopApp(false);
      ((AndroidDriver<MobileElement>) this.driver).startActivity(activity);
      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.view.View[@resource-id='signup-verification-info']")));
@@ -1661,18 +1659,28 @@ public class GenericSteps extends BaseTest{
 				--current_day;
 				//System.out.println("Current Day is :" + current_day);
 			}
-			
 		}
-		
-	
  	Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 	
-		
 	}
+
+	@Given("^user enters \"([^\"]*)\" in Chrome app$") 
+	public void user_enters_in_Chrome_app(String transactionTypes) throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		String eotp = null;
+		List<WebElement> allelements = driver.findElements(By.xpath("//android.widget.TextView[contains(@text,'"+transactionTypes+"')]"));
+		String eotpMsg = allelements.get(allelements.size()-1).getText()+"";
+
+		eotp = eotpMsg.replaceAll("[^0-9]", ""); 
+
+		System.err.println(eotp);
+	 
+		activity = new Activity(ObjectRepository.getString("global.capability.chromeAppPackage"), ObjectRepository.getString("global.capability.chromeAppActivity"));
+		activity.setStopApp(false);
+		((AndroidDriver<MobileElement>) this.driver).startActivity(activity);
  
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.EditText[@resource-id='verification-code-field']")));
+		Thread.sleep(5000);
+		webelementHandler.enterText(By.xpath("//android.widget.EditText[@resource-id='verification-code-field']"), eotp);
+		((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.SPACE));
+	}
 }
-
-
-
-    
-	
-
