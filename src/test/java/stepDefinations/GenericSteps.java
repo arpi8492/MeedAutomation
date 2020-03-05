@@ -1198,7 +1198,8 @@ public class GenericSteps extends BaseTest{
 	 	        ((AndroidDriver<MobileElement>) this.driver).startActivity(activity);	                    
 	 		} catch (Exception e) {
 	 			System.err.println(driver.findElement(By.xpath(ObjectRepository.getString("Accept_continue"))).getText());
-	 		       if (driver.findElement(By.xpath(ObjectRepository.getString("Accept_continue"))).getText().contains("Accept & continue")) {
+	 		       if (driver.findElements(By.xpath(ObjectRepository.getString("Accept_continue"))).size()>0 &&
+	 		    		   driver.findElement(By.xpath(ObjectRepository.getString("Accept_continue"))).getText().contains("Accept & continue")) {
 	 		    	   driver.findElement(By.xpath(ObjectRepository.getString("Accept_continue"))).click();
 	 		    	   driver.findElement(By.xpath(ObjectRepository.getString("No_Thanks"))).click();
 	 		       }
