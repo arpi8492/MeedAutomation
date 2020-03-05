@@ -5,7 +5,9 @@
 Feature: Email Signup
 @RegressionPack @TC001
 Scenario Outline: Verify that the user is able to signup on Yahoomail 
-Given user launches "chrome" app in "<Platform>" device
+Given user launches "Meed" app in "<Platform>" device
+And user waits for "5" seconds
+And user switches to "chrome" app
 And user navigates to "yahoomail.com" and go to the account of "<Invitees>"
 And user clicks on button "Create_An_Account"
 And user waits for "5" seconds
