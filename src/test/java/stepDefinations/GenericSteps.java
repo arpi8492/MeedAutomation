@@ -1225,8 +1225,8 @@ public class GenericSteps extends BaseTest{
 	 	        activity.setStopApp(true);
 	 	        ((AndroidDriver<MobileElement>) this.driver).startActivity(activity);	
 		 	       Thread.sleep(8000);
-		 	       if (webelementHandler.findElements(ObjectRepository.getString("2055093851")).size()>0) {
-		 	    		  webelementHandler.clickButton(ObjectRepository.getString("2055093851"));
+		 	       if (webelementHandler.findElements(ObjectRepository.getString("New_samsung_Message")).size()>0) {
+		 	    		  webelementHandler.clickButton(ObjectRepository.getString("New_samsung_Message"));
 				   }
 		 	       Thread.sleep(3000);
 	 		} catch (Exception e) {
@@ -1659,18 +1659,28 @@ public class GenericSteps extends BaseTest{
 				--current_day;
 				//System.out.println("Current Day is :" + current_day);
 			}
-			
 		}
-		
-	
  	Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 	
-		
 	}
+
+	@Given("^user enters \"([^\"]*)\" in Chrome app$") 
+	public void user_enters_in_Chrome_app(String transactionTypes) throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		String eotp = null;
+		List<WebElement> allelements = driver.findElements(By.xpath("//android.widget.TextView[contains(@text,'"+transactionTypes+"')]"));
+		String eotpMsg = allelements.get(allelements.size()-1).getText()+"";
+
+		eotp = eotpMsg.replaceAll("[^0-9]", ""); 
+
+		System.err.println(eotp);
+	 
+		activity = new Activity(ObjectRepository.getString("global.capability.chromeAppPackage"), ObjectRepository.getString("global.capability.chromeAppActivity"));
+		activity.setStopApp(false);
+		((AndroidDriver<MobileElement>) this.driver).startActivity(activity);
  
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.EditText[@resource-id='verification-code-field']")));
+		Thread.sleep(5000);
+		webelementHandler.enterText(By.xpath("//android.widget.EditText[@resource-id='verification-code-field']"), eotp);
+		((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.SPACE));
+	}
 }
-
-
-
-    
-	
-
