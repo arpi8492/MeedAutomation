@@ -3,7 +3,7 @@
 #Feature: External P2P
 #Scenario: #NA
 Feature: External P2P
-@TC001_P2P_External_Transfer
+@RegressionPack @TC001_P2P_External_Transfer
 Scenario Outline: Verify Meed customer is able to successfully send P2P external transfers to new external contacts
 Given user launches "Meed" app in "<Platform>" device
 And user clicks on button "Get_started"
@@ -25,16 +25,16 @@ And user waits for "2" seconds
 And user selects option "<recipient>" from the list
 And user clicks on button "Next"
 And user waits for "2" seconds
-And user enters "<First_Name>" in textbox at index "0"
-And user enters "<Last_Name>" in textbox at index "1"
-And user enters "<Mobile_Number>" in textbox at index "2"
-And user selects checkbox "Invite"
-And user clicks on button "Next"
-And user enters "<Key>" in textbox at index "0"
-And user enters "<Key>" in textbox at index "1"
-And user clicks on button "Next"
-And user switches to "Samsung Messaging" app
-And user enters "authorization code" in meed app
+#And user enters "<First_Name>" in textbox at index "0"
+#And user enters "<Last_Name>" in textbox at index "1"
+#And user enters "<Mobile_Number>" in textbox at index "2"
+#And user selects checkbox "Invite"
+#And user clicks on button "Next"
+#And user enters "<Key>" in textbox at index "0"
+#And user enters "<Key>" in textbox at index "1"
+#And user clicks on button "Next"
+#And user switches to "Samsung Messaging" app
+#And user enters "authorization code" in meed app
 And user enters text "<Amount>" in textbox "AMOUNT_TO_BE_SENT"
 And user enters text "P2P External automation" in textbox "NOTES"
 And user clicks on button "Confirm_Details"
@@ -68,16 +68,16 @@ And user waits for "2" seconds
 And user selects option "<recipient>" from the list
 And user clicks on button "Next"
 And user waits for "2" seconds
-And user enters "<First_Name>" in textbox at index "0"
-And user enters "<Last_Name>" in textbox at index "1"
-And user enters "<Mobile_Number>" in textbox at index "2"
-And user selects checkbox "Invite"
-And user clicks on button "Next"
-And user enters "<Key>" in textbox at index "0"
-And user enters "<Key>" in textbox at index "1"
-And user clicks on button "Next"
-And user switches to "Samsung Messaging" app
-And user enters "authorization code" in meed app
+#And user enters "<First_Name>" in textbox at index "0"
+#And user enters "<Last_Name>" in textbox at index "1"
+#And user enters "<Mobile_Number>" in textbox at index "2"
+#And user selects checkbox "Invite"
+#And user clicks on button "Next"
+#And user enters "<Key>" in textbox at index "0"
+#And user enters "<Key>" in textbox at index "1"
+#And user clicks on button "Next"
+#And user switches to "Samsung Messaging" app
+#And user enters "authorization code" in meed app
 And user enters text "<Amount>" in textbox "AMOUNT_TO_BE_SENT"
 And user enters text "P2P External automation" in textbox "NOTES"
 And user clicks on button "Confirm_Details"
@@ -86,7 +86,7 @@ And user waits for "2" seconds
 And user validates "Error" with expected value as "<Daily Limit message>"
 		
 Examples:
-|Platform | Email                		|Username |Password   |recipient                     | Amount  |First_Name|Last_Name|Mobile_Number|Key| Daily Limit message |
+|Platform | Email                		|Username |Password   |recipient                    		 | Amount  |First_Name|Last_Name|Mobile_Number|Key| Daily Limit message |
 |Android  |meeduat54update@yopmail.com  |Meeduat54|Password@1 |external.customer3@yopmail.com| 2501.00 |Ext Name  |Sin      |9189516170   |P2P| Daily limit of USD 2500.0 exceeded. |
 
 

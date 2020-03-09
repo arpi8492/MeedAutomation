@@ -26,10 +26,9 @@ And user waits for "5" seconds
 And user validates "LoginScreenWelcomeMessage" field with expected value as "<WelcomeMessage>"
  
 
-
   Examples: 
-    |   Platform    |   Email                           |   Username     |   Password    | Error | WelcomeMessage |
-    |   Android     |   meluser14@yopmail.com   		|   meluser14 	 |   Tester-1 | Thank you for logging into the Meed Banking Club App. We are currently unable to access your account. Please dial 1(833)-213-6333 to speak with a Customer Service Representative about the status of your account.| Welcome back! |
+    |   Platform    |  Email                   |   Username    |   Password | Error 																																																																																																						 | WelcomeMessage |
+    |   Android     |  meluser14@yopmail.com   |   meluser14 	 |   Tester-1 | Thank you for logging into the Meed Banking Club App. We are currently unable to access your account. Please dial 1(833)-213-6333 to speak with a Customer Service Representative about the status of your account.| Welcome back! 	|
     
     @RegressionPack @TC002
 Scenario Outline: Verify that the user is not able to login to Meed app when the account status is Credit Only Meed

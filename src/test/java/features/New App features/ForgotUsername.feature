@@ -16,10 +16,11 @@ And user clicks on button "Forgot_your_username_or_password?"
 And user clicks on button "Forgot_Username"
 And user enters text "<Email>" in textbox "Please_provide_your_email_address."
 And user clicks on button "Continue"
+And user waits for "2" seconds
 And user clicks on button "Finish"
 And user switches to "chrome" app 
 And user navigates to "yopmail.com" and go to the account of "<Email>"
 And user verify that Email is received from "dummywso2mail" with subject "<Subject>" and content "Privacy"
   Examples: 
-	|	Platform	|	Email							| Subject                  | 
-	|	Android		|	meluser14@yopmail.com			| MEED - Account Recovery  | 
+	|	Platform	|	Email									| Subject                  | 
+	|	Android		|	meluser14@yopmail.com	| MEED - Account Recovery  | 

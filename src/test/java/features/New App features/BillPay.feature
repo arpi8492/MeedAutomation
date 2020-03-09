@@ -3,7 +3,7 @@
 #Feature: Bill pay service
 #Scenario: #NA
 Feature: Bill pay service
-@TC001_Pay_with_debit_card
+@RegressionPack @TC001_Pay_with_debit_card
 Scenario Outline: Verify Meed customer is able to pay bills using debit card 
 Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
@@ -31,7 +31,7 @@ Given user launches "Meed" app in "<Platform>" device
     |   Android     |   meluser12new@yopmail.com  |   meluser12 |   Password-1 |   
     
  
-@TC001_BillPay_Add_Payee
+@DeviceSpecific @TC001_BillPay_Add_Payee
 Scenario Outline: Verify Meed customer is able to add a bill payee in the app
 Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
@@ -48,7 +48,7 @@ Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Pay_Bills"
  And user clicks on button "Bill_Pay_Service"
  And user clicks on button "Continue"
- And user waits for "2" seconds 
+ And user waits for "4" seconds 
  And user clicks on button "Add_a_payee"
  And user enters "<Payee_name>" in textbox at index "0"
  And user waits for "3" seconds
@@ -80,10 +80,10 @@ Given user launches "Meed" app in "<Platform>" device
  And user validates that contact "<Payee_name>" is "displayed"
 
    Examples: 
-    |   Platform    |   Email                  |   Username  |   Password   |Payee_name   |  Amount  |Payee_nick |Payee_account_#|    Address  | City| ZIP_CODE|Phone_Number    |        
+    |   Platform    |   Email                  |   Username  |   Password  |	Payee_name   |  Amount  |Payee_nick |Payee_account_#|    Address  | City| ZIP_CODE|Phone_Number    |        
     |   Android     |   jan21meed@yopmail.com  |   meluser16 |   Prodigy@1 |  VAISHALI K |   10.00  |     Sun   | 12345         | BaySt       |Tulsa|   34567 |(918) 951-8081  |
    
-@TC001_BillPayment_Person
+@DeviceSpecific @TC001_BillPayment_Person
 Scenario Outline: Verify Meed customer is able to send bill payment to payee type person
 Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
@@ -141,7 +141,7 @@ Given user launches "Meed" app in "<Platform>" device
     |   Platform    |   Email                  |   Username  |   Password   |Payee_name   |  Amount  |Payee_nick |Payee_account_#|    Address  | City| ZIP_CODE|Phone_Number    |        
     |   Android     |   jan21meed@yopmail.com  |   meluser16 |   Prodigy@1 |  VAISHALI K |   10.00  |     Sun   | 12345         | BaySt       |Tulsa|   34567 |(918) 951-8081  |
     
- @TC001_BillPayment_Company
+ @DeviceSpecific @TC001_BillPayment_Company
 Scenario Outline: Verify Meed customer is able to send bill payment to payee type company
 Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
@@ -207,7 +207,7 @@ Given user launches "Meed" app in "<Platform>" device
     |   Android     |   jan21meed@yopmail.com  |   meluser16 |   Prodigy@1 |  PRODIGY LABS |   10.00  |     PL    | 12345         | BaySt       |Tulsa|   34567 |(918) 951-8081  |
 
     
-@TC001_Modify_BillPayment
+@DeviceSpecific @TC001_Modify_BillPayment
 Scenario Outline: Verify Meed customer is able to modify the scheduled payment
 Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
@@ -279,5 +279,5 @@ Given user launches "Meed" app in "<Platform>" device
  
    Examples: 
     |   Platform    |   Email                  |   Username  |   Password  | Payee_name     |  Amount  |Payee_nick |Payee_account_#|  Address    | City| ZIP_CODE|Phone_Number    |  New Amount |     
-    |   Android     |   jan21meed@yopmail.com  |   meluser16 |   Prodigy@1 | VAISHALI KATTA |   10.00  |     PL    | 12345         | BaySt       |Tulsa|   34567 |(918) 951-8081  | 5.55 |
+    |   Android     |   jan21meed@yopmail.com  |   meluser16 |   Prodigy@1 | VAISHALI KATTA |   10.00  |     PL    | 12345         | BaySt       |Tulsa|   34567 |(918) 951-8081  | 5.55			  |
     
