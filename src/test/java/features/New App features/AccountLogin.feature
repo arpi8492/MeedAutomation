@@ -16,8 +16,8 @@ And user waits for app to load
  Then user validates that "Home" is displayed
 
   Examples: 
-	|	Platform	|	Email							|	Username			|	Password		|		
-	|	Android		|	meluser12@yopmail.com			|	meluser12			|	Password-1		|	
+	|	Platform	|	Email													|	Username			|	Password		|		
+	|	Android		|	manoj.chauhan@prodigylabs.net	|	mchauhan9189	|	Qwerty123!!	|	
 	
 
 @RegressionPack @TC002
@@ -42,8 +42,8 @@ And user enters text "<Email>" in textbox "Your_email"
  And user clicks on button "Back"
 
 Examples: 
-	|	Platform	|	Email					|	Username		|	Password	|		
-	|	Android		|	meluser12@yopmail.com	|	meluser12		|	Password-1	|	
+	|	Platform	|	Email													|	Username			|	Password		|		
+	|	Android		|	manoj.chauhan@prodigylabs.net	|	mchauhan9189	|	Qwerty123!!	|	
 	
 #Test case to retrieve username and password - to be written (options currently unavailable in the app)
    
