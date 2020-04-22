@@ -34,6 +34,7 @@ Given user launches "Meed" app in "<Platform>" device
   And user verify that "Available" in "CHECKING" account is "debited" by "<Amount>"
   And user verify that "Available" in "SAVINGS" account is "credited" by "<Amount>"
   And user clicks on button "CHECKING"
+ And user waits for "5" seconds
   And user verify that "Debit" transaction is listed in the transaction history of "CHECKING" account with note "<Note>" and amount "<Amount>"
   And user clicks on button "Back"
   And user scrolls down
@@ -42,8 +43,8 @@ Given user launches "Meed" app in "<Platform>" device
   And user verify that "Credit" transaction is listed in the transaction history of "SAVINGS" account with note "<Note>" and amount "<Amount>"
   
   Examples: 
-	|	Platform	|	Email						|	Username	|	Password	|	 	Amount		|	Note 							              |
-	|	Android		|	meeduat54update@yopmail.com	|	Meeduat54	|	Password@1	|		1.00		| Testing Checking to Savings transfer Automation |
+	|	Platform	|	Email													|	Username			|	Password		|	 	Amount	|	Note 							          								    |
+	|	Android		|	manoj.chauhan@prodigylabs.net	|	mchauhan9189	|	Qwerty123!!	|		1.00		| Testing Checking to Savings transfer Automation |
 	
 	
 	@RegressionPack @TC002
@@ -308,10 +309,10 @@ And user waits for "5" seconds
    And user scrolls down
   And user enters text "<Amount>" in textbox "AMOUNT_TO_BE_MOVED"
   And user validates "InsufficientFundsError" field with expected value as "<Error>"
-   #
+
   
   Examples: 
-	|	Platform	|	Email					|	Username		|	Password	|	 	Amount		|	Error	|
+	|	Platform	|	Email									|	Username		|	Password	|	 	Amount		|	Error	|
 	|	Android		|	meluser14@yopmail.com	|	meluser14		|	Tester-1	|		999.00		|	There are insufficient funds available to make the requested transfer.|
 	
 	

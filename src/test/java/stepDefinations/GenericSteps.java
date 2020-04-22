@@ -1130,21 +1130,39 @@ public class GenericSteps extends BaseTest{
  @Given("^user verify that \"([^\"]*)\" transaction is listed in the transaction history of \"([^\"]*)\" account with note \"([^\"]*)\" and amount \"([^\"]*)\"$")
  public void user_verify_that_transaction_is_listed_in_the_transaction_history_of_account_with_note_and_amount(String type, String account, String note, String amount) throws Throwable {
 
-	 Thread.sleep(2000);
+	 Thread.sleep(5000);
 	 String transAmount = null;
 	 
+	 System.out.println("Check point 1");
+	 
 	 String locator1 = "//android.view.View[@resource-id='transaction-type']";
+	 System.out.println("Check 2: " + driver.findElement(By.xpath(locator1)).getText());
+	 
+	 
 	 String locator2 = "//android.view.View[@resource-id='transaction-type']/../../following-sibling::android.view.View//android.view.View[@resource-id='amount-value']";
+	 System.out.println("Check 3: " + driver.findElement(By.xpath(locator2)).getText());
+	 
 	 String locator3 = "//android.view.View[@resource-id='transaction-type']/../../following-sibling::android.view.View//android.view.View[@resource-id='amount-value']/following-sibling::android.view.View[@resource-id='decomal-value']";
+	
+	
+	 
+	 System.out.println("Description: " + driver.findElement(By.xpath(locator3)).getText());
+	 
 	 
 	 wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(locator1)));
 	 VerificationHandler.verifyTrue(driver.findElement(By.xpath(locator1)).getText().contains(note) && driver.findElement(By.xpath(locator1)).getText().contains(type));
-
+	 
+	 System.out.println("Check point 2");
+	 
 	 if (amount.equals("Full_Payment")) {
 		 amount = fullPaymentloc;
+		 
+		 System.out.println("Check point 3");
 	 }else if (amount.equals("Minimum_Payment")) {
 		 amount = minimumPaymentloc;
-	}	 	 
+	}	
+	
+	 
 	 transAmount = driver.findElement(By.xpath(locator2)).getText()+driver.findElement(By.xpath(locator3)).getText();  
 	 VerificationHandler.verifyTrue(transAmount.contains(amount));
 		Reporter.addScreenCaptureFromPath(screenshot.captureScreenShot(sName)); 

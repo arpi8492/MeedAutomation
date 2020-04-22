@@ -12,12 +12,12 @@ import cucumber.api.junit.Cucumber;
  
 @RunWith(Cucumber.class)
 @CucumberOptions(		
- features = "src/test/java/features/New App features/AccountLogin.feature",
+ features = "src/test/java/features/New App features/InternalTransfer.feature",
  glue= {"stepDefinations"},
  plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/ExtentReport/TestAutomationReport.html",
 		 "json:target/cucumber-reports/JSON/TestAutomationResult.json"},
  monochrome = true,
- tags= {"@RegressionPack"},
+ tags= {"@TC001"},
  dryRun = false
  )
  

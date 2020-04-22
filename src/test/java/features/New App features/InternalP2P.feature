@@ -4,7 +4,7 @@
 #Scenario: #NA
 Feature: InternalP2P Transfer
 
-@RegressionPack @TC001_P2P_Send_Money
+@DeviceSpecific @TC001_P2P_Send_Money
 Scenario Outline: Verify Meed customer is able to successfully Pay Friends having Meed membership - Send Money
 Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
@@ -19,6 +19,8 @@ Given user launches "Meed" app in "<Platform>" device
  And user waits for "2" seconds
  And user scrolls down
  And user clicks on button "Send_Money" 
+  And user waits for "3" seconds
+ 
  And user clicks on button "Allow"
  And user waits for "5" seconds
 
@@ -38,9 +40,9 @@ Given user launches "Meed" app in "<Platform>" device
 
   Examples: 
     |   Platform    |   Email                   	  |   Username  |   Password   |   recipient              |  Amount  |
-    |   Android     |   meeduat54update@yopmail.com   |   Meeduat54 |   Password@1 |   meluser12@yopmail.com  |   2.00  |
+    |   Android     |   meeduat54update@yopmail.com   |   Meeduat54 |   Password@1 |   meluser7@yopmail.com  |   2.00  |
     
-@RegressionPack @TC001_P2P_Daily_Limits
+@DeviceSpecific @TC001_P2P_Daily_Limits
 Scenario Outline: Verify Meed customer daily limit exceed message when attempted to transfer more than 2,500
 Given user launches "Meed" app in "<Platform>" device
  And user clicks on button "Get_started"
@@ -73,7 +75,7 @@ Given user launches "Meed" app in "<Platform>" device
 
   Examples: 
     |   Platform    |   Email                   	  |   Username  |   Password   |   recipient              |  Amount  | Daily Limit message |
-    |   Android     |   meeduat54update@yopmail.com   |   Meeduat54 |   Password@1 |   meluser12@yopmail.com  |   2501.00  | Daily limit of USD 2500.0 exceeded. |
+    |   Android     |   meeduat54update@yopmail.com   |   Meeduat54 |   Password@1 |   meluser7@yopmail.com  |   2501.00  | Daily limit of USD 2500.0 exceeded. |
    
     
     @RegressionPack @TC001_P2P_Request_Money
