@@ -17,7 +17,7 @@ And user waits for app to load
 
   Examples: 
 	|	Platform	|	Email													|	Username			|	Password		|		
-	|	Android		|	manoj.chauhan@prodigylabs.net	|	mchauhan9189	|	Qwerty123!!	|	
+	|	Android		|	arpiuat3@yopmail.com	|	arpiuat3	|	Password-1	|	
 	
 
 @RegressionPack @TC002
@@ -30,6 +30,7 @@ And user enters text "<Email>" in textbox "Your_email"
  And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
+ And user waits for "5" seconds
  And user clicks on button "CHECKING"
  Then user validates that "Checking" is displayed
  And user clicks on button "Back"
@@ -38,14 +39,12 @@ And user enters text "<Email>" in textbox "Your_email"
  Then user validates that "Line_Of_Credit" is displayed
  And user clicks on button "Back"
  And user clicks on button "SAVINGS"
-  Then user validates that "Savings" is displayed
+ Then user validates that "Savings" is displayed
  And user clicks on button "Back"
 
 Examples: 
 	|	Platform	|	Email													|	Username			|	Password		|		
-	|	Android		|	manoj.chauhan@prodigylabs.net	|	mchauhan9189	|	Qwerty123!!	|	
+	|	Android		|	arpiuat3@yopmail.com	|	arpiuat3	|	Password-1	|	
 	
 #Test case to retrieve username and password - to be written (options currently unavailable in the app)
-   
-
    
