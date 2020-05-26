@@ -12,10 +12,10 @@ Given user launches "Meed" app in "<Platform>" device
  And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
- 
+ And user waits for "5" seconds
+ And user scrolls down
  And user waits for "5" seconds
  And user clicks on button "Move_Money"
- And user scrolls down
  And user scrolls down
  And user scrolls down
  And user clicks on button "Pay_Bills"
@@ -28,19 +28,20 @@ Given user launches "Meed" app in "<Platform>" device
   And user waits for "10" seconds
   Examples: 
     |   Platform    |   Email                     |   Username  |   Password   |    
-    |   Android     |   meluser12new@yopmail.com  |   meluser12 |   Password-1 |   
+    |   Android     |   arpiuat3w@yopmail.com  |   arpiuat3 |   Password-1 |   
     
  
 @DeviceSpecific @TC001_BillPay_Add_Payee
 Scenario Outline: Verify Meed customer is able to add a bill payee in the app
 Given user launches "Meed" app in "<Platform>" device
- And user clicks on button "Get_started"
- And user enters text "<Email>" in textbox "Your_email"
- And user clicks on button "Continue"
+ #And user clicks on button "Get_started"
+ #And user enters text "<Email>" in textbox "Your_email"
+ #And user clicks on button "Continue"
  And user enters text "<Username>" in textbox "Username"
  And user enters text "<Password>" in textbox "Password"
  And user clicks on button "Log_In"
  And user waits for "5" seconds
+ And user scrolls down
  And user clicks on button "Move_Money"
  And user waits for "2" seconds
  And user scrolls down
@@ -81,7 +82,7 @@ Given user launches "Meed" app in "<Platform>" device
 
    Examples: 
     |   Platform    |   Email                  |   Username  |   Password  |	Payee_name   |  Amount  |Payee_nick |Payee_account_#|    Address  | City| ZIP_CODE|Phone_Number    |        
-    |   Android     |   jan21meed@yopmail.com  |   meluser16 |   Prodigy@1 |  VAISHALI K |   10.00  |     Sun   | 12345         | BaySt       |Tulsa|   34567 |(918) 951-8081  |
+    |   Android     |   arpiuat3@yopmail.com  |   arpiuat3 |   Password-1 |  Arpitha |   10.00  |     Sun   | 12345         | BaySt       |Tulsa|   34567 |(918) 951-8081  |
    
 @DeviceSpecific @TC001_BillPayment_Person
 Scenario Outline: Verify Meed customer is able to send bill payment to payee type person
@@ -139,7 +140,7 @@ Given user launches "Meed" app in "<Platform>" device
  
    Examples: 
     |   Platform    |   Email                  |   Username  |   Password   |Payee_name   |  Amount  |Payee_nick |Payee_account_#|    Address  | City| ZIP_CODE|Phone_Number    |        
-    |   Android     |   jan21meed@yopmail.com  |   meluser16 |   Prodigy@1 |  VAISHALI K |   10.00  |     Sun   | 12345         | BaySt       |Tulsa|   34567 |(918) 951-8081  |
+    |   Android     |   arpiuat3@yopmail.com  |   arpiuat3 |   Password-1 |  VAISHALI K |   10.00  |     Sun   | 12345         | BaySt       |Tulsa|   34567 |(918) 951-8081  |
     
  @DeviceSpecific @TC001_BillPayment_Company
 Scenario Outline: Verify Meed customer is able to send bill payment to payee type company
@@ -204,7 +205,7 @@ Given user launches "Meed" app in "<Platform>" device
  
    Examples: 
     |   Platform    |   Email                  |   Username  |   Password  | Payee_name    |  Amount  |Payee_nick |Payee_account_#|  Address  | City| ZIP_CODE|Phone_Number    |        
-    |   Android     |   jan21meed@yopmail.com  |   meluser16 |   Prodigy@1 |  PRODIGY LABS |   10.00  |     PL    | 12345         | BaySt       |Tulsa|   34567 |(918) 951-8081  |
+    |   Android     |   arpiuat3@yopmail.com |   arpiuat3 |   Password-1 |  PRODIGY LABS |   10.00  |     PL    | 12345         | BaySt       |Tulsa|   34567 |(918) 951-8081  |
 
     
 @DeviceSpecific @TC001_Modify_BillPayment
@@ -279,5 +280,5 @@ Given user launches "Meed" app in "<Platform>" device
  
    Examples: 
     |   Platform    |   Email                  |   Username  |   Password  | Payee_name     |  Amount  |Payee_nick |Payee_account_#|  Address    | City| ZIP_CODE|Phone_Number    |  New Amount |     
-    |   Android     |   jan21meed@yopmail.com  |   meluser16 |   Prodigy@1 | VAISHALI KATTA |   10.00  |     PL    | 12345         | BaySt       |Tulsa|   34567 |(918) 951-8081  | 5.55			  |
-    
+    |   Android     |   arpiuat3@yopmail.com |   arpiuat3 |   Password-1 | VAISHALI KATTA |   10.00  |     PL    | 12345         | BaySt       |Tulsa|   34567 |(918) 951-8081  | 5.55			  |
+   
